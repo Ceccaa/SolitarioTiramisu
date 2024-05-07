@@ -7,10 +7,16 @@ namespace SolitarioTiramisù
 {
     class Deck
     {
-        private struct Card
+        public struct Card
         {
-            public int value;
-            public string seed;
+            public int value { get; }
+            public string seed { get; }
+
+            public Card(int value, string seed)
+            {
+                this.value = value;
+                this.seed = seed;
+            }
         }
 
         private Stack<Card> deck = new Stack<Card>();
@@ -21,23 +27,26 @@ namespace SolitarioTiramisù
             {
                 for (int j = 1; j < 10; j++)
                 {
-                    Card c = new Card();
-                    c.value = j;
+                    int value = j;
+                    string seed = "";
+
                     switch (i)
                     {
                         case 0:
-                            c.seed = "A"; //tastiera
+                            seed = "A"; //tastiera
                             break;
                         case 1:
-                            c.seed = "B"; //mouse
+                            seed = "B"; //mouse
                             break;
                         case 2:
-                            c.seed = "C"; //usb
+                            seed = "C"; //usb
                             break;
                         case 3:
-                            c.seed = "D"; //cuffie
+                            seed = "D"; //cuffie
                             break;
                     }
+
+                    Card c = new Card(value, seed);
                     deck.Push(c);
                 }
             }
@@ -55,15 +64,10 @@ namespace SolitarioTiramisù
             }
         }   
 
-        private Card Draw()
+        public Card Draw()
         {
             return deck.Pop();
         }
 
-
-
-
-
     }
-
 }
