@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -19,6 +20,23 @@ namespace SolitarioTiramisù
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void RedRectangle_Move(object sender, MouseEventArgs e)
+        {
+            if(e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragDrop.DoDragDrop(RedRectangle, RedRectangle, DragDropEffects.Move);
+            }
+        }
+
+        private void Canvas_Drop(object sender, DragEventArgs e)
+        {
+            Point dropPosition =  e.GetPosition(canvas);
+
+            Canvas.SetLeft(RedRectangle, dropPosition.X);
+            Canvas.SetTop(RedRectangle, dropPosition.Y);
+            //TODO
         }
     }
 }
