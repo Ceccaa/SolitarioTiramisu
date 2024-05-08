@@ -9,7 +9,7 @@ namespace SolitarioTiramisù
     /// </summary>
     public partial class App : Application
     {
-
+        
     }
 
 }

@@ -5,8 +5,10 @@ using System.Windows;
 
 namespace SolitarioTiramisù
 {
+    //Oggetto mazzo
     class Deck
     {
+        //Struct carta
         public struct Card
         {
             public int value { get; }
@@ -19,8 +21,10 @@ namespace SolitarioTiramisù
             }
         }
 
+        //Rappresentazione del mazzo in memoria
         private Stack<Card> deck = new Stack<Card>();
 
+        //riempimento del mazzo
         public Deck()
         {
             for (int i = 0; i < 4; i++)
@@ -53,6 +57,7 @@ namespace SolitarioTiramisù
             Shuffle();
         }   
 
+        //Mischio mazzo
         private void Shuffle()
         {
             Random r = new Random();
@@ -64,6 +69,7 @@ namespace SolitarioTiramisù
             }
         }   
 
+        //Pesco carta
         public Card Draw()
         {
             return deck.Pop();
