@@ -22,21 +22,40 @@ namespace SolitarioTiramisù
             InitializeComponent();
         }
 
+        private Point startPoint;
+
         private void RedRectangle_Move(object sender, MouseEventArgs e)
         {
-            if(e.LeftButton == MouseButtonState.Pressed)
+            if (e.LeftButton == MouseButtonState.Pressed)
             {
+                startPoint = e.GetPosition(canvas);
                 DragDrop.DoDragDrop(RedRectangle, RedRectangle, DragDropEffects.Move);
             }
         }
 
+        //Set Zindex
+        private void Canvas_DragOver(object sender, DragEventArgs e)
+        {
+            Point dropPosition = e.GetPosition(canvas);
+            Point offset = new Point(dropPosition.X - startPoint.X, dropPosition.Y - startPoint.Y);
+
+            double newLeft = Canvas.GetLeft(RedRectangle) + offset.X;
+            double newTop = Canvas.GetTop(RedRectangle) + offset.Y;
+
+            // Imposta la nuova posizione del cubo all'interno dei limiti del canvas
+            newLeft = Math.Max(0, Math.Min(newLeft, canvas.ActualWidth - RedRectangle.ActualWidth));
+            newTop = Math.Max(0, Math.Min(newTop, canvas.ActualHeight - RedRectangle.ActualHeight));
+
+            Canvas.SetLeft(RedRectangle, newLeft);
+            Canvas.SetTop(RedRectangle, newTop);
+
+            startPoint = dropPosition;
+        }
+
         private void Canvas_Drop(object sender, DragEventArgs e)
         {
-            Point dropPosition =  e.GetPosition(canvas);
 
-            Canvas.SetLeft(RedRectangle, dropPosition.X);
-            Canvas.SetTop(RedRectangle, dropPosition.Y);
-            //TODO
+
         }
     }
 }

@@ -6,11 +6,21 @@
         xmlns:local="clr-namespace:SolitarioTiramisù"
         mc:Ignorable="d"
         Title="Solitario Tiramisù" Height="707" Width="1143">
-    <Grid Background="#FF226F54">
-        <Border Grid.Column="0" Margin="270,402,696,46" BorderBrush="White" BorderThickness="3">
-            <WrapPanel Name="targetPanel1" AllowDrop="True" Margin="-3,-3,-3,3">
-            </WrapPanel>
+    <Grid Background="#FF226F54" AllowDrop="True" >
+        <Border BorderBrush="Black" BorderThickness="3">
+            <Canvas AllowDrop="True" Drop="Canvas_Drop"  x:Name="canvas" DragOver="Canvas_DragOver" Margin="0,-3,7,1">
+                <Rectangle
+            x:Name="RedRectangle"
+            Canvas.Left="321"
+            Canvas.Top="294"
+            Width="50"
+            Height="50"
+            Fill="Red"
+            MouseMove="RedRectangle_Move" Panel.ZIndex="-1"/>
+
+            </Canvas>
         </Border>
+
 
         <Rectangle HorizontalAlignment="Left" Height="243" Margin="40,402,0,0" Stroke="White" VerticalAlignment="Top" Width="176"/>
 
@@ -19,47 +29,39 @@
         <Button Content="Button" HorizontalAlignment="Left" Height="61" Margin="58,63,0,0" VerticalAlignment="Top" Width="140"/>
         <Button Content="Button" HorizontalAlignment="Left" Height="60" Margin="58,164,0,0" VerticalAlignment="Top" Width="140"/>
 
-        <Border BorderBrush="Black" BorderThickness="3">
-            <Canvas AllowDrop="True" Drop="Canvas_Drop"  x:Name="canvas">
-                <Rectangle
-                    x:Name="RedRectangle"
-                    Canvas.Left="50"
-                    Canvas.Top="50"
-                    Width="50"
-                    Height="50"
-                    Fill="Red"
-                    MouseMove="RedRectangle_Move"/>
-                    
-            </Canvas>
-        </Border>
-        
-        <Border Grid.Column="0" Margin="490,402,476,46" BorderBrush="White" BorderThickness="3">
-            <WrapPanel Name="targetPanel2" AllowDrop="True" Margin="-3,-3,-3,3"/>
-        </Border>
 
-        <Border Grid.Column="0" Margin="711,402,249,46" BorderBrush="White" BorderThickness="3" RenderTransformOrigin="0.5,0.5">
-            <WrapPanel Name="targetPanel3" AllowDrop="True" Margin="-3,-3,-3,-3">
-                
+        <Border Grid.Column="0" Margin="270,402,696,46" BorderBrush="White" BorderThickness="3">
+            <WrapPanel Name="targetPanel1" AllowDrop="True" Margin="-3,-3,-3,3">
             </WrapPanel>
         </Border>
 
-        <Border Grid.Column="0" Margin="946,402,25,46" BorderBrush="White" BorderThickness="3" RenderTransformOrigin="0.5,0.5">
+        <Border AllowDrop="True" Grid.Column="0" Margin="490,402,476,46" BorderBrush="White" BorderThickness="3">
+            <WrapPanel Name="targetPanel2" AllowDrop="True" Margin="-3,-3,-3,3"/>
+        </Border>
+
+        <Border AllowDrop="True" Grid.Column="0" Margin="711,402,249,46" BorderBrush="White" BorderThickness="3" RenderTransformOrigin="0.5,0.5">
+            <WrapPanel Name="targetPanel3" AllowDrop="True" Margin="-3,-3,-3,-3">
+
+            </WrapPanel>
+        </Border>
+
+        <Border AllowDrop="True" Grid.Column="0" Margin="946,402,25,46" BorderBrush="White" BorderThickness="3" RenderTransformOrigin="0.5,0.5">
             <WrapPanel Name="targetPanel4" AllowDrop="True" Margin="-3,-3,-3,3" RenderTransformOrigin="0.5,0.5"/>
         </Border>
 
-        <Border Grid.Column="0" Margin="946,25,25,425" BorderBrush="White" BorderThickness="3" RenderTransformOrigin="0.5,0.5">
+        <Border AllowDrop="True" Grid.Column="0" Margin="946,25,25,425" BorderBrush="White" BorderThickness="3" RenderTransformOrigin="0.5,0.5">
             <WrapPanel Name="targetPanel8" AllowDrop="True" Margin="-3,-3,-3,-3" RenderTransformOrigin="0.5,0.5"/>
         </Border>
 
-        <Border Grid.Column="0" Margin="711,25,249,425" BorderBrush="White" BorderThickness="3" RenderTransformOrigin="0.5,0.5">
+        <Border AllowDrop="True" Grid.Column="0" Margin="711,25,249,425" BorderBrush="White" BorderThickness="3" RenderTransformOrigin="0.5,0.5">
             <WrapPanel  Name="targetPanel7" AllowDrop="True" Margin="-3,-3,-3,-3" RenderTransformOrigin="0.5,0.5"/>
         </Border>
 
-        <Border Grid.Column="0" Margin="490,25,476,425" BorderBrush="White" BorderThickness="3" RenderTransformOrigin="0.5,0.5">
+        <Border AllowDrop="True" Grid.Column="0" Margin="490,25,476,425" BorderBrush="White" BorderThickness="3" RenderTransformOrigin="0.5,0.5">
             <WrapPanel  Name="targetPanel6" AllowDrop="True" Margin="0,-3,0,-3" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" Width="177"/>
         </Border>
 
-        <Border Grid.Column="0" Margin="270,25,696,425" BorderBrush="White" BorderThickness="3" RenderTransformOrigin="0.5,0.5">
+        <Border AllowDrop="True" Grid.Column="0" Margin="270,25,696,425" BorderBrush="White" BorderThickness="3" RenderTransformOrigin="0.5,0.5">
             <WrapPanel  Name="targetPanel5" AllowDrop="True" Margin="-3,-3,-3,-3" RenderTransformOrigin="0.5,0.5"/>
         </Border>
 
