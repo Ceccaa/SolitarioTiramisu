@@ -11,21 +11,24 @@
             <Canvas AllowDrop="True" Drop="Canvas_Drop"  x:Name="canvas" DragOver="Canvas_DragOver" Margin="0,-3,7,1">
                 <Rectangle
             x:Name="RedRectangle"
-            Canvas.Left="321"
-            Canvas.Top="294"
-            Width="50"
-            Height="50"
+            Canvas.Left="268"
+            Canvas.Top="402"
+            Width="175"
+            Height="235"
             Fill="Red"
-            MouseMove="RedRectangle_Move" Panel.ZIndex="-1"/>
+            MouseMove="RedRectangle_Move" Panel.ZIndex="-1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
             </Canvas>
         </Border>
 
+        <Rectangle HorizontalAlignment="Left" Height="247" Margin="40,402,0,0" Stroke="White" VerticalAlignment="Top" Width="176"/>
 
-        <Rectangle HorizontalAlignment="Left" Height="243" Margin="40,402,0,0" Stroke="White" VerticalAlignment="Top" Width="176"/>
-
-        <Image Margin="40,402,926,46" Source="/images/RETRO.jpg" Stretch="Fill"/>
-        <Image Margin="40,250,925,197" Source="/1B.jpg" Stretch="Fill" OpacityMask="#FFA6C36F" RenderTransformOrigin="1.652,1.656"/>
+        <Button Content="Button" Canvas.Left="37" Canvas.Top="405" HorizontalAlignment="Left" Height="247" VerticalAlignment="Top" Width="176" Margin="40,402,0,0">
+            <Button.Background>
+                <ImageBrush ImageSource="/Retro.jpg"/>
+            </Button.Background>
+        </Button>
+        
         <Button Content="Button" HorizontalAlignment="Left" Height="61" Margin="58,63,0,0" VerticalAlignment="Top" Width="140"/>
         <Button Content="Button" HorizontalAlignment="Left" Height="60" Margin="58,164,0,0" VerticalAlignment="Top" Width="140"/>
 

@@ -8,4 +8,12 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Retro.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Retro.jpg" />
+  </ItemGroup>
+
 </Project>
