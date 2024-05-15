@@ -64,5 +64,20 @@ namespace SolitarioTiramisù
             
             
         }
+
+        private void RedRectangle_Drop(object sender, DragEventArgs e)
+        {
+            // Controlla se l'elemento di rilascio è uno StackPanel
+            if (e.OriginalSource is StackPanel)
+            {
+                StackPanel stackPanel = (StackPanel)e.OriginalSource;
+                stackPanel.Children.Add((Rectangle)sender);
+            }
+            else
+            {
+                // Se l'elemento di rilascio non è uno StackPanel, annulla l'operazione di drop
+                e.Handled = true;
+            }
+        }
     }
 }
