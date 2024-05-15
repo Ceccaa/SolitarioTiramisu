@@ -57,5 +57,12 @@ namespace SolitarioTiramisù
 
 
         }
+
+
+        private void deck_Click(object sender, RoutedEventArgs e)
+        {
+            
+            
+        }
     }
 }
