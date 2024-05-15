@@ -37,16 +37,16 @@ namespace SolitarioTiramisù
                     switch (i)
                     {
                         case 0:
-                            seed = "A"; //tastiera
+                            seed = "A"; //Visual Studio
                             break;
                         case 1:
-                            seed = "B"; //mouse
+                            seed = "B"; //Php
                             break;
                         case 2:
-                            seed = "C"; //usb
+                            seed = "C"; //Kotlin
                             break;
                         case 3:
-                            seed = "D"; //cuffie
+                            seed = "D"; //Simbolo
                             break;
                     }
 
@@ -75,6 +75,16 @@ namespace SolitarioTiramisù
             return deck.Pop();
         }
 
+        public int Count()
+        {
+            return deck.Count;
+        }
+
+        public void Push(Card card)
+        {
+            //TODO: Valutare controlli eventuali
+            deck.Push(card);
+        }
 
     }
 }

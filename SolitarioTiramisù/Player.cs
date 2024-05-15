@@ -7,7 +7,7 @@ namespace SolitarioTiramisù
 {
     class Player
     {
-        Deck deck = new Deck();
+        
         
         
 
