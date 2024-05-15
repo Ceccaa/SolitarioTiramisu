@@ -10,6 +10,12 @@ namespace SolitarioTiramisù
     public partial class App : Application
     {
         
+        static void StartGame()
+        {
+            Player player = new Player();
+
+        }
+
     }
 
 }

@@ -75,5 +75,6 @@ namespace SolitarioTiramisù
             return deck.Pop();
         }
 
+
     }
 }
