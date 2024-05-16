@@ -17,12 +17,13 @@ namespace SolitarioTiramisù
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Point startPoint;
+        private Rectangle dragRectangle;
+
         public MainWindow()
         {
             InitializeComponent();
         }
-
-        private Point startPoint;
 
         private void RedRectangle_Move(object sender, MouseEventArgs e)
         {
@@ -33,51 +34,96 @@ namespace SolitarioTiramisù
             }
         }
 
-        //Set Zindex
-        private void Canvas_DragOver(object sender, DragEventArgs e)
-        {
-            Point dropPosition = e.GetPosition(canvas);
-            Point offset = new Point(dropPosition.X - startPoint.X, dropPosition.Y - startPoint.Y);
-
-            double newLeft = Canvas.GetLeft(RedRectangle) + offset.X;
-            double newTop = Canvas.GetTop(RedRectangle) + offset.Y;
-
-            // Imposta la nuova posizione del cubo all'interno dei limiti del canvas
-            newLeft = Math.Max(0, Math.Min(newLeft, canvas.ActualWidth - RedRectangle.ActualWidth));
-            newTop = Math.Max(0, Math.Min(newTop, canvas.ActualHeight - RedRectangle.ActualHeight));
-
-            Canvas.SetLeft(RedRectangle, newLeft);
-            Canvas.SetTop(RedRectangle, newTop);
-
-            startPoint = dropPosition;
-        }
-
         private void Canvas_Drop(object sender, DragEventArgs e)
         {
-
-
-        }
-
-
-        private void deck_Click(object sender, RoutedEventArgs e)
-        {
-            
-            
-        }
-
-        private void RedRectangle_Drop(object sender, DragEventArgs e)
-        {
-            // Controlla se l'elemento di rilascio è uno StackPanel
-            if (e.OriginalSource is StackPanel)
+            if (e.Data.GetDataPresent(typeof(Rectangle)))
             {
-                StackPanel stackPanel = (StackPanel)e.OriginalSource;
-                stackPanel.Children.Add((Rectangle)sender);
-            }
-            else
-            {
-                // Se l'elemento di rilascio non è uno StackPanel, annulla l'operazione di drop
+                Rectangle rect = e.Data.GetData(typeof(Rectangle)) as Rectangle;
+
+                Rectangle closestRect = GetClosestRectangle(e.GetPosition(canvas));
+                if (closestRect != null)
+                {
+                    // Remove the rectangle from its current parent (if necessary)
+                    if (rect.Parent is Canvas)
+                    {
+                        ((Canvas)rect.Parent).Children.Remove(rect);
+                    }
+
+                    // Add the rectangle to the Canvas if it's not already there
+                    if (!canvas.Children.Contains(rect))
+                    {
+                        canvas.Children.Add(rect);
+                    }
+
+                    // Set the new position of the rectangle
+                    Canvas.SetLeft(rect, Canvas.GetLeft(closestRect));
+                    Canvas.SetTop(rect, Canvas.GetTop(closestRect));
+                }
+
                 e.Handled = true;
+
+                // Remove the drag rectangle
+                if (dragRectangle != null)
+                {
+                    canvas.Children.Remove(dragRectangle);
+                    dragRectangle = null;
+                }
             }
+        }
+
+        private void Canvas_DragOver(object sender, DragEventArgs e)
+        {
+            e.Effects = DragDropEffects.Move;
+
+            Point dropPosition = e.GetPosition(canvas);
+
+            // Update the position of the drag rectangle
+            if (dragRectangle == null)
+            {
+                dragRectangle = new Rectangle
+                {
+                    Width = RedRectangle.Width,
+                    Height = RedRectangle.Height,
+                    Fill = RedRectangle.Fill,
+                    Stroke = new SolidColorBrush(Colors.Gray),
+                    StrokeThickness = 2,
+                    Opacity = 0.5
+                };
+                canvas.Children.Add(dragRectangle);
+            }
+
+            Canvas.SetLeft(dragRectangle, dropPosition.X - dragRectangle.Width / 2);
+            Canvas.SetTop(dragRectangle, dropPosition.Y - dragRectangle.Height / 2);
+
+            e.Handled = true;
+        }
+
+        private Rectangle GetClosestRectangle(Point dropPosition)
+        {
+            Rectangle closestRect = null;
+            double closestDistance = double.MaxValue;
+
+            foreach (UIElement child in canvas.Children)
+            {
+                if (child is Rectangle rectangle && rectangle != RedRectangle && rectangle != dragRectangle)
+                {
+                    Point rectCenter = new Point(Canvas.GetLeft(rectangle) + rectangle.Width / 2, Canvas.GetTop(rectangle) + rectangle.Height / 2);
+                    double distance = GetDistance(dropPosition, rectCenter);
+
+                    if (distance < closestDistance)
+                    {
+                        closestDistance = distance;
+                        closestRect = rectangle;
+                    }
+                }
+            }
+
+            return closestRect;
+        }
+
+        private double GetDistance(Point p1, Point p2)
+        {
+            return Math.Sqrt(Math.Pow(p1.X - p2.X, 2) + Math.Pow(p1.Y - p2.Y, 2));
         }
     }
 }

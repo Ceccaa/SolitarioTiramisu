@@ -8,75 +8,36 @@
         Title="Solitario Tiramisù" Height="707" Width="1143">
     <Grid Background="#FF226F54" AllowDrop="True">
         <Border BorderBrush="Black" BorderThickness="3">
-            <Canvas AllowDrop="True" Drop="Canvas_Drop" x:Name="canvas" DragOver="Canvas_DragOver" Margin="0,-3,7,1">
-                <!-- Rectangle -->
-                <Rectangle x:Name="RedRectangle" Width="175" Height="235" Fill="Red" MouseMove="RedRectangle_Move" Panel.ZIndex="-1" HorizontalAlignment="Center" VerticalAlignment="Top" Drop="RedRectangle_Drop" Canvas.Left="268" Canvas.Top="402"/>
+            <Canvas x:Name="canvas" AllowDrop="True" Drop="Canvas_Drop" DragOver="Canvas_DragOver" Margin="0,-3,7,1">
+                <Rectangle
+                    x:Name="RedRectangle"
+                    Canvas.Left="268"
+                    Canvas.Top="402"
+                    Width="175"
+                    Height="235"
+                    Fill="Red"
+                    MouseMove="RedRectangle_Move"
+                    Panel.ZIndex="1"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top" />
 
-                <!-- WrapPanel targetPanel1 -->
-                <WrapPanel Canvas.Left="270" Canvas.Top="402" AllowDrop="True" Name="targetPanel1" Width="175" Height="235">
-                    <Border BorderBrush="White" BorderThickness="2" Width="175" Height="235">
-                        <!-- Contenuto del WrapPanel -->
-                    </Border>
-                </WrapPanel>
+                <Rectangle HorizontalAlignment="Left" Height="247" Width="176" Canvas.Left="40" Canvas.Top="402" Stroke="White" />
+                <Button x:Name="deck" Content="" Canvas.Left="37" Canvas.Top="405" Height="247" Width="176">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/Retro.jpg"/>
+                    </Button.Background>
+                </Button>
+                <Button x:Name="btnRestart" Content="RESTART" HorizontalAlignment="Left" Height="60" Margin="40,25,0,0" VerticalAlignment="Top" Width="140"/>
 
-                <!-- WrapPanel targetPanel2 -->
-                <WrapPanel Canvas.Left="490" Canvas.Top="402" AllowDrop="True" Name="targetPanel2" Width="175" Height="235">
-                    <Border BorderBrush="White" BorderThickness="2" Width="175" Height="235">
-                        <!-- Contenuto del WrapPanel -->
-                    </Border>
-                </WrapPanel>
-
-                <!-- WrapPanel targetPanel3 -->
-                <WrapPanel Canvas.Left="711" Canvas.Top="402" AllowDrop="True" Name="targetPanel3" Width="175" Height="235">
-                    <Border BorderBrush="White" BorderThickness="2" Width="175" Height="235">
-                        <!-- Contenuto del WrapPanel -->
-                    </Border>
-                </WrapPanel>
-
-                <!-- WrapPanel targetPanel4 -->
-                <WrapPanel Canvas.Left="946" Canvas.Top="402" AllowDrop="True" Name="targetPanel4" Width="175" Height="235">
-                    <Border BorderBrush="White" BorderThickness="2" Width="175" Height="235">
-                        <!-- Contenuto del WrapPanel -->
-                    </Border>
-                </WrapPanel>
-
-                <!-- WrapPanel targetPanel5 -->
-                <WrapPanel Canvas.Left="270" Canvas.Top="25" AllowDrop="True" Name="targetPanel5" Width="175" Height="235">
-                    <Border BorderBrush="White" BorderThickness="2" Width="175" Height="235">
-                        <!-- Contenuto del WrapPanel -->
-                    </Border>
-                </WrapPanel>
-
-                <!-- WrapPanel targetPanel6 -->
-                <WrapPanel Canvas.Left="490" Canvas.Top="25" AllowDrop="True" Name="targetPanel6" Width="175" Height="235">
-                    <Border BorderBrush="White" BorderThickness="2" Width="175" Height="235">
-                        <!-- Contenuto del WrapPanel -->
-                    </Border>
-                </WrapPanel>
-
-                <!-- WrapPanel targetPanel7 -->
-                <WrapPanel Canvas.Left="711" Canvas.Top="25" AllowDrop="True" Name="targetPanel7" Width="175" Height="235">
-                    <Border BorderBrush="White" BorderThickness="2" Width="175" Height="235">
-                        <!-- Contenuto del WrapPanel -->
-                    </Border>
-                </WrapPanel>
-
-                <!-- WrapPanel targetPanel8 -->
-                <WrapPanel Canvas.Left="946" Canvas.Top="25" AllowDrop="True" Name="targetPanel8" Width="175" Height="235">
-                    <Border BorderBrush="White" BorderThickness="2" Width="175" Height="235">
-                        <!-- Contenuto del WrapPanel -->
-                    </Border>
-                </WrapPanel>
+                <Rectangle Name="targetPanel1" AllowDrop="True" Width="175" Height="235" Stroke="White" Canvas.Left="270" Canvas.Top="50"/>
+                <Rectangle Name="targetPanel2" AllowDrop="True" Width="175" Height="235" Stroke="White" Canvas.Left="490" Canvas.Top="50"/>
+                <Rectangle Name="targetPanel3" AllowDrop="True" Width="175" Height="235" Stroke="White" Canvas.Left="710" Canvas.Top="50"/>
+                <Rectangle Name="targetPanel4" AllowDrop="True" Width="175" Height="235" Stroke="White" Canvas.Left="930" Canvas.Top="50"/>
+                <Rectangle Name="targetPanel5" AllowDrop="True" Width="175" Height="235" Stroke="White" Canvas.Left="270" Canvas.Top="402" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <Rectangle Name="targetPanel6" AllowDrop="True" Width="175" Height="235" Stroke="White" Canvas.Left="490" Canvas.Top="402" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <Rectangle Name="targetPanel7" AllowDrop="True" Width="175" Height="235" Stroke="White" Canvas.Left="710" Canvas.Top="402" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <Rectangle Name="targetPanel8" AllowDrop="True" Width="175" Height="235" Stroke="White" Canvas.Left="930" Canvas.Top="402" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             </Canvas>
         </Border>
-
-        <!-- Other UI elements -->
-        <Rectangle HorizontalAlignment="Left" Height="247" Margin="40,402,0,0" Stroke="White" VerticalAlignment="Top" Width="176"/>
-        <Button x:Name="deck" Content="" Canvas.Left="37" Canvas.Top="405" HorizontalAlignment="Left" Height="247" VerticalAlignment="Top" Width="176" Margin="40,402,0,0" Click="deck_Click">
-            <Button.Background>
-                <ImageBrush ImageSource="/Retro.jpg"/>
-            </Button.Background>
-        </Button>
-        <Button x:Name="btnRestart" Content="RESTART" HorizontalAlignment="Left" Height="60" Margin="40,25,0,0" VerticalAlignment="Top" Width="140"/>
     </Grid>
 </Window>
