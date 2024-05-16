@@ -19,6 +19,7 @@ namespace SolitarioTiramisù
     {
         private Point startPoint;
         private Rectangle dragRectangle;
+        private Table table = new Table();
 
         public MainWindow()
         {
@@ -125,5 +126,70 @@ namespace SolitarioTiramisù
         {
             return Math.Sqrt(Math.Pow(p1.X - p2.X, 2) + Math.Pow(p1.Y - p2.Y, 2));
         }
+
+        private void deck_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                // Note: Container dei targetPanels
+                int targetPanelCount = canvas.Children.OfType<Rectangle>()
+                                                      .Count(rect => rect.Name.StartsWith("targetPanel"));
+
+                IEnumerable<Rectangle> targetPanels = canvas.Children.OfType<Rectangle>()
+                                                                    .Where(rect => rect.Name.StartsWith("targetPanel"))
+                                                                    .Take(targetPanelCount / 2);
+
+                List<Rectangle> rectanglesToAdd = new List<Rectangle>();
+                foreach (Rectangle targetPanel in targetPanels)
+                {
+                    Deck.Card drawnCard = table.DrawCardFromDeck();
+
+                    string imagePath = $"C:/Users/User/Documents/GitHub/SolitarioTiramisu/SolitarioTiramisù/images/{drawnCard.ImagePath}";
+
+                    if (!System.IO.File.Exists(imagePath))
+                    {
+                        MessageBox.Show($"Image file not found: {imagePath}");
+                        return;
+                    }
+                    Rectangle rectangle = new Rectangle();
+                    rectangle.Fill = new ImageBrush(new BitmapImage(new Uri(imagePath)));
+                    rectangle.Width = 175;
+                    rectangle.Height = 235;
+
+                    double horizontalPosition = Canvas.GetLeft(targetPanel);
+                    double verticalPosition = Canvas.GetTop(targetPanel5);
+
+                    Canvas.SetLeft(rectangle, horizontalPosition);
+                    Canvas.SetTop(rectangle, verticalPosition);
+
+                    rectanglesToAdd.Add(rectangle);
+                }
+
+                foreach (Rectangle rectangle in rectanglesToAdd)
+                {
+                    canvas.Children.Add(rectangle);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error in deck_Click method: {ex.GetType().Name}\n{ex.Message}\n{ex.StackTrace}");
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
+
 }

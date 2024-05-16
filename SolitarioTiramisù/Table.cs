@@ -58,6 +58,14 @@ namespace SolitarioTiramisù
                 }
             }
         }
-
+        public Card DrawCardFromDeck()
+        {
+            if (deck.Count() > 0)
+                return deck.Draw();
+            else
+                throw new InvalidOperationException("Deck is empty.");
+        }
     }
+
 }
+

@@ -22,7 +22,7 @@
                     VerticalAlignment="Top" />
 
                 <Rectangle HorizontalAlignment="Left" Height="247" Width="176" Canvas.Left="40" Canvas.Top="402" Stroke="White" />
-                <Button x:Name="deck" Content="" Canvas.Left="37" Canvas.Top="405" Height="247" Width="176">
+                <Button x:Name="deck" Content="" Canvas.Left="37" Canvas.Top="405" Height="247" Width="176" Click="deck_Click">
                     <Button.Background>
                         <ImageBrush ImageSource="/Retro.jpg"/>
                     </Button.Background>
@@ -37,6 +37,7 @@
                 <Rectangle Name="targetPanel6" AllowDrop="True" Width="175" Height="235" Stroke="White" Canvas.Left="490" Canvas.Top="402" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                 <Rectangle Name="targetPanel7" AllowDrop="True" Width="175" Height="235" Stroke="White" Canvas.Left="710" Canvas.Top="402" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                 <Rectangle Name="targetPanel8" AllowDrop="True" Width="175" Height="235" Stroke="White" Canvas.Left="930" Canvas.Top="402" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
             </Canvas>
         </Border>
     </Grid>

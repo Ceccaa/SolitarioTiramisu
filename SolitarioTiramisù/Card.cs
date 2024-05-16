@@ -1,90 +1,106 @@
-using System.Configuration;
-using System.Data;
-using System.Windows;
+    using System.Configuration;
+    using System.Data;
+    using System.IO;
+    using System.Windows;
+    using System.Windows.Controls;
 
-
-namespace SolitarioTiramisù
-{
-    //Oggetto mazzo
-    class Deck
+    namespace SolitarioTiramisù
     {
-        //Struct carta
-        public struct Card
+        //Oggetto mazzo
+        class Deck
         {
-            public int value { get; }
-            public string seed { get; }
-
-            public Card(int value, string seed)
+            //Struct carta
+            public struct Card
             {
-                this.value = value;
-                this.seed = seed;
-            }
-        }
+                public int value { get; }
+                public string seed { get; }
 
-        //Rappresentazione del mazzo in memoria
-        private Stack<Card> deck = new Stack<Card>();
+                public string ImagePath { get; }
 
-        //riempimento del mazzo
-        public Deck()
-        {
-            for (int i = 0; i < 4; i++)
-            {
-                for (int j = 1; j < 10; j++)
+                public Card(int value, string seed , string imagePath)
                 {
-                    int value = j;
-                    string seed = "";
-
-                    switch (i)
-                    {
-                        case 0:
-                            seed = "A"; //Visual Studio
-                            break;
-                        case 1:
-                            seed = "B"; //Php
-                            break;
-                        case 2:
-                            seed = "C"; //Kotlin
-                            break;
-                        case 3:
-                            seed = "D"; //Simbolo
-                            break;
-                    }
-
-                    Card c = new Card(value, seed);
-                    deck.Push(c);
+                    this.value = value;
+                    this.seed = seed;
+                    this.ImagePath = imagePath;
                 }
             }
-            Shuffle();
-        }   
 
-        //Mischio mazzo
-        private void Shuffle()
-        {
-            Random r = new Random();
-            Card[] temp = deck.ToArray();
-            deck.Clear();
-            foreach (Card c in temp.OrderBy(x => r.Next()))
+            //Rappresentazione del mazzo in memoria
+            private Stack<Card> deck = new Stack<Card>();
+
+            //riempimento del mazzo
+            public Deck()
             {
-                deck.Push(c);
+
+                string folderPath = $"C:/Users/User/Documents/GitHub/SolitarioTiramisu/SolitarioTiramisù/images";
+                string[] imageFiles = Directory.GetFiles(folderPath);
+
+                Random random = new Random();
+
+                foreach (string imagePath in imageFiles)
+                {
+                    string imageFileName = Path.GetFileName(imagePath);
+
+
+                    string[] fileNameParts = imageFileName.Split('_', '.');
+                    string parts = fileNameParts[0];
+
+                    if (fileNameParts.Length >= 2 && fileNameParts[0] != "RETRO")
+                    {
+                        string nome ="";
+                        int temp;
+                        string seed = "";
+                        for(int i = 0; i<parts.Length;i++)
+                        {
+                            if (int.TryParse(parts[i].ToString(),out temp))
+                            {
+                                nome += parts[i].ToString();
+                            } else
+                            {
+                                if (i != 0)
+                                {
+                                    seed = parts[i].ToString();
+                                }
+                            }
+                        }
+
+                        int value = int.Parse(nome);
+                        Card card = new Card(value, seed, imageFileName);
+                        deck.Push(card);
+                    }
+                }
+
+                Shuffle();
+            }   
+
+            //Mischio mazzo
+            private void Shuffle()
+            {
+                Random r = new Random();
+                Card[] temp = deck.ToArray();
+                deck.Clear();
+                foreach (Card c in temp.OrderBy(x => r.Next()))
+                {
+                    deck.Push(c);
+                }
+            }   
+
+            //Pesco carta
+            public Card Draw()
+            {
+                return deck.Pop();
             }
-        }   
 
-        //Pesco carta
-        public Card Draw()
-        {
-            return deck.Pop();
+            public int Count()
+            {
+                return deck.Count;
+            }
+
+            public void Push(Card card)
+            {
+                //TODO: Valutare controlli eventuali
+                deck.Push(card);
+            }
+
         }
-
-        public int Count()
-        {
-            return deck.Count;
-        }
-
-        public void Push(Card card)
-        {
-            //TODO: Valutare controlli eventuali
-            deck.Push(card);
-        }
-
     }
-}
