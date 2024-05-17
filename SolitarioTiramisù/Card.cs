@@ -32,7 +32,7 @@
             public Deck()
             {
 
-                string folderPath = $"C:/Users/User/Documents/GitHub/SolitarioTiramisu/SolitarioTiramisù/images";
+                string folderPath = $"../../../images";
                 string[] imageFiles = Directory.GetFiles(folderPath);
 
                 Random random = new Random();
@@ -86,7 +86,7 @@
             }   
 
             //Pesco carta
-            public Card Draw()
+            public Card Pop()
             {
                 return deck.Pop();
             }

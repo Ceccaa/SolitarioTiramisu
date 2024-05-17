@@ -10,6 +10,8 @@ namespace SolitarioTiramisù
     {
         private Deck deck = new Deck();
 
+        //TODO: implementare coerenza tra carte generate a video e vari mazzetti gestiti nel backend come degli stack (guardare sotto)
+
         // mazzetti di appoggio su cui fare spostamenti
         private Stack<Card> miniDeck1 = new Stack<Card>();
         private Stack<Card> miniDeck2 = new Stack<Card>();
@@ -61,7 +63,7 @@ namespace SolitarioTiramisù
         public Card DrawCardFromDeck()
         {
             if (deck.Count() > 0)
-                return deck.Draw();
+                return deck.Pop();
             else
                 throw new InvalidOperationException("Deck is empty.");
         }

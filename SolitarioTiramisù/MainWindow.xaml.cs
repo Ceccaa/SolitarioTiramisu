@@ -139,20 +139,25 @@ namespace SolitarioTiramisù
                                                                     .Where(rect => rect.Name.StartsWith("targetPanel"))
                                                                     .Take(targetPanelCount / 2);
 
+
+
                 List<Rectangle> rectanglesToAdd = new List<Rectangle>();
                 foreach (Rectangle targetPanel in targetPanels)
                 {
                     Deck.Card drawnCard = table.DrawCardFromDeck();
-
-                    string imagePath = $"C:/Users/User/Documents/GitHub/SolitarioTiramisu/SolitarioTiramisù/images/{drawnCard.ImagePath}";
+                    //percorso
+                    string imagePath = $"../../../images/{drawnCard.ImagePath}";
 
                     if (!System.IO.File.Exists(imagePath))
                     {
                         MessageBox.Show($"Image file not found: {imagePath}");
                         return;
                     }
+
                     Rectangle rectangle = new Rectangle();
-                    rectangle.Fill = new ImageBrush(new BitmapImage(new Uri(imagePath)));
+                    //crea effettiva immagine nel rettangolo
+                    rectangle.Fill = new ImageBrush(new BitmapImage(new Uri(imagePath, UriKind.RelativeOrAbsolute)));
+
                     rectangle.Width = 175;
                     rectangle.Height = 235;
 
@@ -175,20 +180,6 @@ namespace SolitarioTiramisù
                 MessageBox.Show($"Error in deck_Click method: {ex.GetType().Name}\n{ex.Message}\n{ex.StackTrace}");
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     }
 
