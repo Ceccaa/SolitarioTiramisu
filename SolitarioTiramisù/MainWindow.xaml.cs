@@ -1,24 +1,19 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace SolitarioTiramisù
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         private Point startPoint;
-        private Rectangle dragRectangle;
+        private Rectangle draggedCard;
         private Table table = new Table();
 
         public MainWindow()
@@ -26,100 +21,86 @@ namespace SolitarioTiramisù
             InitializeComponent();
         }
 
-        private void RedRectangle_Move(object sender, MouseEventArgs e)
+        private void CardRectangle_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                startPoint = e.GetPosition(canvas);
-                DragDrop.DoDragDrop(RedRectangle, RedRectangle, DragDropEffects.Move);
+                Rectangle rectangle = sender as Rectangle;
+                if (rectangle != null && draggedCard == null)
+                {
+                    startPoint = e.GetPosition(canvas);
+                    draggedCard = rectangle;
+                    DragDrop.DoDragDrop(rectangle, rectangle, DragDropEffects.Move);
+                }
             }
         }
 
         private void Canvas_Drop(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(typeof(Rectangle)))
+            if (e.Data.GetDataPresent(typeof(Rectangle)) && draggedCard != null)
             {
-                Rectangle rect = e.Data.GetData(typeof(Rectangle)) as Rectangle;
+                Point dropPosition = e.GetPosition(canvas);
 
-                Rectangle closestRect = GetClosestRectangle(e.GetPosition(canvas));
-                if (closestRect != null)
+                // Ottieni il rettangolo target più vicino
+                Rectangle closestRectangle = GetClosestRectangle(dropPosition);
+
+                if (closestRectangle != null)
                 {
-                    // Remove the rectangle from its current parent (if necessary)
-                    if (rect.Parent is Canvas)
-                    {
-                        ((Canvas)rect.Parent).Children.Remove(rect);
-                    }
-
-                    // Add the rectangle to the Canvas if it's not already there
-                    if (!canvas.Children.Contains(rect))
-                    {
-                        canvas.Children.Add(rect);
-                    }
+                    double horizontalPosition = Canvas.GetLeft(closestRectangle);
+                    double verticalPosition = Canvas.GetTop(closestRectangle);
 
                     // Set the new position of the rectangle
-                    Canvas.SetLeft(rect, Canvas.GetLeft(closestRect));
-                    Canvas.SetTop(rect, Canvas.GetTop(closestRect));
+                    Canvas.SetLeft(draggedCard, horizontalPosition);
+                    Canvas.SetTop(draggedCard, verticalPosition);
                 }
 
                 e.Handled = true;
-
-                // Remove the drag rectangle
-                if (dragRectangle != null)
-                {
-                    canvas.Children.Remove(dragRectangle);
-                    dragRectangle = null;
-                }
+                draggedCard = null;
             }
         }
 
         private void Canvas_DragOver(object sender, DragEventArgs e)
         {
-            e.Effects = DragDropEffects.Move;
-
-            Point dropPosition = e.GetPosition(canvas);
-
-            // Update the position of the drag rectangle
-            if (dragRectangle == null)
+            if (e.Data.GetDataPresent(typeof(Rectangle)))
             {
-                dragRectangle = new Rectangle
+                e.Effects = DragDropEffects.Move;
+                Point position = e.GetPosition(canvas);
+
+                // Move the dragged card with the mouse cursor
+                if (draggedCard != null)
                 {
-                    Width = RedRectangle.Width,
-                    Height = RedRectangle.Height,
-                    Fill = RedRectangle.Fill,
-                    Stroke = new SolidColorBrush(Colors.Gray),
-                    StrokeThickness = 2,
-                    Opacity = 0.5
-                };
-                canvas.Children.Add(dragRectangle);
+                    Canvas.SetLeft(draggedCard, position.X - draggedCard.Width / 2);
+                    Canvas.SetTop(draggedCard, position.Y - draggedCard.Height / 2);
+                }
+
+                e.Handled = true;
             }
-
-            Canvas.SetLeft(dragRectangle, dropPosition.X - dragRectangle.Width / 2);
-            Canvas.SetTop(dragRectangle, dropPosition.Y - dragRectangle.Height / 2);
-
-            e.Handled = true;
         }
 
-        private Rectangle GetClosestRectangle(Point dropPosition)
+        private Rectangle GetClosestRectangle(Point position)
         {
-            Rectangle closestRect = null;
+            Rectangle closestRectangle = null;
             double closestDistance = double.MaxValue;
 
-            foreach (UIElement child in canvas.Children)
+            foreach (var child in canvas.Children)
             {
-                if (child is Rectangle rectangle && rectangle != RedRectangle && rectangle != dragRectangle)
+                if (child is Rectangle rectangle && rectangle.Name.StartsWith("targetPanel"))
                 {
-                    Point rectCenter = new Point(Canvas.GetLeft(rectangle) + rectangle.Width / 2, Canvas.GetTop(rectangle) + rectangle.Height / 2);
-                    double distance = GetDistance(dropPosition, rectCenter);
+                    double left = Canvas.GetLeft(rectangle);
+                    double top = Canvas.GetTop(rectangle);
+                    Point rectCenter = new Point(left + rectangle.Width / 2, top + rectangle.Height / 2);
+
+                    double distance = GetDistance(position, rectCenter);
 
                     if (distance < closestDistance)
                     {
                         closestDistance = distance;
-                        closestRect = rectangle;
+                        closestRectangle = rectangle;
                     }
                 }
             }
 
-            return closestRect;
+            return closestRectangle;
         }
 
         private double GetDistance(Point p1, Point p2)
@@ -131,21 +112,14 @@ namespace SolitarioTiramisù
         {
             try
             {
-                // Note: Container dei targetPanels
-                int targetPanelCount = canvas.Children.OfType<Rectangle>()
-                                                      .Count(rect => rect.Name.StartsWith("targetPanel"));
+                var targetPanels = new List<Rectangle>
+                {
+                    targetPanel5, targetPanel6, targetPanel7, targetPanel8
+                };
 
-                IEnumerable<Rectangle> targetPanels = canvas.Children.OfType<Rectangle>()
-                                                                    .Where(rect => rect.Name.StartsWith("targetPanel"))
-                                                                    .Take(targetPanelCount / 2);
-
-
-
-                List<Rectangle> rectanglesToAdd = new List<Rectangle>();
-                foreach (Rectangle targetPanel in targetPanels)
+                foreach (var targetPanel in targetPanels)
                 {
                     Deck.Card drawnCard = table.DrawCardFromDeck();
-                    //percorso
                     string imagePath = $"../../../images/{drawnCard.ImagePath}";
 
                     if (!System.IO.File.Exists(imagePath))
@@ -154,24 +128,22 @@ namespace SolitarioTiramisù
                         return;
                     }
 
-                    Rectangle rectangle = new Rectangle();
-                    //crea effettiva immagine nel rettangolo
-                    rectangle.Fill = new ImageBrush(new BitmapImage(new Uri(imagePath, UriKind.RelativeOrAbsolute)));
-
-                    rectangle.Width = 175;
-                    rectangle.Height = 235;
+                    Rectangle rectangle = new Rectangle
+                    {
+                        Width = 175,
+                        Height = 235,
+                        Fill = new ImageBrush(new BitmapImage(new Uri(imagePath, UriKind.RelativeOrAbsolute)))
+                    };
 
                     double horizontalPosition = Canvas.GetLeft(targetPanel);
-                    double verticalPosition = Canvas.GetTop(targetPanel5);
+                    double verticalPosition = Canvas.GetTop(targetPanel);
 
                     Canvas.SetLeft(rectangle, horizontalPosition);
                     Canvas.SetTop(rectangle, verticalPosition);
 
-                    rectanglesToAdd.Add(rectangle);
-                }
+                    // Abilitare il drag and drop
+                    rectangle.MouseMove += CardRectangle_MouseMove;
 
-                foreach (Rectangle rectangle in rectanglesToAdd)
-                {
                     canvas.Children.Add(rectangle);
                 }
             }
@@ -180,7 +152,5 @@ namespace SolitarioTiramisù
                 MessageBox.Show($"Error in deck_Click method: {ex.GetType().Name}\n{ex.Message}\n{ex.StackTrace}");
             }
         }
-
     }
-
 }
