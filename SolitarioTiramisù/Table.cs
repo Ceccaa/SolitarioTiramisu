@@ -2,9 +2,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Configuration;
 using System.Data;
 using System.Windows;
-using static SolitarioTiramisù.Deck;
+using static SolitarioTiramisu.Deck;
 
-namespace SolitarioTiramisù
+namespace SolitarioTiramisu
 {
     class Table
     {

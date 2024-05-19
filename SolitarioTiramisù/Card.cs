@@ -4,7 +4,7 @@
     using System.Windows;
     using System.Windows.Controls;
 
-    namespace SolitarioTiramisù
+    namespace SolitarioTiramisu
     {
         //Oggetto mazzo
         class Deck

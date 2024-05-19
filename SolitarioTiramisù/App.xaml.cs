@@ -2,7 +2,7 @@
 using System.Data;
 using System.Windows;
 
-namespace SolitarioTiramisù
+namespace SolitarioTiramisu
 {
     /// <summary>
     /// Interaction logic for App.xaml

@@ -1,31 +1,6 @@
-﻿<Window x:Class="SolitarioTiramisù.MainWindow"
+﻿<Window x:Class="SolitarioTiramisu.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SolitarioTiramisù"
-        mc:Ignorable="d"
-        Title="Solitario Tiramisù" Height="707" Width="1143">
-    <Grid Background="#FF226F54" AllowDrop="True">
-        <Border BorderBrush="Black" BorderThickness="3">
-            <Canvas x:Name="canvas" AllowDrop="True" Drop="Canvas_Drop" DragOver="Canvas_DragOver" Margin="0,-3,7,1">
-                <Rectangle HorizontalAlignment="Left" Height="247" Width="176" Canvas.Left="40" Canvas.Top="402" Stroke="White" />
-                <Button x:Name="deck" Content="" Canvas.Left="37" Canvas.Top="405" Height="247" Width="176" Click="deck_Click">
-                    <Button.Background>
-                        <ImageBrush ImageSource="/Retro.jpg"/>
-                    </Button.Background>
-                </Button>
-                <Button x:Name="btnRestart" Content="RESTART" HorizontalAlignment="Left" Height="60" Margin="40,25,0,0" VerticalAlignment="Top" Width="140"/>
-
-                <Rectangle Name="targetPanel1" AllowDrop="True" Width="175" Height="235" Stroke="White" Canvas.Left="270" Canvas.Top="50"/>
-                <Rectangle Name="targetPanel2" AllowDrop="True" Width="175" Height="235" Stroke="White" Canvas.Left="490" Canvas.Top="50"/>
-                <Rectangle Name="targetPanel3" AllowDrop="True" Width="175" Height="235" Stroke="White" Canvas.Left="710" Canvas.Top="50"/>
-                <Rectangle Name="targetPanel4" AllowDrop="True" Width="175" Height="235" Stroke="White" Canvas.Left="930" Canvas.Top="50"/>
-                <Rectangle Name="targetPanel5" AllowDrop="True" Width="175" Height="235" Stroke="White" Canvas.Left="270" Canvas.Top="402" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <Rectangle Name="targetPanel6" AllowDrop="True" Width="175" Height="235" Stroke="White" Canvas.Left="490" Canvas.Top="402" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <Rectangle Name="targetPanel7" AllowDrop="True" Width="175" Height="235" Stroke="White" Canvas.Left="710" Canvas.Top="402" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <Rectangle Name="targetPanel8" AllowDrop="True" Width="175" Height="235" Stroke="White" Canvas.Left="930" Canvas.Top="402" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-            </Canvas>
-        </Border>
-    </Grid>
+        Title="Solitario" Height="450" Width="800">
+    <Frame Name="MainFrame" NavigationUIVisibility="Hidden" Source="MainPage.xaml" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
 </Window>

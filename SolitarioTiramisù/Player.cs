@@ -3,7 +3,7 @@ using System.Data;
 using System.Windows;
 
 
-namespace SolitarioTiramisù
+namespace SolitarioTiramisu
 {
     class Player
     {
