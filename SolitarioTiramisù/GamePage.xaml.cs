@@ -13,6 +13,7 @@ namespace SolitarioTiramisu
 {
     public partial class GamePage : Page
     {
+        private int it = 0;
         private Point startPoint;
         private Rectangle draggedCard;
         private Table table = new Table();
@@ -36,6 +37,7 @@ namespace SolitarioTiramisu
                 {
                     startPoint = e.GetPosition(canvas);
                     draggedCard = rectangle;
+                    Panel.SetZIndex(draggedCard, ++it);
                     DragDrop.DoDragDrop(rectangle, rectangle, DragDropEffects.Move);
                 }
             }
@@ -61,6 +63,7 @@ namespace SolitarioTiramisu
                 }
 
                 e.Handled = true;
+                Panel.SetZIndex(draggedCard, ++it);
                 draggedCard = null;
             }
         }
