@@ -45,7 +45,8 @@
                     string[] fileNameParts = imageFileName.Split('_', '.');
                     string parts = fileNameParts[0];
 
-                    if (fileNameParts.Length >= 2 && fileNameParts[0] != "RETRO")
+                    //check cards
+                    if (fileNameParts.Length >= 2 && fileNameParts[0] != "RETRO" && fileNameParts[0] != "Logo")
                     {
                         string nome ="";
                         int temp;
