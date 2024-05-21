@@ -14,7 +14,7 @@
             {
                 public int value { get; }
                 public string seed { get; }
-
+                
                 public string ImagePath { get; }
 
                 public Card(int value, string seed , string imagePath)
