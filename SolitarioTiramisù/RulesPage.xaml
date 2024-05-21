@@ -2,13 +2,40 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       Title="RulesPage">
-    <Grid Background="#FF226F54">
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >
-            <TextBlock Text="Regole del Solitario:" FontSize="24" FontWeight="Bold" TextAlignment="Center" Margin="20"/>
-            <TextBlock Text="1. Regola 1..." FontSize="16" TextAlignment="Center" Margin="10"/>
-            <TextBlock Text="2. Regola 2..." FontSize="16" TextAlignment="Center" Margin="10"/>
-            <TextBlock Text="3. Regola 3..." FontSize="16" TextAlignment="Center" Margin="10"/>
-            <Button Content="Vai al Gioco" Click="GoToGameButton_Click" Width="200" Height="50" Margin="20"/>
-        </StackPanel>
+    <Page.Resources>
+        <Style x:Key="RoundedButtonStyle" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="15">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              Margin="10"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="White"/>
+
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="10,5"/>
+        </Style>
+    </Page.Resources>
+    <Grid Background="#226F54">
+        <Grid Height="608" Background="#FF226F54" Margin="0,0,-26,0">
+            <TextBlock FontSize="24" FontWeight="Bold" TextAlignment="Center" Margin="530,24,530,542" FontFamily="Cascadia Code" Foreground="#FFF1E8DC">
+                <Run Text="Solitario Tiramisu"/><Run Language="it-it" Text="'"/><LineBreak/><Run/>
+            </TextBlock>
+            <Button Style="{StaticResource RoundedButtonStyle}" Content="Vai al Gioco" Click="GoToGameButton_Click" Margin="0,508,0,36" FontFamily="Cascadia Mono SemiLight" FontSize="20" HorizontalAlignment="Center" Width="190" Background="#FFF1E8DC"/>
+            <Label Content="COME SI GIOCA:" HorizontalAlignment="Left" Height="36" Margin="178,81,0,0" VerticalAlignment="Top" Width="174" FontFamily="Cascadia Mono SemiLight" FontSize="20" Foreground="#FFF1E8DC"/>
+            <Label Content="REGOLE DEL GIOCO:" HorizontalAlignment="Left" Height="35" Margin="178,156,0,0" VerticalAlignment="Top" Width="206" FontFamily="Cascadia Mono SemiLight" FontSize="20" Foreground="#FFF1E8DC"/>
+            <Label Content="Costruzione delle basi: Le carte possono essere spostate alle basi solo in ordine crescente e dello stesso seme&#xA;&#xA;Movimento delle carte nel tableau: Le carte possono essere spostate tra le sequenze se hanno lo stesso seme della carta in cima. &#xA;Il valore della carta non ha importanza in questo caso.&#xA;Su una sequenza vuota puo' essere posta qualsiasi carta.&#xA;&#xA;Mazzo rimanente: Il mazzo viene diviso a gruppi di quattro carte alla volta.&#xD;&#xA;Le carte pescate possono essere utilizzate per costruire le basi o spostate tra le sequenze del tableau." HorizontalAlignment="Center" Height="160" Margin="0,196,0,0" VerticalAlignment="Top" Width="1228" FontFamily="Cascadia Mono SemiLight" FontSize="16" Foreground="#FFF1E8DC"/>
+            <Label Content="L'obiettivo del solitario e' completare le quattro basi partendo dagli Assi fino ai Re per ogni seme." HorizontalAlignment="Left" Margin="359,122,0,0" VerticalAlignment="Top" FontFamily="Cascadia Mono SemiLight" FontSize="16" Foreground="#FFF1E8DC" Width="953"/>
+            <Label Content="FINE DEL GIOCO:" HorizontalAlignment="Left" Height="30" Margin="178,380,0,0" VerticalAlignment="Top" Width="182" FontFamily="Cascadia Mono SemiLight" FontSize="20" Foreground="#FFF1E8DC" RenderTransformOrigin="0.401,0.583"/>
+            <Label Content="Si puo' rigirare il mazzo due volte: il gioco termina quando tutte le carte si trovano nelle basi in ordine ascendente dallo stesso seme. &#xA;Se al termine del secondo mazzo non ci sono piu' mosse possibili e le basi non sono complete, il gioco e' considerato perso." Margin="172,415,109,0" VerticalAlignment="Top" RenderTransformOrigin="-2.079,-0.116" FontSize="16" FontFamily="Cascadia Mono SemiLight" Foreground="#FFF1E8DC" HorizontalAlignment="Center"/>
+        </Grid>
     </Grid>
 </Page>
