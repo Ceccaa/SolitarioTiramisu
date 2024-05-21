@@ -19,5 +19,11 @@ namespace SolitarioTiramisu
         {
             this.NavigationService.Navigate(new Uri("RulesPage.xaml", UriKind.Relative));
         }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Chiudi la finestra principale
+            Window.GetWindow(this)?.Close();
+        }
     }
 }

@@ -16,6 +16,7 @@
                     </Button.Background>
                 </Button>
                 <Button x:Name="btnRestart" Content="RESTART" HorizontalAlignment="Left" Height="60" Margin="40,25,0,0" VerticalAlignment="Top" Width="140"/>
+                <Button Name="CloseButton" Content="Esci" HorizontalAlignment="Left" Click="CloseButton_Click" Width="143" Height="50" Canvas.Left="37" Canvas.Top="118" VerticalAlignment="Center"/>
 
                 <Rectangle Name="targetPanel1" AllowDrop="True" Width="175" Height="235" Stroke="White" Canvas.Left="270" Canvas.Top="50"/>
                 <Rectangle Name="targetPanel2" AllowDrop="True" Width="175" Height="235" Stroke="White" Canvas.Left="490" Canvas.Top="50"/>

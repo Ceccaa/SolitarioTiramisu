@@ -6,6 +6,7 @@
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button Content="Avvia Gioco" Click="StartGameButton_Click" Width="200" Height="50"/>
             <Button Content="Regole" Click="RulesButton_Click" Width="200" Height="50"/>
+            <Button Name="CloseButton" Content="Esci" HorizontalAlignment="Center" Click="CloseButton_Click" Width="200" Height="50"/>
         </StackPanel>
     </Grid>
 </Page>
