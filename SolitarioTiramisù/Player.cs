@@ -7,9 +7,7 @@ namespace SolitarioTiramisu
 {
     class Player
     {
-        
-        
-        
+
 
     }
 }

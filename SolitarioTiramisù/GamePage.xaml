@@ -10,7 +10,7 @@
         <Border BorderBrush="Black" BorderThickness="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Canvas x:Name="canvas" AllowDrop="True" Drop="Canvas_Drop" DragOver="Canvas_DragOver" Margin="0">
                 <Rectangle HorizontalAlignment="Left" Height="247" Width="176" Canvas.Left="40" Canvas.Top="402" Stroke="White" />
-                <Button x:Name="deck" Content="" Canvas.Left="37" Canvas.Top="405" Height="247" Width="176" Click="deck_Click">
+                <Button x:Name="deck" Content="" Canvas.Left="40" Canvas.Top="402" Height="247" Width="176" Click="deck_Click" HorizontalAlignment="Center" VerticalAlignment="Top">
                     <Button.Background>
                         <ImageBrush ImageSource="/Retro.jpg"/>
                     </Button.Background>
