@@ -128,6 +128,7 @@ namespace SolitarioTiramisu
 
                 foreach (var targetPanel in targetPanels)
                 {
+
                     Deck.Card drawnCard = table.DrawCardFromDeck();
                     string imagePath = $"../../../images/{drawnCard.ImagePath}";
 
@@ -143,10 +144,10 @@ namespace SolitarioTiramisu
                         Height = 235,
                         Fill = new ImageBrush(new BitmapImage(new Uri(imagePath, UriKind.RelativeOrAbsolute)))
                     };
-
+                   
                     double horizontalPosition = Canvas.GetLeft(targetPanel);
                     double verticalPosition = Canvas.GetTop(targetPanel);
-
+                    Panel.SetZIndex(rectangle, ++it);
                     Canvas.SetLeft(rectangle, horizontalPosition);
                     Canvas.SetTop(rectangle, verticalPosition);
 
@@ -154,6 +155,8 @@ namespace SolitarioTiramisu
                     rectangle.MouseMove += CardRectangle_MouseMove;
 
                     canvas.Children.Add(rectangle);
+                    
+
                 }
             }
             catch (Exception ex)
