@@ -2,8 +2,13 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Solitario" Height="450" Width="800"
-         WindowState="Maximized"
+        WindowState="Maximized"
         WindowStyle="None"
         ResizeMode="NoResize">
-    <Frame Name="MainFrame" NavigationUIVisibility="Hidden" Source="MainPage.xaml" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+    <Grid>
+        <!-- MediaElement per la musica di sottofondo -->
+        <MediaElement Name="BackgroundMusic" LoadedBehavior="Manual" UnloadedBehavior="Stop" Volume="0.5" />
+
+        <Frame Name="MainFrame" NavigationUIVisibility="Hidden" Source="MainPage.xaml" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+    </Grid>
 </Window>
