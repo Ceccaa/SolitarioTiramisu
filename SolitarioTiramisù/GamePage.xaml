@@ -9,14 +9,37 @@
     <Grid Background="#FF226F54" AllowDrop="True">
         <Border BorderBrush="Black" BorderThickness="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Canvas x:Name="canvas" AllowDrop="True" Drop="Canvas_Drop" DragOver="Canvas_DragOver" Margin="0">
-                <Rectangle HorizontalAlignment="Left" Height="247" Width="176" Canvas.Left="40" Canvas.Top="402" Stroke="White" />
-                <Button x:Name="deck" Content="" Canvas.Left="40" Canvas.Top="402" Height="247" Width="176" Click="deck_Click" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <Rectangle HorizontalAlignment="Center" Height="235" Width="176" Canvas.Left="40" Canvas.Top="402" Stroke="White" VerticalAlignment="Top" />
+                <Button x:Name="deck" Canvas.Left="40" Canvas.Top="402" Height="235" Width="176" Click="deck_Click" HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
                     <Button.Background>
                         <ImageBrush ImageSource="/Retro.jpg"/>
                     </Button.Background>
                 </Button>
-                <Button x:Name="btnRestart" Content="RESTART" HorizontalAlignment="Left" Height="60" Margin="40,25,0,0" VerticalAlignment="Top" Width="140"/>
-                <Button Name="CloseButton" Content="Esci" HorizontalAlignment="Left" Click="CloseButton_Click" Width="143" Height="50" Canvas.Left="37" Canvas.Top="118" VerticalAlignment="Center"/>
+                <Button x:Name="btnRestart" Content="RESTART" HorizontalAlignment="Center" Height="48" VerticalAlignment="Top" Width="140" Canvas.Left="40" Canvas.Top="50" FontFamily="Cascadia Mono SemiLight" FontSize="16" Background="#FFF1E8DC">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="15">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button Name="CloseButton" Content="ESCI" HorizontalAlignment="Left" Click="CloseButton_Click" Width="143" Height="50" Canvas.Left="37" Canvas.Top="118" VerticalAlignment="Center" FontFamily="Cascadia Mono SemiLight" FontSize="16" Background="#FFF1E8DC">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="15">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
 
                 <Rectangle Name="targetPanel1" AllowDrop="True" Width="175" Height="235" Stroke="White" Canvas.Left="270" Canvas.Top="50"/>
                 <Rectangle Name="targetPanel2" AllowDrop="True" Width="175" Height="235" Stroke="White" Canvas.Left="490" Canvas.Top="50"/>
