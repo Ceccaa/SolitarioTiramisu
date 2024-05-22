@@ -8,6 +8,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static SolitarioTiramisu.Deck;
+using System.Windows.Shapes;
+
 
 namespace SolitarioTiramisu
 {
@@ -17,6 +20,7 @@ namespace SolitarioTiramisu
         private Point startPoint;
         private Rectangle draggedCard;
         private Table table = new Table();
+        private Deck mazzo = new Deck(); 
 
         public GamePage()
         {
@@ -65,6 +69,16 @@ namespace SolitarioTiramisu
                 e.Handled = true;
                 Panel.SetZIndex(draggedCard, ++it);
                 draggedCard = null;
+
+                //TODO: Implementa i movimenti
+                if(closestRectangle == targetPanel5)
+                {
+                    Card from = mazzo.GetCardFromRectangle(closestRectangle);
+                }
+
+                
+
+
 
             }
         }
@@ -156,23 +170,30 @@ namespace SolitarioTiramisu
                     rectangle.MouseMove += CardRectangle_MouseMove;
 
                     canvas.Children.Add(rectangle);
-                    if(targetPanel == targetPanel5)
+                   
+
+                    if (targetPanel == targetPanel5)
                     {
+                        drawnCard.position = "miniDeck1";
                         Table.PushInDeck(drawnCard, "miniDeck1");
                     } else if(targetPanel == targetPanel6)
                     {
+                        drawnCard.position = "miniDeck2";
                         Table.PushInDeck(drawnCard, "miniDeck2");
                     } else if(targetPanel == targetPanel7)
                     {
+                        drawnCard.position = "miniDeck3";
                         Table.PushInDeck(drawnCard, "miniDeck3");
                     }
                     else
                     {
+                        drawnCard.position = "miniDeck4";
                         Table.PushInDeck(drawnCard, "miniDeck4");
                     }
+                    mazzo.LinkCardToRectangle(drawnCard, rectangle);
 
 
-                    
+
 
                 }
             }

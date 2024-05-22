@@ -3,8 +3,10 @@
     using System.IO;
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Shapes; 
 
-    namespace SolitarioTiramisu
+
+namespace SolitarioTiramisu
     {
         //Oggetto mazzo
         class Deck
@@ -17,7 +19,7 @@
                 
                 public string ImagePath { get; }
 
-                public string position { get; }
+                public string position { get; set; }
 
                 public Card(int value, string seed , string imagePath, string position)
                 {
@@ -30,8 +32,9 @@
 
             //Rappresentazione del mazzo in memoria
             private Stack<Card> deck = new Stack<Card>();
+            private Dictionary<Rectangle, Card> cardRectangleMap = new Dictionary<Rectangle, Card>();
 
-            //riempimento del mazzo
+        //riempimento del mazzo
             public Deck()
             {
 
@@ -42,7 +45,7 @@
 
                 foreach (string imagePath in imageFiles)
                 {
-                    string imageFileName = Path.GetFileName(imagePath);
+                    string imageFileName = System.IO.Path.GetFileName(imagePath);
 
 
                     string[] fileNameParts = imageFileName.Split('_', '.');
@@ -105,11 +108,23 @@
                 //TODO: Valutare controlli eventuali
                 deck.Push(card);
             }
-
-            public void AssignPosition(Card card, string position)
+            public void AssignPosition(Card card, string pos)
             {
-                
+                card.position = pos;
             }
 
-        }
+            public void LinkCardToRectangle(Card card, Rectangle rectangle)
+            {
+                cardRectangleMap[rectangle] = card;
+            }
+
+            public Card GetCardFromRectangle(Rectangle rectangle)
+            {
+                return cardRectangleMap[rectangle];
+            }
+
+
+
+
+    }
     }
