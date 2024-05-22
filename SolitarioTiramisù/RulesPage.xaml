@@ -25,17 +25,16 @@
         </Style>
     </Page.Resources>
     <Grid Background="#226F54">
-        <Grid Height="608" Background="#FF226F54" Margin="0,0,-26,0">
-            <TextBlock FontSize="24" FontWeight="Bold" TextAlignment="Center" Margin="530,24,530,542" FontFamily="Cascadia Code" Foreground="#FFF1E8DC">
-                <Run Text="Solitario Tiramisu"/><Run Language="it-it" Text="'"/><LineBreak/><Run/>
-            </TextBlock>
-            <Button Style="{StaticResource RoundedButtonStyle}" Content="Vai al Gioco" Click="GoToGameButton_Click" Margin="0,508,0,36" FontFamily="Cascadia Mono SemiLight" FontSize="20" HorizontalAlignment="Center" Width="190" Background="#FFF1E8DC"/>
-            <Label Content="COME SI GIOCA:" HorizontalAlignment="Left" Height="36" Margin="178,81,0,0" VerticalAlignment="Top" Width="174" FontFamily="Cascadia Mono SemiLight" FontSize="20" Foreground="#FFF1E8DC"/>
-            <Label Content="REGOLE DEL GIOCO:" HorizontalAlignment="Left" Height="35" Margin="178,156,0,0" VerticalAlignment="Top" Width="206" FontFamily="Cascadia Mono SemiLight" FontSize="20" Foreground="#FFF1E8DC"/>
-            <Label Content="Costruzione delle basi: Le carte possono essere spostate alle basi solo in ordine crescente e dello stesso seme&#xA;&#xA;Movimento delle carte nel tableau: Le carte possono essere spostate tra le sequenze se hanno lo stesso seme della carta in cima. &#xA;Il valore della carta non ha importanza in questo caso.&#xA;Su una sequenza vuota puo' essere posta qualsiasi carta.&#xA;&#xA;Mazzo rimanente: Il mazzo viene diviso a gruppi di quattro carte alla volta.&#xD;&#xA;Le carte pescate possono essere utilizzate per costruire le basi o spostate tra le sequenze del tableau." HorizontalAlignment="Center" Height="160" Margin="0,196,0,0" VerticalAlignment="Top" Width="1228" FontFamily="Cascadia Mono SemiLight" FontSize="16" Foreground="#FFF1E8DC"/>
-            <Label Content="L'obiettivo del solitario e' completare le quattro basi partendo dagli Assi fino ai Re per ogni seme." HorizontalAlignment="Left" Margin="359,122,0,0" VerticalAlignment="Top" FontFamily="Cascadia Mono SemiLight" FontSize="16" Foreground="#FFF1E8DC" Width="953"/>
-            <Label Content="FINE DEL GIOCO:" HorizontalAlignment="Left" Height="30" Margin="178,380,0,0" VerticalAlignment="Top" Width="182" FontFamily="Cascadia Mono SemiLight" FontSize="20" Foreground="#FFF1E8DC" RenderTransformOrigin="0.401,0.583"/>
-            <Label Content="Si puo' rigirare il mazzo due volte: il gioco termina quando tutte le carte si trovano nelle basi in ordine ascendente dallo stesso seme. &#xA;Se al termine del secondo mazzo non ci sono piu' mosse possibili e le basi non sono complete, il gioco e' considerato perso." Margin="172,415,109,0" VerticalAlignment="Top" RenderTransformOrigin="-2.079,-0.116" FontSize="16" FontFamily="Cascadia Mono SemiLight" Foreground="#FFF1E8DC" HorizontalAlignment="Center"/>
+        <Grid Height="1000" Width="2000" Background="#FF226F54" Margin="0,0,-26,0">
+
+            <Button Style="{StaticResource RoundedButtonStyle}" Content="Vai al Gioco" Click="GoToGameButton_Click" Margin="840,784,970,132" FontFamily="Cascadia Mono SemiLight" FontSize="20" Width="190" Background="#FFF1E8DC" RenderTransformOrigin="0.522,0.595"/>
+            <Label Content="SOLITARIO TIRAMISU'" Height="51" Margin="840,34,862,915" Width="298" FontFamily="Cascadia Mono SemiLight" FontSize="25" Foreground="#FFF1E8DC"/>
+            <Label Content="COME SI GIOCA:"  Height="36" Margin="405,103,1421,861"  Width="174" FontFamily="Cascadia Mono SemiLight" FontSize="20" Foreground="#FFF1E8DC"/>
+            <Label Content="L'obiettivo del solitario e' completare le quattro basi partendo dagli Assi fino ai Re per ogni seme." Margin="405,139,642,0" FontFamily="Cascadia Mono SemiLight" FontSize="16" Foreground="#FFF1E8DC" Width="953" Height="36" VerticalAlignment="Top"/>
+            <Label Content="REGOLE DEL GIOCO:"  Height="36" Margin="405,241,1389,723"  Width="206" FontFamily="Cascadia Mono SemiLight" FontSize="20" Foreground="#FFF1E8DC"/>
+            <Label Content="Costruzione delle basi: Le carte possono essere spostate alle basi solo in ordine crescente e dello stesso seme&#xA;&#xA;Movimento delle carte nel tableau: Le carte possono essere spostate tra le sequenze se hanno lo stesso seme della carta in cima. &#xA;Il valore della carta non ha importanza in questo caso.&#xA;Su una sequenza vuota puo' essere posta qualsiasi carta.&#xA;&#xA;Mazzo rimanente: Il mazzo viene diviso a gruppi di quattro carte alla volta.&#xD;&#xA;Le carte pescate possono essere utilizzate per costruire le basi o spostate tra le sequenze del tableau." HorizontalAlignment="Left" Height="160" Margin="405,282,0,0" VerticalAlignment="Top" Width="1228" FontFamily="Cascadia Mono SemiLight" FontSize="16" Foreground="#FFF1E8DC"/>
+            <Label Content="FINE DEL GIOCO:" Height="30" Margin="405,485,1413,485" Width="182" FontFamily="Cascadia Mono SemiLight" FontSize="20" Foreground="#FFF1E8DC" RenderTransformOrigin="0.401,0.583"/>
+            <Label Content="Si puo' rigirare il mazzo due volte: il gioco termina quando tutte le carte si trovano nelle basi in ordine ascendente dallo stesso seme. &#xA;Se al termine del secondo mazzo non ci sono piu' mosse possibili e le basi non sono complete, il gioco e' considerato perso." Height="82" Margin="405,534,299,384"  FontFamily="Cascadia Mono SemiLight" FontSize="16" Foreground="#FFF1E8DC"/>
         </Grid>
     </Grid>
 </Page>
