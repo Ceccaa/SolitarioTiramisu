@@ -14,16 +14,16 @@ namespace SolitarioTiramisu
         //TODO: implementare coerenza tra carte generate a video e vari mazzetti gestiti nel backend come degli stack (guardare sotto)
 
         // mazzetti di appoggio su cui fare spostamenti
-        private Stack<Card> miniDeck1 = new Stack<Card>();
-        private Stack<Card> miniDeck2 = new Stack<Card>();
-        private Stack<Card> miniDeck3 = new Stack<Card>();
-        private Stack<Card> miniDeck4 = new Stack<Card>();
+        private static Stack<Card> miniDeck1 = new Stack<Card>();
+        private static Stack<Card> miniDeck2 = new Stack<Card>();
+        private static Stack<Card> miniDeck3 = new Stack<Card>();
+        private static Stack<Card> miniDeck4 = new Stack<Card>();
 
         // mazzetti principali in cui fare la scala
-        private Stack<Card> stairDeck1 = new Stack<Card>();
-        private Stack<Card> stairDeck2 = new Stack<Card>();
-        private Stack<Card> stairDeck3 = new Stack<Card>();
-        private Stack<Card> stairDeck4 = new Stack<Card>();
+        private static Stack<Card> stairDeck1 = new Stack<Card>();
+        private static Stack<Card> stairDeck2 = new Stack<Card>();
+        private static Stack<Card> stairDeck3 = new Stack<Card>();
+        private static Stack<Card> stairDeck4 = new Stack<Card>();
 
         //muovere carte da a, tra i mazzi inferiori 
         public void MinorMoveCard(Stack<Card> from, Stack<Card> to)
@@ -132,6 +132,29 @@ namespace SolitarioTiramisu
 
             return false;
                 
+        }
+
+        public static void PushInDeck(Card card, string to)
+        {
+            switch (to)
+            {
+                case "miniDeck1":
+                    miniDeck1.Push(card);
+                    break;
+
+                case "miniDeck2":
+                    miniDeck2.Push(card);
+                    break;
+
+                case "miniDeck3":
+                    miniDeck3.Push(card);
+                    break;
+
+                case "miniDeck4":
+                    miniDeck4.Push(card);
+                    break;
+
+            }
         }
         
 

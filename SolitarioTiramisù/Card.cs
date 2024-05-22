@@ -17,11 +17,14 @@
                 
                 public string ImagePath { get; }
 
-                public Card(int value, string seed , string imagePath)
+                public string position { get; }
+
+                public Card(int value, string seed , string imagePath, string position)
                 {
                     this.value = value;
                     this.seed = seed;
                     this.ImagePath = imagePath;
+                    this.position = position;   
                 }
             }
 
@@ -66,7 +69,7 @@
                         }
 
                         int value = int.Parse(nome);
-                        Card card = new Card(value, seed, imageFileName);
+                        Card card = new Card(value, seed, imageFileName, "");
                         deck.Push(card);
                     }
                 }
@@ -101,6 +104,11 @@
             {
                 //TODO: Valutare controlli eventuali
                 deck.Push(card);
+            }
+
+            public void AssignPosition(Card card, string position)
+            {
+                
             }
 
         }

@@ -65,6 +65,7 @@ namespace SolitarioTiramisu
                 e.Handled = true;
                 Panel.SetZIndex(draggedCard, ++it);
                 draggedCard = null;
+
             }
         }
 
@@ -155,6 +156,22 @@ namespace SolitarioTiramisu
                     rectangle.MouseMove += CardRectangle_MouseMove;
 
                     canvas.Children.Add(rectangle);
+                    if(targetPanel == targetPanel5)
+                    {
+                        Table.PushInDeck(drawnCard, "miniDeck1");
+                    } else if(targetPanel == targetPanel6)
+                    {
+                        Table.PushInDeck(drawnCard, "miniDeck2");
+                    } else if(targetPanel == targetPanel7)
+                    {
+                        Table.PushInDeck(drawnCard, "miniDeck3");
+                    }
+                    else
+                    {
+                        Table.PushInDeck(drawnCard, "miniDeck4");
+                    }
+
+
                     
 
                 }
