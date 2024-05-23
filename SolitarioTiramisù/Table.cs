@@ -14,28 +14,44 @@ namespace SolitarioTiramisu
         //TODO: implementare coerenza tra carte generate a video e vari mazzetti gestiti nel backend come degli stack (guardare sotto)
 
         // mazzetti di appoggio su cui fare spostamenti
-        private static Stack<Card> miniDeck1 = new Stack<Card>();
-        private static Stack<Card> miniDeck2 = new Stack<Card>();
-        private static Stack<Card> miniDeck3 = new Stack<Card>();
-        private static Stack<Card> miniDeck4 = new Stack<Card>();
+        public Stack<Card> miniDeck1 = new Stack<Card>();
+        public Stack<Card> miniDeck2 = new Stack<Card>();
+        public Stack<Card> miniDeck3 = new Stack<Card>();
+        public Stack<Card> miniDeck4 = new Stack<Card>();
 
         // mazzetti principali in cui fare la scala
-        private static Stack<Card> stairDeck1 = new Stack<Card>();
-        private static Stack<Card> stairDeck2 = new Stack<Card>();
-        private static Stack<Card> stairDeck3 = new Stack<Card>();
-        private static Stack<Card> stairDeck4 = new Stack<Card>();
+        public Stack<Card> stairDeck1 = new Stack<Card>();
+        public Stack<Card> stairDeck2 = new Stack<Card>();
+        public Stack<Card> stairDeck3 = new Stack<Card>();
+        public Stack<Card> stairDeck4 = new Stack<Card>();
 
         //muovere carte da a, tra i mazzi inferiori 
-        public void MinorMoveCard(Stack<Card> from, Stack<Card> to)
+        public bool MinorMoveCard(Stack<Card> from, Stack<Card> to)
         {
             Card tmpCard = from.Pop();
-            Card tmpCard2 = to.Pop();
-            if(tmpCard.seed == tmpCard2.seed)
+            Card tmpCard2;
+            if (to.TryPop(out tmpCard2))
             {
+                if (tmpCard.seed == tmpCard2.seed)
+                {
+                    to.Push(tmpCard2);
+                    to.Push(tmpCard);
+                    SetCardPosition(tmpCard, to);
+                    SetCardPosition(tmpCard2, to);
+                    return true;
+                }
                 to.Push(tmpCard2);
+                from.Push(tmpCard);
+                return false;
+            } else
+            {
                 to.Push(tmpCard);
+                SetCardPosition(tmpCard, to);
+                return true;
             }
-
+                
+            
+/*          
             if(Win() == 0)
             {
                 MessageBox.Show("Hai vinto!");
@@ -44,6 +60,7 @@ namespace SolitarioTiramisu
             {
                 MessageBox.Show("Hai perso!");
             }   
+*/
         }
 
         //muovere carte da mazzi inferiori a mazzi superiori per fare la scala
@@ -56,7 +73,7 @@ namespace SolitarioTiramisu
                 to.Push(tmpCard2);
                 to.Push(tmpCard);
             }
-
+            /*
             if (Win() == 0)
             {
                 MessageBox.Show("Hai vinto!");
@@ -65,6 +82,7 @@ namespace SolitarioTiramisu
             {
                 MessageBox.Show("Hai perso!");
             }
+            */
         }
 
         //rimischiare il mazzo quando finisce. si puo fare solo 1 volta. Da chiamare una volta per ogni mazzetto.
@@ -134,29 +152,17 @@ namespace SolitarioTiramisu
                 
         }
 
-        public static void PushInDeck(Card card, string to)
+        public void PushInDeck(Card card, Stack<Card> deck)
         {
-            switch (to)
-            {
-                case "miniDeck1":
-                    miniDeck1.Push(card);
-                    break;
-
-                case "miniDeck2":
-                    miniDeck2.Push(card);
-                    break;
-
-                case "miniDeck3":
-                    miniDeck3.Push(card);
-                    break;
-
-                case "miniDeck4":
-                    miniDeck4.Push(card);
-                    break;
-
-            }
+            deck.Push(card);
+            
         }
-        
+        public void SetCardPosition(Card card, Stack<Card> to)
+        {
+            //TODO: FIX THIS FUNCTION
+            card.position = to;
+        }
+
 
     }
 

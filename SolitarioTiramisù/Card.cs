@@ -19,9 +19,9 @@ namespace SolitarioTiramisu
                 
                 public string ImagePath { get; }
 
-                public string position { get; set; }
+                public Stack<Card> position { get; set; }
 
-                public Card(int value, string seed , string imagePath, string position)
+                public Card(int value, string seed , string imagePath, Stack<Card> position)
                 {
                     this.value = value;
                     this.seed = seed;
@@ -72,7 +72,7 @@ namespace SolitarioTiramisu
                         }
 
                         int value = int.Parse(nome);
-                        Card card = new Card(value, seed, imageFileName, "");
+                        Card card = new Card(value, seed, imageFileName, null);
                         deck.Push(card);
                     }
                 }
@@ -108,10 +108,6 @@ namespace SolitarioTiramisu
                 //TODO: Valutare controlli eventuali
                 deck.Push(card);
             }
-            public void AssignPosition(Card card, string pos)
-            {
-                card.position = pos;
-            }
 
             public void LinkCardToRectangle(Card card, Rectangle rectangle)
             {
@@ -122,6 +118,7 @@ namespace SolitarioTiramisu
             {
                 return cardRectangleMap[rectangle];
             }
+
 
 
 

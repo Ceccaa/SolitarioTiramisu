@@ -19,8 +19,10 @@ namespace SolitarioTiramisu
         private int it = 0;
         private Point startPoint;
         private Rectangle draggedCard;
+        private Deck mazzo = new Deck();
+        private Point originalPosition;
         private Table table = new Table();
-        private Deck mazzo = new Deck(); 
+
 
         public GamePage()
         {
@@ -41,6 +43,7 @@ namespace SolitarioTiramisu
                 {
                     startPoint = e.GetPosition(canvas);
                     draggedCard = rectangle;
+                    originalPosition = startPoint;
                     Panel.SetZIndex(draggedCard, ++it);
                     DragDrop.DoDragDrop(rectangle, rectangle, DragDropEffects.Move);
                 }
@@ -55,27 +58,50 @@ namespace SolitarioTiramisu
 
                 // Ottieni il rettangolo target più vicino
                 Rectangle closestRectangle = GetClosestRectangle(dropPosition);
-
-                if (closestRectangle != null)
+                Card from = mazzo.GetCardFromRectangle(draggedCard);
+                bool check = true;
+                if (closestRectangle == targetPanel5)
                 {
-                    double horizontalPosition = Canvas.GetLeft(closestRectangle);
-                    double verticalPosition = Canvas.GetTop(closestRectangle);
+                    check = table.MinorMoveCard(from.position, table.miniDeck1);
 
-                    // Set the new position of the rectangle
-                    Canvas.SetLeft(draggedCard, horizontalPosition);
-                    Canvas.SetTop(draggedCard, verticalPosition);
                 }
+                else if (closestRectangle == targetPanel6)
+                {
+                    check = table.MinorMoveCard(from.position, table.miniDeck2);
+                }
+                else if (closestRectangle == targetPanel7)
+                {
+                    check = table.MinorMoveCard(from.position, table.miniDeck3);
+                }
+                else
+                {
+                    check = table.MinorMoveCard(from.position, table.miniDeck4);
+                }
+                if (check)
+                {
+                    if (closestRectangle != null)
+                    {
+                        double horizontalPosition = Canvas.GetLeft(closestRectangle);
+                        double verticalPosition = Canvas.GetTop(closestRectangle);
+
+                        // Set the new position of the rectangle
+                        Canvas.SetLeft(draggedCard, horizontalPosition);
+                        Canvas.SetTop(draggedCard, verticalPosition);
+                    }
+                } else
+                {
+                    Canvas.SetLeft(draggedCard, originalPosition.X);
+                    Canvas.SetTop(draggedCard, originalPosition.Y);
+                }
+                
 
                 e.Handled = true;
                 Panel.SetZIndex(draggedCard, ++it);
+                
                 draggedCard = null;
-
-                //TODO: Implementa i movimenti
-                if(closestRectangle == targetPanel5)
-                {
-                    Card from = mazzo.GetCardFromRectangle(closestRectangle);
-                }
-
+                
+       
+                
                 
 
 
@@ -174,21 +200,21 @@ namespace SolitarioTiramisu
 
                     if (targetPanel == targetPanel5)
                     {
-                        drawnCard.position = "miniDeck1";
-                        Table.PushInDeck(drawnCard, "miniDeck1");
+                        table.SetCardPosition(drawnCard, table.miniDeck1);
+                        table.PushInDeck(drawnCard, drawnCard.position);
                     } else if(targetPanel == targetPanel6)
                     {
-                        drawnCard.position = "miniDeck2";
-                        Table.PushInDeck(drawnCard, "miniDeck2");
+                        table.SetCardPosition(drawnCard, table.miniDeck2);
+                        table.PushInDeck(drawnCard, drawnCard.position);
                     } else if(targetPanel == targetPanel7)
                     {
-                        drawnCard.position = "miniDeck3";
-                        Table.PushInDeck(drawnCard, "miniDeck3");
+                        table.SetCardPosition(drawnCard, table.miniDeck3);
+                        table.PushInDeck(drawnCard, drawnCard.position);
                     }
                     else
                     {
-                        drawnCard.position = "miniDeck4";
-                        Table.PushInDeck(drawnCard, "miniDeck4");
+                        table.SetCardPosition(drawnCard, table.miniDeck4);
+                        table.PushInDeck(drawnCard, drawnCard.position);
                     }
                     mazzo.LinkCardToRectangle(drawnCard, rectangle);
 
