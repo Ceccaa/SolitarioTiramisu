@@ -19,7 +19,6 @@ namespace SolitarioTiramisu
         private int it = 0;
         private Point startPoint;
         private Rectangle draggedCard;
-        private Deck mazzo = new Deck();
         private Point originalPosition;
         private Table table = new Table();
 
@@ -58,24 +57,24 @@ namespace SolitarioTiramisu
 
                 // Ottieni il rettangolo target più vicino
                 Rectangle closestRectangle = GetClosestRectangle(dropPosition);
-                Card from = mazzo.GetCardFromRectangle(draggedCard);
+                Card card = table.deck.GetCardFromRectangle(draggedCard);
                 bool check = true;
                 if (closestRectangle == targetPanel5)
                 {
-                    check = table.MinorMoveCard(from.position, table.miniDeck1);
+                    check = table.MinorMoveCard(ref card, table.miniDeck1);
 
                 }
                 else if (closestRectangle == targetPanel6)
                 {
-                    check = table.MinorMoveCard(from.position, table.miniDeck2);
+                    check = table.MinorMoveCard(ref card, table.miniDeck2);
                 }
                 else if (closestRectangle == targetPanel7)
                 {
-                    check = table.MinorMoveCard(from.position, table.miniDeck3);
+                    check = table.MinorMoveCard(ref card, table.miniDeck3);
                 }
                 else
                 {
-                    check = table.MinorMoveCard(from.position, table.miniDeck4);
+                    check = table.MinorMoveCard(ref card, table.miniDeck4);
                 }
                 if (check)
                 {
@@ -200,23 +199,23 @@ namespace SolitarioTiramisu
 
                     if (targetPanel == targetPanel5)
                     {
-                        table.SetCardPosition(drawnCard, table.miniDeck1);
-                        table.PushInDeck(drawnCard, drawnCard.position);
+                        table.SetCardPosition(ref drawnCard, table.miniDeck1);
+                        table.PushInDeck(ref drawnCard, drawnCard.position);
                     } else if(targetPanel == targetPanel6)
                     {
-                        table.SetCardPosition(drawnCard, table.miniDeck2);
-                        table.PushInDeck(drawnCard, drawnCard.position);
+                        table.SetCardPosition(ref drawnCard, table.miniDeck2);
+                        table.PushInDeck(ref drawnCard, drawnCard.position);
                     } else if(targetPanel == targetPanel7)
                     {
-                        table.SetCardPosition(drawnCard, table.miniDeck3);
-                        table.PushInDeck(drawnCard, drawnCard.position);
+                        table.SetCardPosition(ref drawnCard, table.miniDeck3);
+                        table.PushInDeck(ref drawnCard, drawnCard.position);
                     }
                     else
                     {
-                        table.SetCardPosition(drawnCard, table.miniDeck4);
-                        table.PushInDeck(drawnCard, drawnCard.position);
+                        table.SetCardPosition(ref drawnCard, table.miniDeck4);
+                        table.PushInDeck(ref drawnCard, drawnCard.position);
                     }
-                    mazzo.LinkCardToRectangle(drawnCard, rectangle);
+                    table.deck.LinkCardToRectangle(ref drawnCard, rectangle);
 
 
 

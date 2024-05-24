@@ -9,7 +9,7 @@ namespace SolitarioTiramisu
 {
     class Table
     {
-        private Deck deck = new Deck();
+        public Deck deck = new Deck();
 
         //TODO: implementare coerenza tra carte generate a video e vari mazzetti gestiti nel backend come degli stack (guardare sotto)
 
@@ -26,27 +26,26 @@ namespace SolitarioTiramisu
         public Stack<Card> stairDeck4 = new Stack<Card>();
 
         //muovere carte da a, tra i mazzi inferiori 
-        public bool MinorMoveCard(Stack<Card> from, Stack<Card> to)
+        public bool MinorMoveCard(ref Card tmpCard, Stack<Card> to)
         {
-            Card tmpCard = from.Pop();
+            Stack<Card> from = tmpCard.position;
             Card tmpCard2;
             if (to.TryPop(out tmpCard2))
             {
                 if (tmpCard.seed == tmpCard2.seed)
                 {
-                    to.Push(tmpCard2);
-                    to.Push(tmpCard);
-                    SetCardPosition(tmpCard, to);
-                    SetCardPosition(tmpCard2, to);
+                    PushInDeck(ref tmpCard2,to);
+                    PushInDeck(ref tmpCard, to);
+                    SetCardPosition(ref tmpCard, to);
                     return true;
                 }
-                to.Push(tmpCard2);
-                from.Push(tmpCard);
+                PushInDeck(ref tmpCard2, to);
+                PushInDeck(ref tmpCard, from);
                 return false;
             } else
             {
-                to.Push(tmpCard);
-                SetCardPosition(tmpCard, to);
+                PushInDeck(ref tmpCard, to);
+                SetCardPosition(ref tmpCard,to);
                 return true;
             }
                 
@@ -93,7 +92,7 @@ namespace SolitarioTiramisu
                 for(int i = 0; i < miniDeck.Count; i++)
                 {
                     Card tmp = miniDeck.Pop();
-                    deck.Push(tmp);
+                    deck.Push(ref tmp);
                 }
             }
         }
@@ -152,14 +151,13 @@ namespace SolitarioTiramisu
                 
         }
 
-        public void PushInDeck(Card card, Stack<Card> deck)
+        public void PushInDeck(ref Card card, Stack<Card> deck)
         {
             deck.Push(card);
             
-        }
-        public void SetCardPosition(Card card, Stack<Card> to)
+        } 
+        public void SetCardPosition(ref Card card, Stack<Card> to)
         {
-            //TODO: FIX THIS FUNCTION
             card.position = to;
         }
 

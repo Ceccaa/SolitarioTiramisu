@@ -103,13 +103,13 @@ namespace SolitarioTiramisu
                 return deck.Count;
             }
 
-            public void Push(Card card)
+            public void Push(ref Card card)
             {
                 //TODO: Valutare controlli eventuali
                 deck.Push(card);
             }
 
-            public void LinkCardToRectangle(Card card, Rectangle rectangle)
+            public void LinkCardToRectangle(ref Card card, Rectangle rectangle)
             {
                 cardRectangleMap[rectangle] = card;
             }
