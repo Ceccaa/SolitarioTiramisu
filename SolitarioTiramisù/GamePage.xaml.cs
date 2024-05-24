@@ -163,7 +163,7 @@ namespace SolitarioTiramisu
             {
                 var targetPanels = new List<Rectangle>
                 {
-                    targetPanel5, targetPanel6, targetPanel7, targetPanel8
+                    targetPanel5, targetPanel6
                 };
 
                 foreach (var targetPanel in targetPanels)
@@ -205,7 +205,7 @@ namespace SolitarioTiramisu
                     {
                         table.SetCardPosition(ref drawnCard, table.miniDeck2);
                         table.PushInDeck(ref drawnCard, drawnCard.position);
-                    } else if(targetPanel == targetPanel7)
+                    }/* else if(targetPanel == targetPanel7)
                     {
                         table.SetCardPosition(ref drawnCard, table.miniDeck3);
                         table.PushInDeck(ref drawnCard, drawnCard.position);
@@ -214,7 +214,7 @@ namespace SolitarioTiramisu
                     {
                         table.SetCardPosition(ref drawnCard, table.miniDeck4);
                         table.PushInDeck(ref drawnCard, drawnCard.position);
-                    }
+                    }*/
                     table.deck.LinkCardToRectangle(ref drawnCard, rectangle);
 
 

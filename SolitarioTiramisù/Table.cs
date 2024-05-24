@@ -29,23 +29,27 @@ namespace SolitarioTiramisu
         public bool MinorMoveCard(ref Card tmpCard, Stack<Card> to)
         {
             Stack<Card> from = tmpCard.position;
+            
             Card tmpCard2;
             if (to.TryPop(out tmpCard2))
             {
                 if (tmpCard.seed == tmpCard2.seed)
                 {
+                    SetCardPosition(ref tmpCard, to);
                     PushInDeck(ref tmpCard2,to);
                     PushInDeck(ref tmpCard, to);
-                    SetCardPosition(ref tmpCard, to);
+                    from.Pop();
                     return true;
                 }
                 PushInDeck(ref tmpCard2, to);
                 PushInDeck(ref tmpCard, from);
+                from.Pop();
                 return false;
             } else
             {
-                PushInDeck(ref tmpCard, to);
-                SetCardPosition(ref tmpCard,to);
+                SetCardPosition(ref tmpCard, to);
+                PushInDeck(ref tmpCard, to);        
+                from.Pop();
                 return true;
             }
                 
