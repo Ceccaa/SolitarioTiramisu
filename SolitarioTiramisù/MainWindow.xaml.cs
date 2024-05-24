@@ -24,5 +24,11 @@ namespace SolitarioTiramisu
             BackgroundMusic.Position = TimeSpan.Zero;
             BackgroundMusic.Play();
         }
+
+        public void DisableMusic()
+        {
+            BackgroundMusic.Stop();
+        }
+
     }
 }
