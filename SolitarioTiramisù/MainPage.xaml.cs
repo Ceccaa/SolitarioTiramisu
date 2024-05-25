@@ -12,6 +12,7 @@ namespace SolitarioTiramisu
         {
             InitializeComponent();
             SetLogoImage();
+            SetButtonContent();
         }
 
         private void SetLogoImage()
@@ -35,6 +36,14 @@ namespace SolitarioTiramisu
             {
                 MessageBox.Show($"Error loading image: {ex.Message}");
             }
+        }
+
+        private void SetButtonContent()
+        {
+            btnStart.Content = Application.Current.Resources["StartGameButton"];
+            btnRules.Content = Application.Current.Resources["RulesButton"];
+            btnClose.Content = Application.Current.Resources["CloseButton"];
+            btnOptions.Content = Application.Current.Resources["OptionButton"];
         }
 
         private void StartGameButton_Click(object sender, RoutedEventArgs e)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Windows;
 
 namespace SolitarioTiramisu
@@ -55,6 +56,34 @@ namespace SolitarioTiramisu
         {
             BackgroundMusic.Play();
             IsMusicEnabled = true;
+        }
+
+        public void ChangeLanguage(string culture)
+        {
+            ResourceDictionary dict = new ResourceDictionary();
+            switch (culture)
+            {
+                case "it-IT":
+                    dict.Source = new Uri("Resources/Strings.it.xaml", UriKind.Relative);
+                    break;
+                case "en-US":
+                default:
+                    dict.Source = new Uri("Resources/Strings.en.xaml", UriKind.Relative);
+                    break;
+            }
+
+            // Trova e rimuovi il dizionario corrente
+            ResourceDictionary oldDict = (from d in Application.Current.Resources.MergedDictionaries
+                                          where d.Source != null && d.Source.OriginalString.StartsWith("Resources/Strings.")
+                                          select d).FirstOrDefault();
+
+            if (oldDict != null)
+            {
+                Application.Current.Resources.MergedDictionaries.Remove(oldDict);
+            }
+
+            // Aggiungi il nuovo dizionario
+            Application.Current.Resources.MergedDictionaries.Add(dict);
         }
     }
 }

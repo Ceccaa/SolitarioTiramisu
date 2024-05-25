@@ -16,41 +16,53 @@ namespace SolitarioTiramisu
         {
             if (Window.GetWindow(this) is MainWindow mainWindow)
             {
-                // Aggiorna il contenuto del pulsante in base allo stato della musica
-                btnMusic.Content = mainWindow.IsMusicEnabled ? "DISATTIVA MUSICA" : "ATTIVA MUSICA";
+                btnMusic.Content = mainWindow.IsMusicEnabled
+                    ? Application.Current.Resources["BtnMusicOff"]
+                    : Application.Current.Resources["BtnMusicOn"];
+                btnLanguage.Content = Application.Current.Resources["LanguageButton"];
+                // Imposta il contenuto del pulsante "MENU'"
+                btnMenu.Content = Application.Current.Resources["MenuButton"];
             }
         }
 
         private void DisableMusic_Click(object sender, RoutedEventArgs e)
         {
-            // Ottieni il contenuto del pulsante come stringa
-            string buttonContent = btnMusic.Content.ToString();
-
-            // Verifica se la finestra corrente è MainWindow
             if (Window.GetWindow(this) is MainWindow mainWindow)
             {
-                if (buttonContent == "ATTIVA MUSICA")
+                if (mainWindow.IsMusicEnabled)
                 {
-                    // Attiva la musica
-                    mainWindow.EnableMusic();
-
-                    // Cambia il contenuto del pulsante in "DISATTIVA"
-                    btnMusic.Content = "DISATTIVA MUSICA";
-                }
-                else if (buttonContent == "DISATTIVA MUSICA")
-                {
-                    // Disattiva la musica
                     mainWindow.DisableMusic();
-
-                    // Cambia il contenuto del pulsante in "ATTIVA"
-                    btnMusic.Content = "ATTIVA MUSICA";
+                    btnMusic.Content = Application.Current.Resources["BtnMusicOn"];
+                }
+                else
+                {
+                    mainWindow.EnableMusic();
+                    btnMusic.Content = Application.Current.Resources["BtnMusicOff"];
                 }
             }
         }
 
         private void LanguageButton_Click(object sender, RoutedEventArgs e)
         {
-            // Implementa il comportamento del pulsante del cambio lingua
+            if (Window.GetWindow(this) is MainWindow mainWindow)
+            {
+                if (btnLanguage.Content.ToString() == "ITALIANO")
+                {
+                    mainWindow.ChangeLanguage("en-US");
+                }
+                else
+                {
+                    mainWindow.ChangeLanguage("it-IT");
+                }
+
+                // Aggiorna il contenuto del pulsante dopo il cambio di lingua
+                btnLanguage.Content = Application.Current.Resources["LanguageButton"];
+                btnMusic.Content = mainWindow.IsMusicEnabled
+                    ? Application.Current.Resources["BtnMusicOff"]
+                    : Application.Current.Resources["BtnMusicOn"];
+                // Aggiorna il contenuto del pulsante "MENU'"
+                btnMenu.Content = Application.Current.Resources["MenuButton"];
+            }
         }
 
         private void MainButton_Click(object sender, RoutedEventArgs e)

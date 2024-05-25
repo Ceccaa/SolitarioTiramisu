@@ -48,10 +48,10 @@
         <!-- Buttons Container -->
         <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0">
             <StackPanel HorizontalAlignment="Center" Margin="0,68,0,-68">
-                <Button Content="AVVIA GIOCO" Click="StartGameButton_Click" Width="300" Height="80" Margin="10" FontFamily="Cascadia Mono SemiLight" FontSize="20"/>
-                <Button Content="REGOLE" Click="RulesButton_Click" Width="300" Height="80" Margin="10" FontFamily="Cascadia Mono SemiLight" FontSize="20"/>
-                <Button Name="OptionsButton" Content="IMPOSTAZIONI" Click="OptionButton_Click" Width="300" Height="80" Margin="10" FontFamily="Cascadia Mono SemiLight" FontSize="20"/>
-                <Button Name="CloseButton" Content="ESCI" Click="CloseButton_Click" Width="300" Height="80" Margin="10" FontFamily="Cascadia Mono SemiLight" FontSize="20"/>
+                <Button x:Name="btnStart" Content="AVVIA GIOCO" Click="StartGameButton_Click" Width="300" Height="80" Margin="10" FontFamily="Cascadia Mono SemiLight" FontSize="20"/>
+                <Button x:Name="btnRules" Content="REGOLE" Click="RulesButton_Click" Width="300" Height="80" Margin="10" FontFamily="Cascadia Mono SemiLight" FontSize="20"/>
+                <Button x:Name="btnOptions" Content="IMPOSTAZIONI" Click="OptionButton_Click" Width="300" Height="80" Margin="10" FontFamily="Cascadia Mono SemiLight" FontSize="20"/>
+                <Button x:Name="btnClose" Content="ESCI" Click="CloseButton_Click" Width="300" Height="80" Margin="10" FontFamily="Cascadia Mono SemiLight" FontSize="20"/>
             </StackPanel>
         </Grid>
     </Grid>
