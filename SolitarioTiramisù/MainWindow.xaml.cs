@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.IO;
+using System.Windows;
 
 namespace SolitarioTiramisu
 {
@@ -12,13 +14,29 @@ namespace SolitarioTiramisu
             this.WindowStyle = WindowStyle.None;
             this.ResizeMode = ResizeMode.NoResize;
 
-            // Imposta il percorso del file audio
-            BackgroundMusic.Source = new Uri("pack://application:,,,/background_music.mp3");
-            BackgroundMusic.MediaEnded += BackgroundMusic_MediaEnded; // Riproduci in loop
-            BackgroundMusic.Play();
+            string relativePath = "soundboard/background.mp3";
+            string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            string absolutePath = Path.Combine(baseDirectory, relativePath);
+
+            if (File.Exists(absolutePath))
+            {
+                try
+                {
+                    BackgroundMusic.Source = new Uri(absolutePath, UriKind.Absolute);
+                    BackgroundMusic.MediaEnded += BackgroundMusic_MediaEnded; // Riproduci in loop
+                    BackgroundMusic.Play();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error setting music source: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show($"File not found: {absolutePath}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
-        // Metodo per riprodurre la musica in loop
         private void BackgroundMusic_MediaEnded(object sender, RoutedEventArgs e)
         {
             BackgroundMusic.Position = TimeSpan.Zero;
@@ -30,5 +48,9 @@ namespace SolitarioTiramisu
             BackgroundMusic.Stop();
         }
 
+        public void EnableMusic()
+        {
+            BackgroundMusic.Play();
+        }
     }
 }
