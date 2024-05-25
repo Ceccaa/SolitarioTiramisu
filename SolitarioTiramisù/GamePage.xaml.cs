@@ -3,30 +3,27 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using static SolitarioTiramisu.Deck;
-using System.Windows.Shapes;
-
 
 namespace SolitarioTiramisu
 {
     public partial class GamePage : Page
     {
-        private int it = 0;
+        private int zIndexCounter = 0;
         private Point startPoint;
         private Rectangle draggedCard;
         private Point originalPosition;
         private Table table = new Table();
 
-
         public GamePage()
         {
             InitializeComponent();
         }
+
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             // Chiudi la finestra principale
@@ -42,8 +39,8 @@ namespace SolitarioTiramisu
                 {
                     startPoint = e.GetPosition(canvas);
                     draggedCard = rectangle;
-                    originalPosition = startPoint;
-                    Panel.SetZIndex(draggedCard, ++it);
+                    originalPosition = new Point(Canvas.GetLeft(draggedCard), Canvas.GetTop(draggedCard));
+                    Panel.SetZIndex(draggedCard, ++zIndexCounter);
                     DragDrop.DoDragDrop(rectangle, rectangle, DragDropEffects.Move);
                 }
             }
@@ -54,74 +51,61 @@ namespace SolitarioTiramisu
             if (e.Data.GetDataPresent(typeof(Rectangle)) && draggedCard != null)
             {
                 Point dropPosition = e.GetPosition(canvas);
-
-                // Ottieni il rettangolo target più vicino
                 Rectangle closestRectangle = GetClosestRectangle(dropPosition);
-                Card card = table.deck.GetCardFromRectangle(draggedCard);
-                bool check = true;
-                if (closestRectangle == targetPanel5)
-                {
-                    check = table.MinorMoveCard(ref card, table.miniDeck1);
 
-                }
-                else if (closestRectangle == targetPanel6)
+                if (closestRectangle != null)
                 {
-                    check = table.MinorMoveCard(ref card, table.miniDeck2);
-                }
-                else if (closestRectangle == targetPanel7)
-                {
-                    check = table.MinorMoveCard(ref card, table.miniDeck3);
-                }
-                else
-                {
-                    check = table.MinorMoveCard(ref card, table.miniDeck4);
-                }
-                if (check)
-                {
-                    if (closestRectangle != null)
+                    Card card = table.Deck.GetCardFromRectangle(draggedCard);
+                    bool isMoveValid = PerformMove(card, closestRectangle);
+
+                    if (isMoveValid)
                     {
-                        double horizontalPosition = Canvas.GetLeft(closestRectangle);
-                        double verticalPosition = Canvas.GetTop(closestRectangle);
-
-                        // Set the new position of the rectangle
-                        Canvas.SetLeft(draggedCard, horizontalPosition);
-                        Canvas.SetTop(draggedCard, verticalPosition);
+                        double newLeft = Canvas.GetLeft(closestRectangle);
+                        double newTop = Canvas.GetTop(closestRectangle);
+                        Canvas.SetLeft(draggedCard, newLeft);
+                        Canvas.SetTop(draggedCard, newTop);
                     }
-                } else
-                {
-                    Canvas.SetLeft(draggedCard, originalPosition.X);
-                    Canvas.SetTop(draggedCard, originalPosition.Y);
+                    else
+                    {
+                        Canvas.SetLeft(draggedCard, originalPosition.X);
+                        Canvas.SetTop(draggedCard, originalPosition.Y);
+                    }
+
+                    e.Handled = true;
+                    draggedCard = null;
                 }
-                
-
-                e.Handled = true;
-                Panel.SetZIndex(draggedCard, ++it);
-                
-                draggedCard = null;
-                
-       
-                
-                
-
-
-
             }
+        }
+
+        private bool PerformMove(Card card, Rectangle targetRectangle)
+        {
+            if (targetRectangle == targetPanel5)
+            {
+                return table.MinorMoveCard(ref card, table.MiniDeck1);
+            }
+            else if (targetRectangle == targetPanel6)
+            {
+                return table.MinorMoveCard(ref card, table.MiniDeck2);
+            }
+            else if (targetRectangle == targetPanel7)
+            {
+                return table.MinorMoveCard(ref card, table.MiniDeck3);
+            }
+            else if (targetRectangle == targetPanel8)
+            {
+                return table.MinorMoveCard(ref card, table.MiniDeck4);
+            }
+            return false;
         }
 
         private void Canvas_DragOver(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(typeof(Rectangle)))
+            if (e.Data.GetDataPresent(typeof(Rectangle)) && draggedCard != null)
             {
                 e.Effects = DragDropEffects.Move;
                 Point position = e.GetPosition(canvas);
-
-                // Move the dragged card with the mouse cursor
-                if (draggedCard != null)
-                {
-                    Canvas.SetLeft(draggedCard, position.X - draggedCard.Width / 2);
-                    Canvas.SetTop(draggedCard, position.Y - draggedCard.Height / 2);
-                }
-
+                Canvas.SetLeft(draggedCard, position.X - draggedCard.Width / 2);
+                Canvas.SetTop(draggedCard, position.Y - draggedCard.Height / 2);
                 e.Handled = true;
             }
         }
@@ -138,7 +122,6 @@ namespace SolitarioTiramisu
                     double left = Canvas.GetLeft(rectangle);
                     double top = Canvas.GetTop(rectangle);
                     Point rectCenter = new Point(left + rectangle.Width / 2, top + rectangle.Height / 2);
-
                     double distance = GetDistance(position, rectCenter);
 
                     if (distance < closestDistance)
@@ -161,14 +144,10 @@ namespace SolitarioTiramisu
         {
             try
             {
-                var targetPanels = new List<Rectangle>
-                {
-                    targetPanel5, targetPanel6
-                };
+                var targetPanels = new List<Rectangle> { targetPanel5, targetPanel6, targetPanel7, targetPanel8 };
 
                 foreach (var targetPanel in targetPanels)
                 {
-
                     Deck.Card drawnCard = table.DrawCardFromDeck();
                     string imagePath = $"../../../images/{drawnCard.ImagePath}";
 
@@ -184,47 +163,48 @@ namespace SolitarioTiramisu
                         Height = 235,
                         Fill = new ImageBrush(new BitmapImage(new Uri(imagePath, UriKind.RelativeOrAbsolute)))
                     };
-                   
+
                     double horizontalPosition = Canvas.GetLeft(targetPanel);
                     double verticalPosition = Canvas.GetTop(targetPanel);
-                    Panel.SetZIndex(rectangle, ++it);
+                    Panel.SetZIndex(rectangle, ++zIndexCounter);
                     Canvas.SetLeft(rectangle, horizontalPosition);
                     Canvas.SetTop(rectangle, verticalPosition);
 
-                    // Abilitare il drag and drop
                     rectangle.MouseMove += CardRectangle_MouseMove;
 
                     canvas.Children.Add(rectangle);
-                   
 
-                    if (targetPanel == targetPanel5)
-                    {
-                        table.SetCardPosition(ref drawnCard, table.miniDeck1);
-                        table.PushInDeck(ref drawnCard, drawnCard.position);
-                    } else if(targetPanel == targetPanel6)
-                    {
-                        table.SetCardPosition(ref drawnCard, table.miniDeck2);
-                        table.PushInDeck(ref drawnCard, drawnCard.position);
-                    }/* else if(targetPanel == targetPanel7)
-                    {
-                        table.SetCardPosition(ref drawnCard, table.miniDeck3);
-                        table.PushInDeck(ref drawnCard, drawnCard.position);
-                    }
-                    else
-                    {
-                        table.SetCardPosition(ref drawnCard, table.miniDeck4);
-                        table.PushInDeck(ref drawnCard, drawnCard.position);
-                    }*/
-                    table.deck.LinkCardToRectangle(ref drawnCard, rectangle);
-
-
-
-
+                    AssignCardToDeck(drawnCard, targetPanel);
+                    table.Deck.LinkCardToRectangle(ref drawnCard, rectangle);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error in deck_Click method: {ex.GetType().Name}\n{ex.Message}\n{ex.StackTrace}");
+                MessageBox.Show($"Error in Deck_Click method: {ex.GetType().Name}\n{ex.Message}\n{ex.StackTrace}");
+            }
+        }
+
+        private void AssignCardToDeck(Card card, Rectangle targetPanel)
+        {
+            if (targetPanel == targetPanel5)
+            {
+                table.SetCardPosition(ref card, table.MiniDeck1);
+                table.PushInDeck(ref card, table.MiniDeck1);
+            }
+            else if (targetPanel == targetPanel6)
+            {
+                table.SetCardPosition(ref card, table.MiniDeck2);
+                table.PushInDeck(ref card, table.MiniDeck2);
+            }
+            else if (targetPanel == targetPanel7)
+            {
+                table.SetCardPosition(ref card, table.MiniDeck3);
+                table.PushInDeck(ref card, table.MiniDeck3);
+            }
+            else if (targetPanel == targetPanel8)
+            {
+                table.SetCardPosition(ref card, table.MiniDeck4);
+                table.PushInDeck(ref card, table.MiniDeck4);
             }
         }
     }

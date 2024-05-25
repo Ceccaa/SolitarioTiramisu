@@ -1,149 +1,147 @@
-using System.ComponentModel.DataAnnotations;
+using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.IO;
+using System.Linq;
 using System.Windows;
-using System.Windows.Media.TextFormatting;
+using System.Windows.Controls;
+using System.Windows.Shapes;
 using static SolitarioTiramisu.Deck;
 
 namespace SolitarioTiramisu
 {
     class Table
     {
-        public Deck deck = new Deck();
+        public Deck Deck = new Deck();
 
-        //TODO: implementare coerenza tra carte generate a video e vari mazzetti gestiti nel backend come degli stack (guardare sotto)
+        // TODO: implementare coerenza tra carte generate a video e vari mazzetti gestiti nel backend come degli stack (guardare sotto)
 
         // mazzetti di appoggio su cui fare spostamenti
-        public Stack<Card> miniDeck1 = new Stack<Card>();
-        public Stack<Card> miniDeck2 = new Stack<Card>();
-        public Stack<Card> miniDeck3 = new Stack<Card>();
-        public Stack<Card> miniDeck4 = new Stack<Card>();
+        public Stack<Card> MiniDeck1 = new Stack<Card>();
+        public Stack<Card> MiniDeck2 = new Stack<Card>();
+        public Stack<Card> MiniDeck3 = new Stack<Card>();
+        public Stack<Card> MiniDeck4 = new Stack<Card>();
 
         // mazzetti principali in cui fare la scala
-        public Stack<Card> stairDeck1 = new Stack<Card>();
-        public Stack<Card> stairDeck2 = new Stack<Card>();
-        public Stack<Card> stairDeck3 = new Stack<Card>();
-        public Stack<Card> stairDeck4 = new Stack<Card>();
+        public Stack<Card> StairDeck1 = new Stack<Card>();
+        public Stack<Card> StairDeck2 = new Stack<Card>();
+        public Stack<Card> StairDeck3 = new Stack<Card>();
+        public Stack<Card> StairDeck4 = new Stack<Card>();
 
-        //muovere carte da a, tra i mazzi inferiori 
+        // muovere carte da a, tra i mazzi inferiori 
         public bool MinorMoveCard(ref Card tmpCard, Stack<Card> to)
         {
-            Stack<Card> from = tmpCard.position;
-            
-            Card tmpCard2;
-            if (to.TryPop(out tmpCard2))
+            Stack<Card> from = tmpCard.Position;
+
+            if (to.TryPeek(out Card tmpCard2))
             {
-                if (tmpCard.seed == tmpCard2.seed)
+                if (tmpCard.Seed == tmpCard2.Seed)
                 {
                     SetCardPosition(ref tmpCard, to);
-                    PushInDeck(ref tmpCard2,to);
+                    PushInDeck(ref tmpCard2, to);
                     PushInDeck(ref tmpCard, to);
                     from.Pop();
                     return true;
                 }
+
                 PushInDeck(ref tmpCard2, to);
                 PushInDeck(ref tmpCard, from);
-                from.Pop();
                 return false;
-            } else
+            }
+            else
             {
                 SetCardPosition(ref tmpCard, to);
-                PushInDeck(ref tmpCard, to);        
+                PushInDeck(ref tmpCard, to);
                 from.Pop();
                 return true;
             }
-                
-            
-/*          
-            if(Win() == 0)
-            {
-                MessageBox.Show("Hai vinto!");
-            }
-            else
-            {
-                MessageBox.Show("Hai perso!");
-            }   
-*/
         }
 
-        //muovere carte da mazzi inferiori a mazzi superiori per fare la scala
+        // muovere carte da mazzi inferiori a mazzi superiori per fare la scala
         public void StairMoveCard(Stack<Card> from, Stack<Card> to)
         {
             Card tmpCard = from.Pop();
-            Card tmpCard2 = to.Pop();
-            if (tmpCard.seed == tmpCard2.seed && tmpCard.value > tmpCard2.value)
+
+            if (to.TryPeek(out Card tmpCard2))
             {
-                to.Push(tmpCard2);
-                to.Push(tmpCard);
-            }
-            /*
-            if (Win() == 0)
-            {
-                MessageBox.Show("Hai vinto!");
+                if (tmpCard.Seed == tmpCard2.Seed && tmpCard.Value > tmpCard2.Value)
+                {
+                    to.Push(tmpCard2);
+                    to.Push(tmpCard);
+                }
+                else
+                {
+                    from.Push(tmpCard);
+                    throw new InvalidOperationException("Invalid move");
+                }
             }
             else
             {
-                MessageBox.Show("Hai perso!");
+                to.Push(tmpCard);
             }
-            */
         }
 
-        //rimischiare il mazzo quando finisce. si puo fare solo 1 volta. Da chiamare una volta per ogni mazzetto.
+        // rimischiare il mazzo quando finisce. si puo fare solo 1 volta. Da chiamare una volta per ogni mazzetto.
         public void RedistributeDeck(Stack<Card> miniDeck)
         {
-            if (deck.Count() == 0)
+            if (Deck.Count() == 0)
             {
-                for(int i = 0; i < miniDeck.Count; i++)
+                while (miniDeck.Count > 0)
                 {
                     Card tmp = miniDeck.Pop();
-                    deck.Push(ref tmp);
+                    Deck.Push(ref tmp);
                 }
             }
         }
+
         public Card DrawCardFromDeck()
         {
-            if (deck.Count() > 0)
-                return deck.Pop();
+            if (Deck.Count() > 0)
+                return Deck.Pop();
             else
                 throw new InvalidOperationException("Deck is empty.");
         }
 
         public int Win()
         {
-            if(stairDeck1.Count == 10 && stairDeck2.Count == 10 && stairDeck3.Count == 10 && stairDeck4.Count == 10)
+            if (StairDeck1.Count == 10 && StairDeck2.Count == 10 && StairDeck3.Count == 10 && StairDeck4.Count == 10)
             {
-                return 0; //ha vinto
+                return 0; // ha vinto
             }
-            else if(HasLost())
+            else if (HasLost())
             {
-                return 1; //ha perso
+                return 1; // ha perso
             }
-            else { }
 
-            return 2; // puo continuare a giocare
+            return 2; // può continuare a giocare
         }
 
         private bool HasLost()
         {
-            List<Card> tmpList = new List<Card>();
-            tmpList.Add(miniDeck1.Peek());
-            tmpList.Add(miniDeck2.Peek());
-            tmpList.Add(miniDeck3.Peek());
-            tmpList.Add(miniDeck4.Peek());
-
-            List<Card> stairList = new List<Card>();
-            stairList.Add(stairDeck1.Peek());
-            stairList.Add(stairDeck2.Peek());
-            stairList.Add(stairDeck3.Peek());
-            stairList.Add(stairDeck4.Peek());
-
-            if (tmpList[1].seed != tmpList[2].seed && tmpList[2].seed != tmpList[3].seed && tmpList[3].seed != tmpList[4].seed)
+            List<Card> tmpList = new List<Card>
             {
-                for(int i = 0; i < tmpList.Count; i++)
+                MiniDeck1.Count > 0 ? MiniDeck1.Peek() : null,
+                MiniDeck2.Count > 0 ? MiniDeck2.Peek() : null,
+                MiniDeck3.Count > 0 ? MiniDeck3.Peek() : null,
+                MiniDeck4.Count > 0 ? MiniDeck4.Peek() : null
+            }.Where(card => card != null).ToList();
+
+            List<Card> stairList = new List<Card>
+            {
+                StairDeck1.Count > 0 ? StairDeck1.Peek() : null,
+                StairDeck2.Count > 0 ? StairDeck2.Peek() : null,
+                StairDeck3.Count > 0 ? StairDeck3.Peek() : null,
+                StairDeck4.Count > 0 ? StairDeck4.Peek() : null
+            }.Where(card => card != null).ToList();
+
+            if (tmpList.All(card => card != null) && stairList.All(card => card != null))
+            {
+                foreach (Card tmpCard in tmpList)
                 {
-                    foreach (Card c in stairList)
+                    foreach (Card stairCard in stairList)
                     {
-                        if(c.seed == tmpList[i].seed && c.value+1 < tmpList[i].value)
+                        if (stairCard.Seed == tmpCard.Seed && stairCard.Value + 1 < tmpCard.Value)
                         {
                             return true;
                         }
@@ -152,21 +150,16 @@ namespace SolitarioTiramisu
             }
 
             return false;
-                
         }
 
-        public void PushInDeck(ref Card card, Stack<Card> deck)
+        public void PushInDeck(ref Card card, Stack<Card> to)
         {
-            deck.Push(card);
-            
-        } 
+            to.Push(card);
+        }
+
         public void SetCardPosition(ref Card card, Stack<Card> to)
         {
-            card.position = to;
+            card.Position = to;
         }
-
-
     }
-
 }
-
