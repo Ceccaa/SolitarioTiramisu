@@ -6,6 +6,8 @@ namespace SolitarioTiramisu
 {
     public partial class MainWindow : Window
     {
+        public bool IsMusicEnabled { get; private set; } = true;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -46,11 +48,13 @@ namespace SolitarioTiramisu
         public void DisableMusic()
         {
             BackgroundMusic.Stop();
+            IsMusicEnabled = false;
         }
 
         public void EnableMusic()
         {
             BackgroundMusic.Play();
+            IsMusicEnabled = true;
         }
     }
 }

@@ -16,4 +16,10 @@
     <Resource Include="Retro.jpg" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="soundboard\background.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

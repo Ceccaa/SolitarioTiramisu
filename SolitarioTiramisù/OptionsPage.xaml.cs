@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -13,7 +9,16 @@ namespace SolitarioTiramisu
         public OptionsPage()
         {
             InitializeComponent();
+            Loaded += OptionsPage_Loaded;
+        }
 
+        private void OptionsPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (Window.GetWindow(this) is MainWindow mainWindow)
+            {
+                // Aggiorna il contenuto del pulsante in base allo stato della musica
+                btnMusic.Content = mainWindow.IsMusicEnabled ? "DISATTIVA MUSICA" : "ATTIVA MUSICA";
+            }
         }
 
         private void DisableMusic_Click(object sender, RoutedEventArgs e)
@@ -43,16 +48,14 @@ namespace SolitarioTiramisu
             }
         }
 
-
-        private void LanguageButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void LanguageButton_Click(object sender, RoutedEventArgs e)
         {
-
+            // Implementa il comportamento del pulsante del cambio lingua
         }
 
-        private void MainButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void MainButton_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new Uri("MainPage.xaml", UriKind.Relative));
-
         }
     }
 }
