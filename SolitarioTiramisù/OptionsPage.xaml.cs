@@ -16,14 +16,33 @@ namespace SolitarioTiramisu
 
         }
 
-        private void DisableMusic_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void DisableMusic_Click(object sender, RoutedEventArgs e)
         {
+            // Ottieni il contenuto del pulsante come stringa
+            string buttonContent = btnMusic.Content.ToString();
+
+            // Verifica se la finestra corrente è MainWindow
             if (Window.GetWindow(this) is MainWindow mainWindow)
             {
-                mainWindow.DisableMusic();
-            }
+                if (buttonContent == "ATTIVA MUSICA")
+                {
+                    // Attiva la musica
+                    mainWindow.EnableMusic();
 
+                    // Cambia il contenuto del pulsante in "DISATTIVA"
+                    btnMusic.Content = "DISATTIVA MUSICA";
+                }
+                else if (buttonContent == "DISATTIVA MUSICA")
+                {
+                    // Disattiva la musica
+                    mainWindow.DisableMusic();
+
+                    // Cambia il contenuto del pulsante in "ATTIVA"
+                    btnMusic.Content = "ATTIVA MUSICA";
+                }
+            }
         }
+
 
         private void LanguageButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
