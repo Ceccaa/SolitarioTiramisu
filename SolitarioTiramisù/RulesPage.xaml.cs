@@ -13,7 +13,8 @@ namespace SolitarioTiramisu
 
         private void GoToGameButton_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new Uri("GamePage.xaml", UriKind.Relative));
+            this.NavigationService.Navigate(new Uri("MainPage.xaml", UriKind.Relative));
         }
     }
 }
+

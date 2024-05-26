@@ -6,9 +6,23 @@
     <sys:String x:Key="LanguageButton">ENGLISH</sys:String>
     <sys:String x:Key="BtnExit">EXIT</sys:String>
     <sys:String x:Key="CloseButton">EXIT</sys:String>
+    <sys:String x:Key="btnOptions">OPTIONS</sys:String>
     <sys:String x:Key="btnRules">RULES</sys:String>
     <sys:String x:Key="StartGameButton">START GAME</sys:String>
     <sys:String x:Key="OptionButton">OPTIONS</sys:String>
     <sys:String x:Key="RulesButton">RULES</sys:String>
     <sys:String x:Key="MenuButton">MENU</sys:String>
+    <!-- Aggiunti per la RulesPage -->
+    <sys:String x:Key="GameTitle">SOLITARIO TIRAMISU'</sys:String>
+    <sys:String x:Key="HowToPlay">HOW TO PLAY:</sys:String>
+    <sys:String x:Key="ObjectiveText">The goal of Solitaire is to build up the four foundation piles from Ace to King for each suit.</sys:String>
+    <sys:String x:Key="GameRules">GAME RULES:</sys:String>
+    <sys:String x:Key="RulesText">Building the foundations: Cards can be moved to the foundations only in ascending order and by the same suit.
+    Moving cards in the tableau: Cards can be moved between sequences if they have the same suit as the top card. 
+    The value of the card does not matter in this case. Any card can be placed on an empty sequence.
+    Remaining deck: The deck is dealt four cards at a time.
+    The dealt cards can be used to build the foundations or moved between sequences in the tableau.</sys:String>
+    <sys:String x:Key="EndOfGame">END OF GAME:</sys:String>
+    <sys:String x:Key="EndText">You can go through the deck twice: the game ends when all the cards are in the foundations in ascending order by the same suit. 
+    If there are no more possible moves and the foundations are not complete at the end of the second pass through the deck, the game is considered lost.</sys:String>
 </ResourceDictionary>

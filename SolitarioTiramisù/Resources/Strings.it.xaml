@@ -6,9 +6,23 @@
     <sys:String x:Key="LanguageButton">ITALIANO</sys:String>
     <sys:String x:Key="BtnExit">ESCI</sys:String>
     <sys:String x:Key="CloseButton">ESCI</sys:String>
+    <sys:String x:Key="btnOptions">OPZIONI</sys:String>
     <sys:String x:Key="btnRules">REGOLE</sys:String>
     <sys:String x:Key="StartGameButton">AVVIA GIOCO</sys:String>
     <sys:String x:Key="OptionButton">OPZIONI</sys:String>
     <sys:String x:Key="RulesButton">REGOLE</sys:String>
     <sys:String x:Key="MenuButton">MENU'</sys:String>
+    <!-- Aggiunti per la RulesPage -->
+    <sys:String x:Key="GameTitle">SOLITARIO TIRAMISU'</sys:String>
+    <sys:String x:Key="HowToPlay">COME SI GIOCA:</sys:String>
+    <sys:String x:Key="ObjectiveText">L'obiettivo del solitario è completare le quattro basi partendo dagli Assi fino ai Re per ogni seme.</sys:String>
+    <sys:String x:Key="GameRules">REGOLE DEL GIOCO:</sys:String>
+    <sys:String x:Key="RulesText">Costruzione delle basi: Le carte possono essere spostate alle basi solo in ordine crescente e dello stesso seme.
+    Movimento delle carte nel tableau: Le carte possono essere spostate tra le sequenze se hanno lo stesso seme della carta in cima.
+    Il valore della carta non ha importanza in questo caso. Su una sequenza vuota può essere posta qualsiasi carta.
+    Mazzo rimanente: Il mazzo viene diviso a gruppi di quattro carte alla volta.
+    Le carte pescate possono essere utilizzate per costruire le basi o spostate tra le sequenze del tableau.</sys:String>
+    <sys:String x:Key="EndOfGame">FINE DEL GIOCO:</sys:String>
+    <sys:String x:Key="EndText">Si può rigirare il mazzo due volte: il gioco termina quando tutte le carte si trovano nelle basi in ordine ascendente dallo stesso seme.
+    Se al termine del secondo mazzo non ci sono più mosse possibili e le basi non sono complete, il gioco è considerato perso.</sys:String>
 </ResourceDictionary>

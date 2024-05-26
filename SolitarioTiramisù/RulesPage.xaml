@@ -43,33 +43,22 @@
 
         <!-- Header -->
         <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,30,10,10">
-            <Label Content="SOLITARIO TIRAMISU'" FontFamily="Cascadia Mono SemiLight" FontSize="30" Foreground="#FFF1E8DC"/>
+            <Label Content="{DynamicResource GameTitle}" FontFamily="Cascadia Mono SemiLight" FontSize="30" Foreground="#FFF1E8DC"/>
         </StackPanel>
 
         <!-- Rules Content -->
         <StackPanel Grid.Row="1" VerticalAlignment="Top" Margin="20,20,20,20">
-            <Label Content="COME SI GIOCA:" FontFamily="Cascadia Mono SemiLight" FontSize="20" Foreground="#FFF1E8DC" Margin="0,20,0,5"/>
-            <TextBlock TextWrapping="Wrap" FontFamily="Cascadia Mono SemiLight" FontSize="18" Foreground="#FFF1E8DC" Margin="0,5,0,20">
-                L'obiettivo del solitario e' completare le quattro basi partendo dagli Assi fino ai Re per ogni seme.
-            </TextBlock>
-            <Label Content="REGOLE DEL GIOCO:" FontFamily="Cascadia Mono SemiLight" FontSize="20" Foreground="#FFF1E8DC" Margin="0,20,0,5"/>
-            <TextBlock TextWrapping="Wrap" FontFamily="Cascadia Mono SemiLight" FontSize="18" Foreground="#FFF1E8DC" Margin="0,5,0,20">
-                Costruzione delle basi: Le carte possono essere spostate alle basi solo in ordine crescente e dello stesso seme. 
-                Movimento delle carte nel tableau: Le carte possono essere spostate tra le sequenze se hanno lo stesso seme della carta in cima. 
-                Il valore della carta non ha importanza in questo caso. Su una sequenza vuota puo' essere posta qualsiasi carta. 
-                Mazzo rimanente: Il mazzo viene diviso a gruppi di quattro carte alla volta. 
-                Le carte pescate possono essere utilizzate per costruire le basi o spostate tra le sequenze del tableau.
-            </TextBlock>
-            <Label Content="FINE DEL GIOCO:" FontFamily="Cascadia Mono SemiLight" FontSize="20" Foreground="#FFF1E8DC" Margin="0,20,0,5"/>
-            <TextBlock TextWrapping="Wrap" FontFamily="Cascadia Mono SemiLight" FontSize="18" Foreground="#FFF1E8DC" Margin="0,5,0,20">
-                 Si puo' rigirare il mazzo due volte: il gioco termina quando tutte le carte si trovano nelle basi in ordine ascendente dallo stesso seme. 
-                Se al termine del secondo mazzo non ci sono piu' mosse possibili e le basi non sono complete, il gioco e' considerato perso.
-            </TextBlock>
+            <Label Content="{DynamicResource HowToPlay}" FontFamily="Cascadia Mono SemiLight" FontSize="20" Foreground="#FFF1E8DC" Margin="0,20,0,5"/>
+            <TextBlock Text="{DynamicResource ObjectiveText}" TextWrapping="Wrap" FontFamily="Cascadia Mono SemiLight" FontSize="18" Foreground="#FFF1E8DC" Margin="0,5,0,20"/>
+            <Label Content="{DynamicResource GameRules}" FontFamily="Cascadia Mono SemiLight" FontSize="20" Foreground="#FFF1E8DC" Margin="0,20,0,5"/>
+            <TextBlock Text="{DynamicResource RulesText}" TextWrapping="Wrap" FontFamily="Cascadia Mono SemiLight" FontSize="18" Foreground="#FFF1E8DC" Margin="0,5,0,20"/>
+            <Label Content="{DynamicResource EndOfGame}" FontFamily="Cascadia Mono SemiLight" FontSize="20" Foreground="#FFF1E8DC" Margin="0,20,0,5"/>
+            <TextBlock Text="{DynamicResource EndText}" TextWrapping="Wrap" FontFamily="Cascadia Mono SemiLight" FontSize="18" Foreground="#FFF1E8DC" Margin="0,5,0,20"/>
         </StackPanel>
 
         <!-- Button -->
         <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,150">
-            <Button Content="Vai al Gioco" Click="GoToGameButton_Click" FontFamily="Cascadia Mono SemiLight" FontSize="20" Width="338" Height="110"/>
+            <Button Content="{DynamicResource MenuButton}" Click="GoToGameButton_Click" FontFamily="Cascadia Mono SemiLight" FontSize="20" Width="338" Height="110"/>
         </StackPanel>
     </Grid>
 </Page>
