@@ -6,10 +6,8 @@
     <sys:String x:Key="LanguageButton">ITALIANO</sys:String>
     <sys:String x:Key="BtnExit">ESCI</sys:String>
     <sys:String x:Key="CloseButton">ESCI</sys:String>
-    <sys:String x:Key="btnOptions">OPZIONI</sys:String>
     <sys:String x:Key="btnRules">REGOLE</sys:String>
     <sys:String x:Key="StartGameButton">AVVIA GIOCO</sys:String>
-    <sys:String x:Key="OptionButton">OPZIONI</sys:String>
     <sys:String x:Key="RulesButton">REGOLE</sys:String>
     <sys:String x:Key="MenuButton">MENU'</sys:String>
     <!-- Aggiunti per la RulesPage -->

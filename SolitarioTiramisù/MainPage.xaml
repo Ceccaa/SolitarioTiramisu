@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       Title="MainPage" Height="1058">
     <Page.Resources>
+        <!-- Stile generico per i pulsanti -->
         <Style TargetType="Button">
             <Setter Property="Template">
                 <Setter.Value>
@@ -33,7 +34,43 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+
+        <!-- Stile specifico per il pulsante btnOptions -->
+        <Style x:Key="OptionsButtonStyle" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                CornerRadius="15" 
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center" 
+                                              Content="{TemplateBinding Content}" 
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <ImageBrush ImageSource="options.png"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <!-- Cambia l'opacita' per l'effetto di hover -->
+                    <Setter Property="Opacity" Value="0.8"/>
+                    <Setter Property="BorderBrush" Value="#FF4682B4"/>
+                    <Setter Property="BorderThickness" Value="3"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Page.Resources>
+
     <Grid Name="Sfondo" Background="#FF226F54" Margin="0,-66,0,-156">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*" />
@@ -48,10 +85,10 @@
         <!-- Buttons Container -->
         <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0">
             <StackPanel HorizontalAlignment="Center" Margin="0,68,0,-68">
-                <Button x:Name="btnStart" Content="AVVIA GIOCO" Click="StartGameButton_Click" Width="300" Height="80" Margin="10" FontFamily="Cascadia Mono SemiLight" FontSize="20"/>
-                <Button x:Name="btnRules" Content="REGOLE" Click="RulesButton_Click" Width="300" Height="80" Margin="10" FontFamily="Cascadia Mono SemiLight" FontSize="20"/>
-                <Button x:Name="btnOptions" Content="IMPOSTAZIONI" Click="OptionButton_Click" Width="300" Height="80" Margin="10" FontFamily="Cascadia Mono SemiLight" FontSize="20"/>
-                <Button x:Name="btnClose" Content="ESCI" Click="CloseButton_Click" Width="300" Height="80" Margin="10" FontFamily="Cascadia Mono SemiLight" FontSize="20"/>
+                <Button x:Name="btnStart" Content="AVVIA GIOCO" Click="StartGameButton_Click" BorderBrush="Black" BorderThickness="2" Width="300" Height="80" Margin="10" FontFamily="Cascadia Mono SemiLight" FontSize="20"/>
+                <Button x:Name="btnRules" Content="REGOLE" Click="RulesButton_Click" BorderBrush="Black" BorderThickness="2" Width="300" Height="80" Margin="10" FontFamily="Cascadia Mono SemiLight" FontSize="20"/>
+                <Button x:Name="btnClose" Content="ESCI" Click="CloseButton_Click" BorderBrush="Black" BorderThickness="2" Width="300" Height="80" Margin="10" FontFamily="Cascadia Mono SemiLight" FontSize="20"/>
+                <Button x:Name="btnOptions" Click="OptionButton_Click" Width="68" Height="61" BorderBrush="Black" BorderThickness="2" FontFamily="Cascadia Mono SemiLight" FontSize="20" HorizontalAlignment="Left" Margin="10,0,0,0" Style="{StaticResource OptionsButtonStyle}"/>
             </StackPanel>
         </Grid>
     </Grid>
