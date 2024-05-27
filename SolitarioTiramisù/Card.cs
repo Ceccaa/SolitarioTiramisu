@@ -53,7 +53,7 @@ namespace SolitarioTiramisu
                 string parts = fileNameParts[0];
 
                 // Check cards
-                if (fileNameParts.Length >= 2 && fileNameParts[0] != "RETRO" && fileNameParts[0] != "Logo")
+                if (fileNameParts.Length >= 2 && fileNameParts[0] != "RETRO" && fileNameParts[0] != "Logo" && fileNameParts[0] != "options")
                 {
                     string nome = "";
                     int temp;
