@@ -18,6 +18,7 @@ namespace SolitarioTiramisu
         private Rectangle draggedCard;
         private Point originalPosition;
         private Table table = new Table();
+        private Deck mazzo = new Deck();    
 
         public GamePage()
         {
@@ -55,7 +56,7 @@ namespace SolitarioTiramisu
 
                 if (closestRectangle != null)
                 {
-                    Card card = table.Deck.GetCardFromRectangle(draggedCard);
+                    Card card = mazzo.GetCardFromRectangle(draggedCard);
                     bool isMoveValid = PerformMove(card, closestRectangle);
 
                     if (isMoveValid)
@@ -81,19 +82,31 @@ namespace SolitarioTiramisu
         {
             if (targetRectangle == targetPanel5)
             {
-                return table.MinorMoveCard(ref card, table.MiniDeck1);
+                return table.MinorMoveCard(card.Position, table.MiniDeck1);
             }
             else if (targetRectangle == targetPanel6)
             {
-                return table.MinorMoveCard(ref card, table.MiniDeck2);
+                return table.MinorMoveCard(card.Position, table.MiniDeck2);
             }
             else if (targetRectangle == targetPanel7)
             {
-                return table.MinorMoveCard(ref card, table.MiniDeck3);
+                return table.MinorMoveCard(card.Position, table.MiniDeck3);
             }
             else if (targetRectangle == targetPanel8)
             {
-                return table.MinorMoveCard(ref card, table.MiniDeck4);
+                return table.MinorMoveCard(card.Position, table.MiniDeck4);
+            } else if (targetRectangle == targetPanel1)
+            {
+                return table.StairMoveCard(card.Position, table.StairDeck1);
+            } else if (targetRectangle == targetPanel2)
+            {
+                return table.StairMoveCard(card.Position, table.StairDeck2);
+            } else if (targetRectangle == targetPanel3)
+            {
+                return table.StairMoveCard(card.Position, table.StairDeck3);
+            } else
+            {
+                return table.StairMoveCard(card.Position, table.StairDeck4);
             }
             return false;
         }
@@ -175,7 +188,7 @@ namespace SolitarioTiramisu
                     canvas.Children.Add(rectangle);
 
                     AssignCardToDeck(drawnCard, targetPanel);
-                    table.Deck.LinkCardToRectangle(ref drawnCard, rectangle);
+                    mazzo.LinkCardToRectangle(drawnCard, rectangle);
                 }
             }
             catch (Exception ex)
@@ -188,23 +201,23 @@ namespace SolitarioTiramisu
         {
             if (targetPanel == targetPanel5)
             {
-                table.SetCardPosition(ref card, table.MiniDeck1);
-                table.PushInDeck(ref card, table.MiniDeck1);
+                table.SetCardPosition(card, table.MiniDeck1);
+                table.PushInDeck(card, table.MiniDeck1);
             }
             else if (targetPanel == targetPanel6)
             {
-                table.SetCardPosition(ref card, table.MiniDeck2);
-                table.PushInDeck(ref card, table.MiniDeck2);
+                table.SetCardPosition(card, table.MiniDeck2);
+                table.PushInDeck(card, table.MiniDeck2);
             }
             else if (targetPanel == targetPanel7)
             {
-                table.SetCardPosition(ref card, table.MiniDeck3);
-                table.PushInDeck(ref card, table.MiniDeck3);
+                table.SetCardPosition(card, table.MiniDeck3);
+                table.PushInDeck(card, table.MiniDeck3);
             }
             else if (targetPanel == targetPanel8)
             {
-                table.SetCardPosition(ref card, table.MiniDeck4);
-                table.PushInDeck(ref card, table.MiniDeck4);
+                table.SetCardPosition(card, table.MiniDeck4);
+                table.PushInDeck(card, table.MiniDeck4);
             }
         }
     }

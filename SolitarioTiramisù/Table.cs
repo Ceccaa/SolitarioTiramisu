@@ -13,7 +13,7 @@ namespace SolitarioTiramisu
 {
     class Table
     {
-        public Deck Deck = new Deck();
+        private Deck Deck = new Deck();
 
         // TODO: implementare coerenza tra carte generate a video e vari mazzetti gestiti nel backend come degli stack (guardare sotto)
 
@@ -30,55 +30,66 @@ namespace SolitarioTiramisu
         public Stack<Card> StairDeck4 = new Stack<Card>();
 
         // muovere carte da a, tra i mazzi inferiori 
-        public bool MinorMoveCard(ref Card tmpCard, Stack<Card> to)
+        public bool MinorMoveCard(Stack<Card> from, Stack<Card> to)
         {
-            Stack<Card> from = tmpCard.Position;
+            Card tmpCard = from.Pop();
 
-            if (to.TryPeek(out Card tmpCard2))
+            if (to.TryPop(out Card tmpCard2))
             {
                 if (tmpCard.Seed == tmpCard2.Seed)
                 {
-                    SetCardPosition(ref tmpCard, to);
-                    PushInDeck(ref tmpCard2, to);
-                    PushInDeck(ref tmpCard, to);
-                    from.Pop();
+                    SetCardPosition(tmpCard, to);
+                    PushInDeck(tmpCard2, to);
+                    PushInDeck(tmpCard, to);
                     return true;
                 }
 
-                PushInDeck(ref tmpCard2, to);
-                PushInDeck(ref tmpCard, from);
+                PushInDeck(tmpCard2, to);
+                PushInDeck(tmpCard, from);
                 return false;
             }
             else
             {
-                SetCardPosition(ref tmpCard, to);
-                PushInDeck(ref tmpCard, to);
-                from.Pop();
+                SetCardPosition(tmpCard, to);
+                PushInDeck(tmpCard, to);
                 return true;
             }
         }
 
         // muovere carte da mazzi inferiori a mazzi superiori per fare la scala
-        public void StairMoveCard(Stack<Card> from, Stack<Card> to)
+        public bool StairMoveCard(Stack<Card> from, Stack<Card> to)
         {
             Card tmpCard = from.Pop();
 
             if (to.TryPeek(out Card tmpCard2))
             {
-                if (tmpCard.Seed == tmpCard2.Seed && tmpCard.Value > tmpCard2.Value)
+                if (tmpCard.Seed == tmpCard2.Seed && tmpCard.Value == tmpCard2.Value+1)
                 {
+                    SetCardPosition(tmpCard, to);
                     to.Push(tmpCard2);
                     to.Push(tmpCard);
+                    return true;
                 }
                 else
                 {
+                    SetCardPosition(tmpCard, from);
                     from.Push(tmpCard);
-                    throw new InvalidOperationException("Invalid move");
+                    return false;
                 }
             }
             else
             {
-                to.Push(tmpCard);
+                if(tmpCard.Value == 1)
+                {
+                    SetCardPosition(tmpCard, to);
+                    to.Push(tmpCard);
+                    return true;
+                }
+                SetCardPosition(tmpCard, from);
+                from.Push(tmpCard);
+                return false;
+                
+
             }
         }
 
@@ -90,7 +101,7 @@ namespace SolitarioTiramisu
                 while (miniDeck.Count > 0)
                 {
                     Card tmp = miniDeck.Pop();
-                    Deck.Push(ref tmp);
+                    Deck.Push(tmp);
                 }
             }
         }
@@ -152,12 +163,12 @@ namespace SolitarioTiramisu
             return false;
         }
 
-        public void PushInDeck(ref Card card, Stack<Card> to)
+        public void PushInDeck(Card card, Stack<Card> to)
         {
             to.Push(card);
         }
 
-        public void SetCardPosition(ref Card card, Stack<Card> to)
+        public void SetCardPosition(Card card, Stack<Card> to)
         {
             card.Position = to;
         }
