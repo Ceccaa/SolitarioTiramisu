@@ -9,13 +9,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="book.jpg" />
+    <None Remove="exit.jpg" />
     <None Remove="options.png" />
     <None Remove="Retro.jpg" />
+    <None Remove="start.jpg" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="book.jpg" />
+    <Resource Include="exit.jpg" />
     <Resource Include="options.png" />
     <Resource Include="Retro.jpg" />
+    <Resource Include="start.jpg" />
   </ItemGroup>
 
   <ItemGroup>

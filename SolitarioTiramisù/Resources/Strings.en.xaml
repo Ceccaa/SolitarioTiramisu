@@ -2,8 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
     <sys:String x:Key="LanguageButton">EN</sys:String>
-    <sys:String x:Key="BtnExit">EXIT</sys:String>
-    <sys:String x:Key="CloseButton">EXIT</sys:String>
     <sys:String x:Key="btnRules">RULES</sys:String>
     <sys:String x:Key="StartGameButton">START GAME</sys:String>
     <sys:String x:Key="RulesButton">RULES</sys:String>

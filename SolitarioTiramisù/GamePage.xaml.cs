@@ -193,13 +193,15 @@ namespace SolitarioTiramisu
             }
             catch (Exception ex)
             {
-                
+
                 table.RedistributeDeck(table.MiniDeck4);
                 table.RedistributeDeck(table.MiniDeck3);
                 table.RedistributeDeck(table.MiniDeck2);
                 table.RedistributeDeck(table.MiniDeck1);
             }
         }
+
+
 
         private void AssignCardToDeck(Card card, Rectangle targetPanel)
         {
