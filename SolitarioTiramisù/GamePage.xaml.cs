@@ -193,7 +193,11 @@ namespace SolitarioTiramisu
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error in Deck_Click method: {ex.GetType().Name}\n{ex.Message}\n{ex.StackTrace}");
+                
+                table.RedistributeDeck(table.MiniDeck4);
+                table.RedistributeDeck(table.MiniDeck3);
+                table.RedistributeDeck(table.MiniDeck2);
+                table.RedistributeDeck(table.MiniDeck1);
             }
         }
 
