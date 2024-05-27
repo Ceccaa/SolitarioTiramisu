@@ -40,7 +40,62 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" 
+                        <Border Background="White" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                CornerRadius="15" 
+                                Padding="{TemplateBinding Padding}">
+                            <Image Source="options.png" Stretch="Uniform"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <!-- Cambia l'opacita' per l'effetto di hover -->
+                    <Setter Property="Opacity" Value="0.8"/>
+                    <Setter Property="Background" Value="#CEFCFF"/>
+                    <Setter Property="BorderBrush" Value="#4682B4"/>
+                    <Setter Property="BorderThickness" Value="3"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Stile specifico per il pulsante btnMusic -->
+        <Style x:Key="MusicButtonStyle" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="White" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                CornerRadius="15" 
+                                Padding="{TemplateBinding Padding}">
+                            <Image x:Name="MusicImage" Stretch="Uniform"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <!-- Cambia l'opacita' per l'effetto di hover -->
+                    <Setter Property="Opacity" Value="0.8"/>
+                    <Setter Property="BorderBrush" Value="#CEFCFF"/>
+                    <Setter Property="BorderThickness" Value="3"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Stile specifico per il pulsante btnLanguage -->
+        <Style x:Key="LanguageButtonStyle" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="White" 
                                 BorderBrush="{TemplateBinding BorderBrush}" 
                                 BorderThickness="{TemplateBinding BorderThickness}" 
                                 CornerRadius="15" 
@@ -53,18 +108,16 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <Setter Property="Background">
-                <Setter.Value>
-                    <ImageBrush ImageSource="options.png"/>
-                </Setter.Value>
-            </Setter>
+            <Setter Property="Background" Value="White"/>
             <Setter Property="BorderBrush" Value="Black"/>
             <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <!-- Cambia l'opacita' per l'effetto di hover -->
-                    <Setter Property="Opacity" Value="0.8"/>
-                    <Setter Property="BorderBrush" Value="#FF4682B4"/>
+                    <!-- Cambia il colore di sfondo e il bordo per l'effetto hover -->
+                    <Setter Property="Background" Value="#CEFCFF"/>
+                    <Setter Property="BorderBrush" Value="#4682B4"/>
                     <Setter Property="BorderThickness" Value="3"/>
                 </Trigger>
             </Style.Triggers>
@@ -88,7 +141,11 @@
                 <Button x:Name="btnStart" Content="AVVIA GIOCO" Click="StartGameButton_Click" BorderBrush="Black" BorderThickness="2" Width="300" Height="80" Margin="10" FontFamily="Cascadia Mono SemiLight" FontSize="20"/>
                 <Button x:Name="btnRules" Content="REGOLE" Click="RulesButton_Click" BorderBrush="Black" BorderThickness="2" Width="300" Height="80" Margin="10" FontFamily="Cascadia Mono SemiLight" FontSize="20"/>
                 <Button x:Name="btnClose" Content="ESCI" Click="CloseButton_Click" BorderBrush="Black" BorderThickness="2" Width="300" Height="80" Margin="10" FontFamily="Cascadia Mono SemiLight" FontSize="20"/>
-                <Button x:Name="btnOptions" Click="OptionButton_Click" Width="68" Height="61" BorderBrush="Black" BorderThickness="2" FontFamily="Cascadia Mono SemiLight" FontSize="20" HorizontalAlignment="Left" Margin="10,0,0,0" Style="{StaticResource OptionsButtonStyle}"/>
+                <StackPanel Orientation="Horizontal" Width="296">
+                    <Button x:Name="btnOptions" Click="OptionButton_Click" Width="68" Height="57" Style="{StaticResource OptionsButtonStyle}" Margin="0,0,0,0"/>
+                    <Button x:Name="btnMusic" Click="DisableMusic_Click" Width="68" Height="57" Style="{StaticResource MusicButtonStyle}" Margin="10,0,0,0"/>
+                    <Button x:Name="btnLanguage" Content="{DynamicResource LanguageButton}" Click="LanguageButton_Click" Width="68" Height="57" Style="{StaticResource LanguageButtonStyle}" Margin="10,0,0,0" FontSize="20"/>
+                </StackPanel>
             </StackPanel>
         </Grid>
     </Grid>

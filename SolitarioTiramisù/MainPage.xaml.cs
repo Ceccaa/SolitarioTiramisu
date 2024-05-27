@@ -13,6 +13,27 @@ namespace SolitarioTiramisu
             InitializeComponent();
             SetLogoImage();
             SetButtonContent();
+            Loaded += MainPage_Loaded;
+        }
+
+        private void LanguageButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (Window.GetWindow(this) is MainWindow mainWindow)
+            {
+                if (btnLanguage.Content.ToString() == "IT")
+                {
+                    mainWindow.ChangeLanguage("en-US");
+                }
+                else
+                {
+                    mainWindow.ChangeLanguage("it-IT");
+                }
+
+                // Aggiorna il contenuto del pulsante dopo il cambio di lingua
+                btnLanguage.Content = Application.Current.Resources["LanguageButton"];
+                // Aggiorna il contenuto di tutti i pulsanti
+                SetButtonContent();
+            }
         }
 
         private void SetLogoImage()
@@ -44,6 +65,42 @@ namespace SolitarioTiramisu
             btnRules.Content = Application.Current.Resources["RulesButton"];
             btnClose.Content = Application.Current.Resources["CloseButton"];
             btnOptions.Content = Application.Current.Resources["OptionButton"];
+            btnLanguage.Content = Application.Current.Resources["LanguageButton"];
+        }
+
+        private void MainPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (Window.GetWindow(this) is MainWindow mainWindow)
+            {
+                UpdateMusicButtonImage(mainWindow.IsMusicEnabled);
+            }
+        }
+
+        private void DisableMusic_Click(object sender, RoutedEventArgs e)
+        {
+            if (Window.GetWindow(this) is MainWindow mainWindow)
+            {
+                if (mainWindow.IsMusicEnabled)
+                {
+                    mainWindow.DisableMusic();
+                    UpdateMusicButtonImage(false);
+                }
+                else
+                {
+                    mainWindow.EnableMusic();
+                    UpdateMusicButtonImage(true);
+                }
+            }
+        }
+
+        private void UpdateMusicButtonImage(bool isMusicEnabled)
+        {
+            var musicImage = btnMusic.Template.FindName("MusicImage", btnMusic) as Image;
+            if (musicImage != null)
+            {
+                string imagePath = isMusicEnabled ? "../../../images/musicOn.jpg" : "../../../images/musicOff.jpg";
+                musicImage.Source = new BitmapImage(new Uri(System.IO.Path.GetFullPath(imagePath), UriKind.Absolute));
+            }
         }
 
         private void StartGameButton_Click(object sender, RoutedEventArgs e)

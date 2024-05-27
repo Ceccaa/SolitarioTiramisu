@@ -42,8 +42,6 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
         </Grid>
-        <Button x:Name="btnLanguage" Content="{DynamicResource LanguageButton}" Click="LanguageButton_Click" Width="300" Height="80" FontFamily="Cascadia Mono SemiLight" FontSize="20" VerticalAlignment="Center" Margin="0,95,0,400" HorizontalAlignment="Center"/>
-        <Button x:Name="btnMusic"  Content="{DynamicResource BtnMusic}" Click="DisableMusic_Click" Width="300" Height="80" FontFamily="Cascadia Mono SemiLight" FontSize="20" Margin="0,95,0,200" VerticalAlignment="Center" HorizontalAlignment="Center"  />
         <Button x:Name="btnMenu" Content="{DynamicResource BtnExit}" Click="MainButton_Click" Width="300" Height="80" FontFamily="Cascadia Mono SemiLight" FontSize="20" Margin="0,190,0,100" VerticalAlignment="Center" HorizontalAlignment="Center"/>
     </Grid>
 </Page>
