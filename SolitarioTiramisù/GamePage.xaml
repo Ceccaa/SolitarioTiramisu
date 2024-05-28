@@ -30,11 +30,34 @@
             </Style.Triggers>
         </Style>
     </Page.Resources>
-    <Grid Background="#FF226F54" AllowDrop="True">
-        <Border BorderBrush="Black" BorderThickness="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <Canvas x:Name="canvas" AllowDrop="True" Drop="Canvas_Drop" DragOver="Canvas_DragOver" Margin="0">
-                <Rectangle HorizontalAlignment="Left" Height="235" Width="176" Canvas.Left="198" Canvas.Top="560" Stroke="White" VerticalAlignment="Top" />
-                <Button x:Name="deck" Canvas.Left="198" Canvas.Top="559" Height="236" Width="176" Click="deck_Click" HorizontalAlignment="Center" VerticalAlignment="Center">
+    <Grid Background="#FF226F54">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Border Grid.Row="1" Grid.Column="1">
+            <Canvas x:Name="canvas" Width="1150" Height="550" AllowDrop="True" Drop="Canvas_Drop" DragOver="Canvas_DragOver">
+                <!-- Posizioni target panel -->
+                <Rectangle x:Name="targetPanel1" Width="175" Height="235" Stroke="White" Canvas.Left="275" Canvas.Top="21" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Rectangle x:Name="targetPanel2" Width="175" Height="235" Stroke="White" Canvas.Left="500" Canvas.Top="20" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Rectangle x:Name="targetPanel3" Width="175" Height="235" Stroke="White" Canvas.Left="725" Canvas.Top="20" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <Rectangle x:Name="targetPanel4" Width="175" Height="235" Stroke="White" Canvas.Left="950" Canvas.Top="21"/>
+
+                <Rectangle x:Name="targetPanel5" Width="175" Height="235" Stroke="White" Canvas.Left="275" Canvas.Top="289" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <Rectangle x:Name="targetPanel6" Width="175" Height="235" Stroke="White" Canvas.Left="500" Canvas.Top="289" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Rectangle x:Name="targetPanel7" Width="175" Height="235" Stroke="White" Canvas.Left="725" Canvas.Top="289" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <Rectangle x:Name="targetPanel8" Width="175" Height="235" Stroke="White" Canvas.Left="950" Canvas.Top="289" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+                <Rectangle Height="236" Width="176" Stroke="White" Canvas.Left="50" Canvas.Top="289" HorizontalAlignment="Center" VerticalAlignment="Top" />
+
+                <!-- Spostato il deck a sinistra di targetPanel5 -->
+                <Button x:Name="deck" Height="236" Width="176" Click="deck_Click" Canvas.Left="50" Canvas.Top="289" HorizontalAlignment="Center" VerticalAlignment="Top">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border Background="{TemplateBinding Background}">
@@ -46,17 +69,9 @@
                         <ImageBrush ImageSource="/Retro.jpg"/>
                     </Button.Background>
                 </Button>
-                <Button x:Name="btnRestart" Content="RESTART" Style="{StaticResource ColoredButtonStyle}" HorizontalAlignment="Left" Height="73" VerticalAlignment="Center" Width="176" Canvas.Left="198" Canvas.Top="168" FontFamily="Cascadia Mono SemiLight" FontSize="16"/>
-                <Button Name="CloseButton" Content="ESCI" Style="{StaticResource ColoredButtonStyle}" HorizontalAlignment="Left" Click="CloseButton_Click" Width="176" Height="74" Canvas.Left="198" Canvas.Top="312" VerticalAlignment="Center" FontFamily="Cascadia Mono SemiLight" FontSize="16"/>
 
-                <Rectangle Name="targetPanel1" AllowDrop="True" Width="175" Height="235" Stroke="White" Canvas.Left="549" Canvas.Top="168" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <Rectangle Name="targetPanel2" AllowDrop="True" Width="175" Height="235" Stroke="White" Canvas.Left="851" Canvas.Top="168" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <Rectangle Name="targetPanel3" AllowDrop="True" Width="175" Height="235" Stroke="White" Canvas.Left="1150" Canvas.Top="168" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <Rectangle Name="targetPanel4" AllowDrop="True" Width="175" Height="235" Stroke="White" Canvas.Left="1450" Canvas.Top="168" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <Rectangle Name="targetPanel5" AllowDrop="True" Width="175" Height="235" Stroke="White" Canvas.Left="550" Canvas.Top="560" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <Rectangle Name="targetPanel6" AllowDrop="True" Width="175" Height="235" Stroke="White" Canvas.Left="850" Canvas.Top="560" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <Rectangle Name="targetPanel7" AllowDrop="True" Width="175" Height="235" Stroke="White" Canvas.Left="1150" Canvas.Top="560" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <Rectangle Name="targetPanel8" AllowDrop="True" Width="175" Height="235" Stroke="White" Canvas.Left="1450" Canvas.Top="560" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <Button x:Name="btnRestart" Content="RESTART" Style="{StaticResource ColoredButtonStyle}" Height="73" Width="176" Canvas.Left="50" Canvas.Top="21" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <Button Name="CloseButton" Content="ESCI" Style="{StaticResource ColoredButtonStyle}" Click="CloseButton_Click" Width="176" Height="74" Canvas.Left="50" Canvas.Top="121" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             </Canvas>
         </Border>
     </Grid>

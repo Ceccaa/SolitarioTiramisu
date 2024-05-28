@@ -204,20 +204,23 @@ namespace SolitarioTiramisu
                         Fill = new ImageBrush(new BitmapImage(new Uri(imagePath, UriKind.RelativeOrAbsolute)))
                     };
 
+                    // Impostare la posizione iniziale del rettangolo
                     double horizontalPosition = Canvas.GetLeft(targetPanel);
                     double verticalPosition = Canvas.GetTop(targetPanel);
-                    Panel.SetZIndex(rectangle, ++zIndexCounter);
                     Canvas.SetLeft(rectangle, horizontalPosition);
                     Canvas.SetTop(rectangle, verticalPosition);
 
+                    // Collegare l'evento MouseMove
                     rectangle.MouseMove += CardRectangle_MouseMove;
 
+                    // Aggiungere il rettangolo al canvas
                     canvas.Children.Add(rectangle);
 
+                    // Assegnare la carta al mazzo
                     AssignCardToDeck(drawnCard, targetPanel);
                     mazzo.LinkCardToRectangle(drawnCard, rectangle);
 
-                    // Track the card in the targetPanelCards dictionary
+                    // Tracciare la carta nel dizionario targetPanelCards
                     if (!targetPanelCards.ContainsKey(targetPanel))
                     {
                         targetPanelCards[targetPanel] = new List<Rectangle>();
