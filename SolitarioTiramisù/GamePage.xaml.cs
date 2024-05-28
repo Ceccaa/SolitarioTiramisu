@@ -18,7 +18,10 @@ namespace SolitarioTiramisu
         private Rectangle draggedCard;
         private Point originalPosition;
         private Table table = new Table();
-        private Deck mazzo = new Deck();    
+        private Deck mazzo = new Deck();
+
+        // Dictionary to track cards associated with each target panel
+        private Dictionary<Rectangle, List<Rectangle>> targetPanelCards = new Dictionary<Rectangle, List<Rectangle>>();
 
         public GamePage()
         {
@@ -65,6 +68,9 @@ namespace SolitarioTiramisu
                         double newTop = Canvas.GetTop(closestRectangle);
                         Canvas.SetLeft(draggedCard, newLeft);
                         Canvas.SetTop(draggedCard, newTop);
+
+                        // Update the card position in the dictionary
+                        UpdateCardPositionInDictionary(draggedCard, closestRectangle);
                     }
                     else
                     {
@@ -76,6 +82,24 @@ namespace SolitarioTiramisu
                     draggedCard = null;
                 }
             }
+        }
+
+        private void UpdateCardPositionInDictionary(Rectangle card, Rectangle newTargetPanel)
+        {
+            foreach (var kvp in targetPanelCards)
+            {
+                if (kvp.Value.Contains(card))
+                {
+                    kvp.Value.Remove(card);
+                    break;
+                }
+            }
+
+            if (!targetPanelCards.ContainsKey(newTargetPanel))
+            {
+                targetPanelCards[newTargetPanel] = new List<Rectangle>();
+            }
+            targetPanelCards[newTargetPanel].Add(card);
         }
 
         private bool PerformMove(Card card, Rectangle targetRectangle)
@@ -95,20 +119,23 @@ namespace SolitarioTiramisu
             else if (targetRectangle == targetPanel8)
             {
                 return table.MinorMoveCard(card.Position, table.MiniDeck4);
-            } else if (targetRectangle == targetPanel1)
+            }
+            else if (targetRectangle == targetPanel1)
             {
                 return table.StairMoveCard(card.Position, table.StairDeck1);
-            } else if (targetRectangle == targetPanel2)
+            }
+            else if (targetRectangle == targetPanel2)
             {
                 return table.StairMoveCard(card.Position, table.StairDeck2);
-            } else if (targetRectangle == targetPanel3)
+            }
+            else if (targetRectangle == targetPanel3)
             {
                 return table.StairMoveCard(card.Position, table.StairDeck3);
-            } else
+            }
+            else
             {
                 return table.StairMoveCard(card.Position, table.StairDeck4);
             }
-            return false;
         }
 
         private void Canvas_DragOver(object sender, DragEventArgs e)
@@ -189,10 +216,21 @@ namespace SolitarioTiramisu
 
                     AssignCardToDeck(drawnCard, targetPanel);
                     mazzo.LinkCardToRectangle(drawnCard, rectangle);
+
+                    // Track the card in the targetPanelCards dictionary
+                    if (!targetPanelCards.ContainsKey(targetPanel))
+                    {
+                        targetPanelCards[targetPanel] = new List<Rectangle>();
+                    }
+                    targetPanelCards[targetPanel].Add(rectangle);
                 }
             }
             catch (Exception ex)
             {
+                ClearTargetPanel(targetPanel5);
+                ClearTargetPanel(targetPanel6);
+                ClearTargetPanel(targetPanel7);
+                ClearTargetPanel(targetPanel8);
 
                 table.RedistributeDeck(table.MiniDeck4);
                 table.RedistributeDeck(table.MiniDeck3);
@@ -201,7 +239,17 @@ namespace SolitarioTiramisu
             }
         }
 
-
+        private void ClearTargetPanel(Rectangle targetPanel)
+        {
+            if (targetPanelCards.TryGetValue(targetPanel, out var cards))
+            {
+                foreach (var card in cards)
+                {
+                    canvas.Children.Remove(card);
+                }
+                cards.Clear();
+            }
+        }
 
         private void AssignCardToDeck(Card card, Rectangle targetPanel)
         {
