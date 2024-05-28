@@ -33,7 +33,45 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+
+        <!-- Stile specifico per il pulsante "Menu" -->
+        <Style x:Key="MenuButtonStyle" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                CornerRadius="15" 
+                                Padding="{TemplateBinding Padding}">
+                            <Grid>
+                                <Border Margin="-1,-1,-1,-1" CornerRadius="15" ClipToBounds="True" Background="White">
+                                    <Image Source="/menu.jpg" Stretch="Uniform" />
+                                </Border>
+                                <ContentPresenter HorizontalAlignment="Center" 
+                                                  VerticalAlignment="Center" 
+                                                  Content="{TemplateBinding Content}" 
+                                                  ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Width" Value="338"/>
+            <Setter Property="Height" Value="110"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="0.8"/>
+                    <Setter Property="Background" Value="#CEFCFF"/>
+                    <Setter Property="BorderBrush" Value="#4682B4"/>
+                    <Setter Property="BorderThickness" Value="3"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Page.Resources>
+
     <Grid Background="#226F54">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -58,7 +96,7 @@
 
         <!-- Button -->
         <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,150">
-            <Button Content="{DynamicResource MenuButton}" Click="GoToGameButton_Click" FontFamily="Cascadia Mono SemiLight" FontSize="20" Width="338" Height="110"/>
+            <Button Click="GoToGameButton_Click" FontFamily="Cascadia Mono SemiLight" FontSize="20" Style="{StaticResource MenuButtonStyle}"/>
         </StackPanel>
     </Grid>
 </Page>
