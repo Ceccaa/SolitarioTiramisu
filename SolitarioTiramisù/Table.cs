@@ -96,14 +96,12 @@ namespace SolitarioTiramisu
         // rimischiare il mazzo quando finisce. si puo fare solo 1 volta. Da chiamare una volta per ogni mazzetto.
         public void RedistributeDeck(Stack<Card> miniDeck)
         {
-            if (Deck.Count() == 0)
+            while (miniDeck.Count > 0)
             {
-                while (miniDeck.Count > 0)
-                {
-                    Card tmp = miniDeck.Pop();
-                    Deck.Push(tmp);
-                }
+                Card tmp = miniDeck.Pop();
+                Deck.Push(tmp);
             }
+            
         }
 
         public Card DrawCardFromDeck()

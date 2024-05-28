@@ -18,7 +18,8 @@ namespace SolitarioTiramisu
         private Rectangle draggedCard;
         private Point originalPosition;
         private Table table = new Table();
-        private Deck mazzo = new Deck();    
+        private Deck mazzo = new Deck();
+        private Dictionary<Rectangle, List<Rectangle>> targetPanelCards = new Dictionary<Rectangle, List<Rectangle>>();
 
         public GamePage()
         {
@@ -182,25 +183,47 @@ namespace SolitarioTiramisu
                     Panel.SetZIndex(rectangle, ++zIndexCounter);
                     Canvas.SetLeft(rectangle, horizontalPosition);
                     Canvas.SetTop(rectangle, verticalPosition);
-
+                    
                     rectangle.MouseMove += CardRectangle_MouseMove;
 
                     canvas.Children.Add(rectangle);
 
                     AssignCardToDeck(drawnCard, targetPanel);
                     mazzo.LinkCardToRectangle(drawnCard, rectangle);
+                    if (!targetPanelCards.ContainsKey(targetPanel))
+                    {
+                        targetPanelCards[targetPanel] = new List<Rectangle>();
+                    }
+                    targetPanelCards[targetPanel].Add(rectangle);
                 }
             }
             catch (Exception ex)
             {
+                ClearTargetPanel(targetPanel5);
+                ClearTargetPanel(targetPanel6);
+                ClearTargetPanel(targetPanel7);
+                ClearTargetPanel(targetPanel8);
 
                 table.RedistributeDeck(table.MiniDeck4);
                 table.RedistributeDeck(table.MiniDeck3);
                 table.RedistributeDeck(table.MiniDeck2);
                 table.RedistributeDeck(table.MiniDeck1);
+                
+
+
             }
         }
-
+        private void ClearTargetPanel(Rectangle targetPanel)
+        {
+            if (targetPanelCards.TryGetValue(targetPanel, out var cards))
+            {
+                foreach (var card in cards)
+                {
+                    canvas.Children.Remove(card);
+                }
+                cards.Clear();
+            }
+        }
 
 
         private void AssignCardToDeck(Card card, Rectangle targetPanel)
