@@ -64,7 +64,7 @@ namespace SolitarioTiramisu
             btnStart.Content = Application.Current.Resources["StartGameButton"];
             btnRules.Content = Application.Current.Resources["RulesButton"];
             btnClose.Content = Application.Current.Resources["CloseButton"];
-            btnOptions.Content = Application.Current.Resources["OptionButton"];
+            btninfo.Content = Application.Current.Resources["OptionButton"];
             btnLanguage.Content = Application.Current.Resources["LanguageButton"];
         }
 
@@ -118,9 +118,9 @@ namespace SolitarioTiramisu
             Window.GetWindow(this)?.Close();
         }
 
-        private void OptionButton_Click(object sender, RoutedEventArgs e)
+        private void infoButton_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new Uri("OptionsPage.xaml", UriKind.Relative));
+            this.NavigationService.Navigate(new Uri("infoPage.xaml", UriKind.Relative));
         }
     }
 }

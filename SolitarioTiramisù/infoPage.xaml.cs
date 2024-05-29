@@ -4,9 +4,9 @@ using System.Windows.Controls;
 
 namespace SolitarioTiramisu
 {
-    public partial class OptionsPage : Page
+    public partial class infoPage : Page
     {
-        public OptionsPage()
+        public infoPage()
         {
             InitializeComponent();
         }

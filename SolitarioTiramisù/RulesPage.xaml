@@ -87,22 +87,35 @@
         </StackPanel>
 
         <!-- Rules Content -->
-        <StackPanel Grid.Row="1" VerticalAlignment="Top" Margin="20,20,20,20" Height="400">
-            <Label Content="{DynamicResource HowToPlay}" FontFamily="Cascadia Mono SemiLight" FontSize="20" Foreground="#FFF1E8DC" Margin="0,20,0,5"/>
-            <TextBlock Text="{DynamicResource ObjectiveText}" TextWrapping="Wrap" FontFamily="Cascadia Mono SemiLight" FontSize="18" Foreground="#FFF1E8DC" Width="1000" Margin="-2100,0,0,0"/>
-            <Label Content="{DynamicResource GameRules}" FontFamily="Cascadia Mono SemiLight" FontSize="20" Foreground="#FFF1E8DC" Margin="5,20,0,5"/>
-            <TextBlock TextWrapping="Wrap" FontFamily="Cascadia Mono SemiLight" FontSize="18" Foreground="#FFF1E8DC" Width="3131"><Run Text="Costruzione delle basi: Le carte possono essere spostate alle basi solo in ordine crescente e dello stesso seme. Movimento delle carte nel tableau: Le carte possono essere spostate tra le sequenze se hanno lo stesso seme della carta in cima. "/><LineBreak/><Run Text="Il valore della carta non ha importanza in questo caso. Su una sequenza vuota puo' essere posta qualsiasi carta. Mazzo rimanente: Il mazzo viene diviso a gruppi di quattro carte alla volta. Le carte pescate possono essere utilizzate per costruire le basi o spostate tra le sequenze del tableau."/></TextBlock>
-            <Label Content="{DynamicResource EndOfGame}" FontFamily="Cascadia Mono SemiLight" FontSize="20" Foreground="#FFF1E8DC" Margin="5,20,0,5"/>
-            <TextBlock Text="{DynamicResource EndText}" TextWrapping="Wrap" FontFamily="Cascadia Mono SemiLight" FontSize="18" Foreground="#FFF1E8DC" Margin="10,5,0,20"/>
+        <StackPanel Grid.Row="1" VerticalAlignment="Top" Margin="20,20,20,20" Height="500">
+            <Label Content="{DynamicResource HowToPlay}" FontFamily="Cascadia Mono SemiLight" FontSize="20" Foreground="#FFF1E8DC" Margin="5,20,0,15" HorizontalAlignment="Left"/>
+            <TextBlock Text="{DynamicResource ObjectiveText}" TextWrapping="Wrap" FontFamily="Cascadia Mono SemiLight" FontSize="18" Foreground="#FFF1E8DC" Width="1062" Margin="10,0,0,20" HorizontalAlignment="Left" LineHeight="28"/>
+            <Label Content="{DynamicResource GameRules}" FontFamily="Cascadia Mono SemiLight" FontSize="20" Foreground="#FFF1E8DC" Margin="5,20,0,15" Width="250" HorizontalAlignment="Left"/>
+            <TextBlock TextWrapping="Wrap" FontFamily="Cascadia Mono SemiLight" FontSize="18" Foreground="#FFF1E8DC" Margin="10,0,0,20" HorizontalAlignment="Left" Width="1435" LineHeight="28">
+                <Run Text="Costruzione delle basi: Le carte possono essere spostate alle basi solo in ordine crescente e dello stesso seme. "/>
+                <LineBreak/>
+                <Run Text="Movimento delle carte nel tableau: Le carte possono essere spostate tra le sequenze se hanno lo stesso seme della carta in cima. "/>
+                <LineBreak/>
+                <Run Text="Il valore della carta non ha importanza in questo caso. Su una sequenza vuota puo' essere posta qualsiasi carta. "/>
+                <LineBreak/>
+                <Run Text="Mazzo rimanente: Il mazzo viene diviso a gruppi di quattro carte alla volta. "/>
+                <LineBreak/>
+                <Run Text="Le carte pescate possono essere utilizzate per costruire le basi o spostate tra le sequenze del tableau."/>
+            </TextBlock>
+            <Label Content="{DynamicResource EndOfGame}" FontFamily="Cascadia Mono SemiLight" FontSize="20" Foreground="#FFF1E8DC" Margin="5,20,0,15" HorizontalAlignment="Left"/>
+            <TextBlock TextWrapping="Wrap" FontFamily="Cascadia Mono SemiLight" FontSize="18" Foreground="#FFF1E8DC" Margin="10,5,0,20" HorizontalAlignment="Left" LineHeight="28">
+                <Run Text="Si puo' rigirare il mazzo due volte: il gioco termina quando tutte le carte si trovano nelle basi in ordine ascendente dallo stesso seme. "/>
+                <LineBreak/>
+                <Run Text="Se al termine del secondo mazzo non ci sono piu' mosse possibili e le basi non sono complete, il gioco e' considerato perso."/>
+            </TextBlock>
         </StackPanel>
 
         <!-- Button -->
-        <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,150">
-            <Button  Click="GoToGameButton_Click" FontFamily="Cascadia Mono SemiLight" FontSize="20" Style="{StaticResource MenuButtonStyle}">
+        <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,10,10,125">
+            <Button Click="GoToGameButton_Click" FontFamily="Cascadia Mono SemiLight" FontSize="20" Style="{StaticResource MenuButtonStyle}" Height="100" Width="308">
                 <Button.Background>
                     <ImageBrush/>
                 </Button.Background>
-
             </Button>
         </StackPanel>
     </Grid>
