@@ -13,6 +13,8 @@ namespace SolitarioTiramisu
 {
     class Table
     {
+        public event Action<string> OnGameEnd; // Evento per notificare la fine del gioco
+
         private Deck Deck = new Deck();
 
         // TODO: implementare coerenza tra carte generate a video e vari mazzetti gestiti nel backend come degli stack (guardare sotto)
@@ -33,19 +35,19 @@ namespace SolitarioTiramisu
         // muovere carte da a, tra i mazzi inferiori 
         public bool MinorMoveCard(Stack<Card> from, Stack<Card> to)
         {
-            if (Win() == 0)
+            int winStatus = Win();
+            if (winStatus == 0)
             {
-                Console.WriteLine("Hai vinto!");
+                OnGameEnd?.Invoke("Hai vinto!"); // Solleva l'evento con il messaggio di vittoria
                 return true;
             }
-            else if (Win() == 1)
+            else if (winStatus == 1)
             {
-                Console.WriteLine("Hai perso!");
+                OnGameEnd?.Invoke("Hai perso!"); // Solleva l'evento con il messaggio di sconfitta
                 return false;
             }
             else
             {
-
                 Card tmpCard = from.Pop();
 
                 if (to.TryPop(out Card tmpCard2))
@@ -69,20 +71,20 @@ namespace SolitarioTiramisu
                     return true;
                 }
             }
-
         }
 
         // muovere carte da mazzi inferiori a mazzi superiori per fare la scala
         public bool StairMoveCard(Stack<Card> from, Stack<Card> to)
-        { 
-            if (Win() == 0)
+        {
+            int winStatus = Win();
+            if (winStatus == 0)
             {
-               Console.WriteLine("Hai vinto!");
+                OnGameEnd?.Invoke("Hai vinto!"); // Solleva l'evento con il messaggio di vittoria
                 return true;
             }
-            else if(Win() == 1)
+            else if (winStatus == 1)
             {
-                Console.WriteLine("Hai perso!");
+                OnGameEnd?.Invoke("Hai perso!"); // Solleva l'evento con il messaggio di sconfitta
                 return false;
             }
             else
@@ -116,7 +118,6 @@ namespace SolitarioTiramisu
                     SetCardPosition(tmpCard, from);
                     from.Push(tmpCard);
                     return false;
-
                 }
             }
         }
@@ -124,9 +125,9 @@ namespace SolitarioTiramisu
         // rimischiare il mazzo quando finisce. si puo fare solo 1 volta. Da chiamare una volta per ogni mazzetto.
         public void RedistributeDeck(Stack<Card> miniDeck)
         {
-            if(redistribute >= 4)
+            if (redistribute >= 4)
             {
-                Console.WriteLine("Hai perso!");
+                OnGameEnd?.Invoke("Hai perso!"); // Solleva l'evento con il messaggio di sconfitta
                 return;
             }
             else
@@ -138,9 +139,6 @@ namespace SolitarioTiramisu
                     Deck.Push(tmp);
                 }
             }
-
-
-            
         }
 
         public Card DrawCardFromDeck()
@@ -155,7 +153,6 @@ namespace SolitarioTiramisu
         {
             if (StairDeck1.Count == 10 && StairDeck2.Count == 10 && StairDeck3.Count == 10 && StairDeck4.Count == 10)
             {
-
                 return 0; // ha vinto
             }
             else if (HasLost())
@@ -180,7 +177,7 @@ namespace SolitarioTiramisu
             if (StairDeck3.TryPeek(out Card tmp3)) stairList.Add(tmp3);
             if (StairDeck4.TryPeek(out Card tmp4)) stairList.Add(tmp4);
 
-            if(stairList.Count < 4)
+            if (stairList.Count < 4)
             {
                 return false;
             }
@@ -205,7 +202,6 @@ namespace SolitarioTiramisu
             }
 
             return false;
-
         }
 
         public void PushInDeck(Card card, Stack<Card> to)
