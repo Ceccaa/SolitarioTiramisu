@@ -9,14 +9,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="book.jpg" />
     <None Remove="exit.jpg" />
+    <None Remove="menu.jpg" />
     <None Remove="options.png" />
+    <None Remove="RETRO.jpg" />
     <None Remove="start.jpg" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="book.jpg" />
     <Resource Include="exit.jpg" />
+    <Resource Include="menu.jpg" />
     <Resource Include="options.png" />
+    <Resource Include="RETRO.jpg" />
     <Resource Include="start.jpg" />
   </ItemGroup>
 

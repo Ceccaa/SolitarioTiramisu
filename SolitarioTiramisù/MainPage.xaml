@@ -230,7 +230,11 @@
         <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0">
             <StackPanel HorizontalAlignment="Center" Margin="0,68,0,-68">
                 <Button x:Name="btnStart" Click="StartGameButton_Click" Width="300" Height="80" Style="{StaticResource StartButtonStyle}" Margin="10"/>
-                <Button x:Name="btnRules" Click="RulesButton_Click" Width="300" Height="80" Style="{StaticResource RulesButtonStyle}" Margin="10" FontFamily="Cascadia Mono SemiLight" FontSize="20"/>
+                <Button x:Name="btnRules" Click="RulesButton_Click" Width="300" Height="80" Style="{StaticResource RulesButtonStyle}" Margin="10" FontFamily="Cascadia Mono SemiLight" FontSize="20">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/book.jpg"/>
+                    </Button.Background>
+                </Button>
                 <Button x:Name="btnClose" Click="CloseButton_Click" Width="300" Height="80" Style="{StaticResource CloseButtonStyle}" Margin="10"/>
                 <StackPanel Orientation="Horizontal" Width="296" Margin="0,10,0,0">
                     <Button x:Name="btnOptions" Click="OptionButton_Click" Width="68" Height="57" Style="{StaticResource OptionsButtonStyle}" Margin="0,0,0,0" HorizontalAlignment="Left"/>
