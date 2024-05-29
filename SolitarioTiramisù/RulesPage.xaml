@@ -43,10 +43,11 @@
                                 BorderThickness="{TemplateBinding BorderThickness}" 
                                 CornerRadius="15" 
                                 Padding="{TemplateBinding Padding}">
-                            <Grid>
-                                <Border Margin="-1,-1,-1,-1" CornerRadius="15" ClipToBounds="True" Background="White">
-                                    <Image Source="/menu.jpg" Stretch="Uniform" />
-                                </Border>
+                            <Grid Margin="0,5,0,5">
+                                <Grid.Background>
+                                    <ImageBrush Stretch="Uniform" ImageSource="/menu.jpg" />
+                                </Grid.Background>
+
                                 <ContentPresenter HorizontalAlignment="Center" 
                                                   VerticalAlignment="Center" 
                                                   Content="{TemplateBinding Content}" 
@@ -96,7 +97,12 @@
 
         <!-- Button -->
         <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,150">
-            <Button Click="GoToGameButton_Click" FontFamily="Cascadia Mono SemiLight" FontSize="20" Style="{StaticResource MenuButtonStyle}"/>
+            <Button  Click="GoToGameButton_Click" FontFamily="Cascadia Mono SemiLight" FontSize="20" Style="{StaticResource MenuButtonStyle}">
+                <Button.Background>
+                    <ImageBrush/>
+                </Button.Background>
+
+            </Button>
         </StackPanel>
     </Grid>
 </Page>
