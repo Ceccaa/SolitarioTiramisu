@@ -155,6 +155,7 @@ namespace SolitarioTiramisu
         {
             if (StairDeck1.Count == 10 && StairDeck2.Count == 10 && StairDeck3.Count == 10 && StairDeck4.Count == 10)
             {
+
                 return 0; // ha vinto
             }
             else if (HasLost())

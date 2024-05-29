@@ -45,8 +45,9 @@
                                 Padding="{TemplateBinding Padding}">
                             <Grid Margin="0,5,0,5">
                                 <Grid.Background>
-                                    <ImageBrush Stretch="Uniform" ImageSource="/menu.jpg" />
+                                    <ImageBrush Stretch="Uniform" ImageSource="/menu.jpg"/>
                                 </Grid.Background>
+
 
                                 <ContentPresenter HorizontalAlignment="Center" 
                                                   VerticalAlignment="Center" 
@@ -86,13 +87,13 @@
         </StackPanel>
 
         <!-- Rules Content -->
-        <StackPanel Grid.Row="1" VerticalAlignment="Top" Margin="20,20,20,20">
+        <StackPanel Grid.Row="1" VerticalAlignment="Top" Margin="20,20,20,20" Height="400">
             <Label Content="{DynamicResource HowToPlay}" FontFamily="Cascadia Mono SemiLight" FontSize="20" Foreground="#FFF1E8DC" Margin="0,20,0,5"/>
-            <TextBlock Text="{DynamicResource ObjectiveText}" TextWrapping="Wrap" FontFamily="Cascadia Mono SemiLight" FontSize="18" Foreground="#FFF1E8DC" Margin="0,5,0,20"/>
-            <Label Content="{DynamicResource GameRules}" FontFamily="Cascadia Mono SemiLight" FontSize="20" Foreground="#FFF1E8DC" Margin="0,20,0,5"/>
-            <TextBlock Text="{DynamicResource RulesText}" TextWrapping="Wrap" FontFamily="Cascadia Mono SemiLight" FontSize="18" Foreground="#FFF1E8DC" Margin="0,5,0,20"/>
-            <Label Content="{DynamicResource EndOfGame}" FontFamily="Cascadia Mono SemiLight" FontSize="20" Foreground="#FFF1E8DC" Margin="0,20,0,5"/>
-            <TextBlock Text="{DynamicResource EndText}" TextWrapping="Wrap" FontFamily="Cascadia Mono SemiLight" FontSize="18" Foreground="#FFF1E8DC" Margin="0,5,0,20"/>
+            <TextBlock Text="{DynamicResource ObjectiveText}" TextWrapping="Wrap" FontFamily="Cascadia Mono SemiLight" FontSize="18" Foreground="#FFF1E8DC" Width="1000" Margin="-2100,0,0,0"/>
+            <Label Content="{DynamicResource GameRules}" FontFamily="Cascadia Mono SemiLight" FontSize="20" Foreground="#FFF1E8DC" Margin="5,20,0,5"/>
+            <TextBlock TextWrapping="Wrap" FontFamily="Cascadia Mono SemiLight" FontSize="18" Foreground="#FFF1E8DC" Width="3131"><Run Text="Costruzione delle basi: Le carte possono essere spostate alle basi solo in ordine crescente e dello stesso seme. Movimento delle carte nel tableau: Le carte possono essere spostate tra le sequenze se hanno lo stesso seme della carta in cima. "/><LineBreak/><Run Text="Il valore della carta non ha importanza in questo caso. Su una sequenza vuota puo' essere posta qualsiasi carta. Mazzo rimanente: Il mazzo viene diviso a gruppi di quattro carte alla volta. Le carte pescate possono essere utilizzate per costruire le basi o spostate tra le sequenze del tableau."/></TextBlock>
+            <Label Content="{DynamicResource EndOfGame}" FontFamily="Cascadia Mono SemiLight" FontSize="20" Foreground="#FFF1E8DC" Margin="5,20,0,5"/>
+            <TextBlock Text="{DynamicResource EndText}" TextWrapping="Wrap" FontFamily="Cascadia Mono SemiLight" FontSize="18" Foreground="#FFF1E8DC" Margin="10,5,0,20"/>
         </StackPanel>
 
         <!-- Button -->
