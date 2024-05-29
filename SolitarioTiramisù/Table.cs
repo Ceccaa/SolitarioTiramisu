@@ -124,7 +124,7 @@ namespace SolitarioTiramisu
         // rimischiare il mazzo quando finisce. si puo fare solo 1 volta. Da chiamare una volta per ogni mazzetto.
         public void RedistributeDeck(Stack<Card> miniDeck)
         {
-            if(redistribute > 4)
+            if(redistribute >= 4)
             {
                 Console.WriteLine("Hai perso!");
                 return;
@@ -195,7 +195,7 @@ namespace SolitarioTiramisu
                 {
                     foreach (Card c in stairList)
                     {
-                        if (c.Seed == miniList[i].Seed && c.Value + 1 < miniList[i].Value && Deck.Count() == 0 && redistribute > 4)
+                        if (c.Seed == miniList[i].Seed && c.Value + 1 < miniList[i].Value && Deck.Count() == 0 && redistribute >= 4)
                         {
                             return true;
                         }
