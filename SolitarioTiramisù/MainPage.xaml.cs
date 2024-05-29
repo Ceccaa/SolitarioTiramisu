@@ -42,7 +42,7 @@ namespace SolitarioTiramisu
             {
                 Image logo = new Image
                 {
-                    Source = new BitmapImage(new Uri(System.IO.Path.GetFullPath("../../../images/Logo.png"), UriKind.Absolute)),
+                    Source = new BitmapImage(new Uri(System.IO.Path.GetFullPath("../../../assets/Logo.png"), UriKind.Absolute)),
                     Stretch = Stretch.Uniform,
                     Width = 980,  // Dimensione regolabile
                     Height = 620  // Dimensione regolabile
@@ -98,7 +98,7 @@ namespace SolitarioTiramisu
             var musicImage = btnMusic.Template.FindName("MusicImage", btnMusic) as Image;
             if (musicImage != null)
             {
-                string imagePath = isMusicEnabled ? "../../../images/musicOn.jpg" : "../../../images/musicOff.jpg";
+                string imagePath = isMusicEnabled ? "../../../assets/musicOn.jpg" : "../../../assets/musicOff.jpg";
                 musicImage.Source = new BitmapImage(new Uri(System.IO.Path.GetFullPath(imagePath), UriKind.Absolute));
             }
         }

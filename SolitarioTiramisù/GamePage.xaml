@@ -66,7 +66,7 @@
                         </ControlTemplate>
                     </Button.Template>
                     <Button.Background>
-                        <ImageBrush ImageSource="/Retro.jpg"/>
+                        <ImageBrush ImageSource="../../../images/RETRO.png"/>
                     </Button.Background>
                 </Button>
 

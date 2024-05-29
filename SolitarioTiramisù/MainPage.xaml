@@ -45,7 +45,7 @@
                                 BorderThickness="{TemplateBinding BorderThickness}" 
                                 CornerRadius="15" 
                                 Padding="{TemplateBinding Padding}">
-                            <Image Source="options.png" Stretch="Uniform"/>
+                            <Image Source="/options.png" Stretch="Uniform"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>

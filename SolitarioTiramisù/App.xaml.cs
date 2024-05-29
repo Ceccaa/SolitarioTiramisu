@@ -12,7 +12,7 @@ namespace SolitarioTiramisu
         
         static void StartGame()
         {
-            Player player = new Player();
+
 
         }
 
