@@ -118,7 +118,19 @@
                 </Button>
 
                 <!-- TextBlock per messaggi di vittoria o sconfitta -->
-                <TextBlock x:Name="statusMessage" FontSize="24" Foreground="White" Background="Black" Opacity="0.8" Width="300" Height="100" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed"/>
+                <TextBlock x:Name="statusMessage"
+                   FontSize="24"
+                   Foreground="Black"
+                   Width="300"
+                   Height="100"
+                   TextAlignment="Center"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   Visibility="Collapsed"
+                   FontFamily="Segoe UI"
+                   TextWrapping="Wrap"
+                   Padding="10,5">
+                </TextBlock>
             </Canvas>
         </Border>
     </Grid>

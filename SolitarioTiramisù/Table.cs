@@ -43,7 +43,7 @@ namespace SolitarioTiramisu
             }
             else if (winStatus == 1)
             {
-                OnGameEnd?.Invoke("Hai perso!"); // Solleva l'evento con il messaggio di sconfitta
+                OnGameEnd?.Invoke("Hai perso! :_("); // Solleva l'evento con il messaggio di sconfitta
                 return false;
             }
             else
@@ -84,7 +84,7 @@ namespace SolitarioTiramisu
             }
             else if (winStatus == 1)
             {
-                OnGameEnd?.Invoke("Hai perso!"); // Solleva l'evento con il messaggio di sconfitta
+                OnGameEnd?.Invoke("Hai perso! :_("); // Solleva l'evento con il messaggio di sconfitta
                 return false;
             }
             else
