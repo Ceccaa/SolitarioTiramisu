@@ -129,9 +129,14 @@ namespace SolitarioTiramisu
         // Rimischiare il mazzo quando finisce. Si puo fare solo 1 volta. Da chiamare una volta per ogni mazzetto.
         public void RedistributeDeck(Stack<Card> miniDeck)
         {
-            if (redistribute > 4)
+            if (redistribute > 4 || Win() == 1)
             {
                 OnGameEnd?.Invoke("HAI PERSO!"); // Solleva l'evento con il messaggio di sconfitta
+                return;
+            }
+            else if(redistribute > 4 || Win() == 0)
+            {
+                OnGameEnd?.Invoke("HAI VINTO!"); // Solleva l'evento con il messaggio di vincita
                 return;
             }
             else
@@ -153,7 +158,7 @@ namespace SolitarioTiramisu
                 throw new InvalidOperationException("Deck is empty.");
         }
 
-        public int Win()
+        private int Win()
         {
             if (StairDeck1.Count == 10 && StairDeck2.Count == 10 && StairDeck3.Count == 10 && StairDeck4.Count == 10)
             {
