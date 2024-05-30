@@ -2,14 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
     <sys:String x:Key="LanguageButton">IT</sys:String>
-    <sys:String x:Key="BtnExit">ESCI</sys:String>
-    <sys:String x:Key="CloseButton">ESCI</sys:String>
-    <sys:String x:Key="btnRules">REGOLE</sys:String>
-    <sys:String x:Key="StartGameButton">AVVIA GIOCO</sys:String>
-    <sys:String x:Key="RulesButton">REGOLE</sys:String>
-    <sys:String x:Key="MenuButton">MENU'</sys:String>
     <!-- Aggiunti per la RulesPage -->
-    <sys:String x:Key="GameTitle">SOLITARIO TIRAMISU'</sys:String>
     <sys:String x:Key="HowToPlay">COME SI GIOCA:</sys:String>
     <sys:String x:Key="ObjectiveText">L'obiettivo del solitario è completare le quattro basi partendo dagli Assi fino ai Re per ogni seme.</sys:String>
     <sys:String x:Key="GameRules">REGOLE DEL GIOCO:</sys:String>
@@ -21,4 +14,5 @@
     <sys:String x:Key="EndOfGame">FINE DEL GIOCO:</sys:String>
     <sys:String x:Key="EndText">Si può rigirare il mazzo due volte: il gioco termina quando tutte le carte si trovano nelle basi in ordine ascendente dallo stesso seme.
     Se al termine del secondo mazzo non ci sono più mosse possibili e le basi non sono complete, il gioco è considerato perso.</sys:String>
+    
 </ResourceDictionary>
