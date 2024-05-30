@@ -50,14 +50,17 @@
         </Grid.ColumnDefinitions>
 
         <!-- Title Label -->
-        <Label Grid.Row="1" HorizontalContentAlignment="Center" FontSize="30" FontFamily="Cascadia Mono SemiLight" Content="Crediti" Margin="0,96,0,0" VerticalAlignment="Top"/>
+        <StackPanel Margin="0,50,0,0">
+            <Label Grid.Row="1" HorizontalContentAlignment="Center" FontSize="30" FontFamily="Cascadia Mono SemiLight" Content="Crediti" Margin="0,0,0,0" VerticalAlignment="Top"/>
+
+        </StackPanel>
 
         <!-- Content StackPanel -->
-        <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0">
-            <Label HorizontalContentAlignment="Center" FontSize="20" FontFamily="Cascadia Mono SemiLight" Content="Mattia Cincotta - Frontend Developer" Margin="0,5,0,5"/>
-            <Label HorizontalContentAlignment="Center" FontSize="20" FontFamily="Cascadia Mono SemiLight" Content="Giulia Cocka - Frontend Developer" Margin="0,5,0,5"/>
-            <Label HorizontalContentAlignment="Center" FontSize="20" FontFamily="Cascadia Mono SemiLight" Content="Simone Ceccarelli - Backend Developer" Margin="0,5,0,5"/>
-            <Label HorizontalContentAlignment="Center" FontSize="20" FontFamily="Cascadia Mono SemiLight" Content="Daniele Broccoli - Backend Developer" Margin="0,5,0,5"/>
+        <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Height="299" Margin="0,0,0,0">
+            <Label HorizontalContentAlignment="Left" FontSize="20" FontFamily="Cascadia Mono SemiLight" Content="Simone Ceccarelli - Backend Developer" />
+            <Label HorizontalContentAlignment="Left" FontSize="20" FontFamily="Cascadia Mono SemiLight" Content="Daniele Broccoli - Backend Developer"/>
+            <Label HorizontalContentAlignment="Left" FontSize="20" FontFamily="Cascadia Mono SemiLight" Content="Mattia Cincotta - Frontend Developer" />
+            <Label HorizontalContentAlignment="Left" FontSize="20" FontFamily="Cascadia Mono SemiLight" Content="Giulia Cocka - Frontend Developer" />
         </StackPanel>
 
         <!-- Button -->
