@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace SolitarioTiramisu
 {
     public partial class finalPage : Page
     {
-        public finalPage()
+        public finalPage(string message)
         {
             InitializeComponent();
+            UpdateResult(message);
+            SetResultImage(message);
         }
 
         public void UpdateResult(string message)
@@ -16,9 +20,52 @@ namespace SolitarioTiramisu
             result.Text = message;
         }
 
+        private void SetResultImage(string message)
+        {
+            try
+            {
+                Image resultImage = new Image
+                {
+                    Stretch = Stretch.Uniform,
+                    Width = 250,  // Dimensione regolabile
+                    Height = 250  // Dimensione regolabile
+                };
+
+                string imagePath;
+                if (message == "HAI VINTO!")
+                {
+                    imagePath = System.IO.Path.GetFullPath("../../../assets/trophy.jpg");
+                }
+                else
+                {
+                    imagePath = System.IO.Path.GetFullPath("../../../assets/gameOver.jpg");
+                }
+
+                resultImage.Source = new BitmapImage(new Uri(imagePath, UriKind.Absolute));
+
+                // Posiziona l'immagine nel centro del contenitore
+                // Utilizza il metodo Sfondo.ActualWidth e Sfondo.ActualHeight per calcolare le posizioni
+                resultImage.Loaded += (s, e) =>
+                {
+                    Canvas.SetLeft(resultImage, (Sfondo.ActualWidth - resultImage.Width) / 2);
+                    Canvas.SetTop(resultImage, 0);  // Vicino al bordo superiore
+                };
+
+                // Aggiungi l'immagine al contenitore Sfondo
+                Sfondo.Children.Add(resultImage);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading image: {ex.Message}");
+            }
+        }
+
         private void MainButton_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new Uri("MainPage.xaml", UriKind.Relative));
+            // Naviga usando la finestra principale
+            Window mainWindow = Application.Current.MainWindow;
+            Frame mainFrame = (Frame)mainWindow.FindName("MainFrame");
+            mainFrame.Navigate(new Uri("MainPage.xaml", UriKind.Relative));
         }
     }
 }

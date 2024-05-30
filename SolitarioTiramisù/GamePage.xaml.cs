@@ -31,15 +31,25 @@ namespace SolitarioTiramisu
 
         private void GameTable_OnGameEnd(string message)
         {
-            // Mostra il messaggio di vittoria o sconfitta
             Dispatcher.Invoke(() =>
             {
-                var finalPage = new finalPage();
-                finalPage.UpdateResult(message);
+                var finalPage = new finalPage(message);
 
-                this.NavigationService.Navigate(finalPage);
+                // Naviga usando la finestra principale
+                Window mainWindow = Application.Current.MainWindow;
+                Frame mainFrame = (Frame)mainWindow.FindName("MainFrame");
+                if (mainFrame != null)
+                {
+                    mainFrame.Navigate(finalPage);
+                }
+                else
+                {
+                    MessageBox.Show("Main frame not found.");
+                }
             });
         }
+
+
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
