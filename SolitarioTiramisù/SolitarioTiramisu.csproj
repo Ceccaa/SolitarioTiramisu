@@ -9,8 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="assets\gameTable.jpg" />
     <None Remove="book.jpg" />
     <None Remove="exit.jpg" />
+    <None Remove="gameTable.jpg" />
     <None Remove="info.jpg" />
     <None Remove="menu.jpg" />
     <None Remove="RETRO.jpg" />
@@ -18,8 +20,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="assets\gameTable.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="book.jpg" />
     <Resource Include="exit.jpg" />
+    <Resource Include="gameTable.jpg" />
     <Resource Include="info.jpg" />
     <Resource Include="menu.jpg" />
     <Resource Include="RETRO.jpg" />

@@ -1,7 +1,7 @@
-<Page x:Class="SolitarioTiramisu.infoPage"
+<Page x:Class="SolitarioTiramisu.finalPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      Title="InfoPage">
+      Title="finalPage">
     <Page.Resources>
         <Style x:Key="MenuButtonStyle" TargetType="Button">
             <Setter Property="Template">
@@ -48,6 +48,6 @@
                 </Button.Background>
             </Button>
         </StackPanel>
-        <Label HorizontalContentAlignment="Center" FontSize="30" FontFamily="Cascadia Mono SemiLight" Content="Crediti" HorizontalAlignment="Center" Margin="0,28,0,0" VerticalAlignment="Top" Height="71" Width="146"/>
+        <TextBlock x:Name="result" HorizontalAlignment="Center" Margin="0,60,0,0" TextWrapping="Wrap" Text="sas" VerticalAlignment="Top" Height="53" Width="163"/>
     </Grid>
 </Page>

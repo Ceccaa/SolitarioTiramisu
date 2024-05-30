@@ -15,6 +15,8 @@ namespace SolitarioTiramisu
     {
         public event Action<string> OnGameEnd; // Evento per notificare la fine del gioco
 
+
+
         private Deck Deck = new Deck();
 
         // TODO: implementare coerenza tra carte generate a video e vari mazzetti gestiti nel backend come degli stack (guardare sotto)
@@ -38,12 +40,12 @@ namespace SolitarioTiramisu
             int winStatus = Win();
             if (winStatus == 0)
             {
-                OnGameEnd?.Invoke("Hai vinto!"); // Solleva l'evento con il messaggio di vittoria
+                OnGameEnd?.Invoke("HAI VINTO!"); // Solleva l'evento con il messaggio di vittoria
                 return true;
             }
             else if (winStatus == 1)
             {
-                OnGameEnd?.Invoke("Hai perso! :_("); // Solleva l'evento con il messaggio di sconfitta
+                OnGameEnd?.Invoke("HAI PERSO!"); // Solleva l'evento con il messaggio di sconfitta
                 return false;
             }
             else
@@ -79,12 +81,12 @@ namespace SolitarioTiramisu
             int winStatus = Win();
             if (winStatus == 0)
             {
-                OnGameEnd?.Invoke("Hai vinto!"); // Solleva l'evento con il messaggio di vittoria
+                OnGameEnd?.Invoke("HAI VINTO!"); // Solleva l'evento con il messaggio di vittoria
                 return true;
             }
             else if (winStatus == 1)
             {
-                OnGameEnd?.Invoke("Hai perso! :_("); // Solleva l'evento con il messaggio di sconfitta
+                OnGameEnd?.Invoke("HAI PERSO!"); // Solleva l'evento con il messaggio di sconfitta
                 return false;
             }
             else
@@ -127,7 +129,7 @@ namespace SolitarioTiramisu
         {
             if (redistribute >= 4)
             {
-                OnGameEnd?.Invoke("Hai perso!"); // Solleva l'evento con il messaggio di sconfitta
+                OnGameEnd?.Invoke("HAI PERSO!"); // Solleva l'evento con il messaggio di sconfitta
                 return;
             }
             else
@@ -165,6 +167,7 @@ namespace SolitarioTiramisu
 
         private bool HasLost()
         {
+            
             List<Card> miniList = new List<Card>();
             if (MiniDeck1.TryPeek(out Card tmp11)) miniList.Add(tmp11);
             if (MiniDeck2.TryPeek(out Card tmp22)) miniList.Add(tmp22);
@@ -187,19 +190,25 @@ namespace SolitarioTiramisu
                 return false;
             }
 
-            if (miniList[0].Seed != miniList[1].Seed && miniList[1].Seed != miniList[2].Seed && miniList[2].Seed != miniList[3].Seed)
+
+            if (Deck.Count() <= 0)
             {
-                for (int i = 0; i < miniList.Count; i++)
+                if (miniList[0].Seed != miniList[1].Seed && miniList[1].Seed != miniList[2].Seed && miniList[2].Seed != miniList[3].Seed)
                 {
-                    foreach (Card c in stairList)
+                    for (int i = 0; i < miniList.Count; i++)
                     {
-                        if (c.Seed == miniList[i].Seed && c.Value + 1 < miniList[i].Value && Deck.Count() == 0 && redistribute >= 4)
+                        foreach (Card c in stairList)
                         {
-                            return true;
+                            if (c.Seed == miniList[i].Seed && c.Value + 1 < miniList[i].Value && Deck.Count() == 0 && redistribute >= 4)
+                            {
+                                return true;
+                            }
                         }
                     }
+
                 }
             }
+
 
             return false;
         }

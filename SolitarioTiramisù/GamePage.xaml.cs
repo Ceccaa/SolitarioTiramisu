@@ -34,8 +34,10 @@ namespace SolitarioTiramisu
             // Mostra il messaggio di vittoria o sconfitta
             Dispatcher.Invoke(() =>
             {
-                statusMessage.Text = message;
-                statusMessage.Visibility = Visibility.Visible;
+                var finalPage = new finalPage();
+                finalPage.UpdateResult(message);
+
+                this.NavigationService.Navigate(finalPage);
             });
         }
 
