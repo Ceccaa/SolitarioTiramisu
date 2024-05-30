@@ -37,20 +37,20 @@ namespace SolitarioTiramisu
         public bool MinorMoveCard(Stack<Card> from, Stack<Card> to)
         {
             int winStatus = Win();
-            if (winStatus == 0)
+            if (winStatus == 1) // ha vinto
             {
-                OnGameEnd?.Invoke("HAI VINTO!"); // Solleva l'evento con il messaggio di vittoria
+                OnGameEnd?.Invoke("HAI VINTO!");
                 return true;
             }
-            else if (winStatus == 1)
+            else if (winStatus == 0) // ha perso
             {
-                OnGameEnd?.Invoke("HAI PERSO!"); // Solleva l'evento con il messaggio di sconfitta
+                OnGameEnd?.Invoke("HAI PERSO!");
                 return false;
             }
             else
             {
+                // Logica di spostamento delle carte
                 Card tmpCard = from.Pop();
-
                 if (to.TryPeek(out Card tmpCard2))
                 {
                     if (tmpCard.Seed == tmpCard2.Seed)
@@ -64,7 +64,6 @@ namespace SolitarioTiramisu
                         PushInDeck(tmpCard, from);
                         return false;
                     }
-
                 }
                 else
                 {
@@ -75,24 +74,23 @@ namespace SolitarioTiramisu
             }
         }
 
-        // muovere carte da mazzi inferiori a mazzi superiori per fare la scala
         public bool StairMoveCard(Stack<Card> from, Stack<Card> to)
         {
             int winStatus = Win();
-            if (winStatus == 0)
+            if (winStatus == 1) // ha vinto
             {
-                OnGameEnd?.Invoke("HAI VINTO!"); // Solleva l'evento con il messaggio di vittoria
+                OnGameEnd?.Invoke("HAI VINTO!");
                 return true;
             }
-            else if (winStatus == 1)
+            else if (winStatus == 0) // ha perso
             {
-                OnGameEnd?.Invoke("HAI PERSO!"); // Solleva l'evento con il messaggio di sconfitta
+                OnGameEnd?.Invoke("HAI PERSO!");
                 return false;
             }
             else
             {
+                // Logica di spostamento delle carte
                 Card tmpCard = from.Pop();
-
                 if (to.TryPeek(out Card tmpCard2))
                 {
                     if (tmpCard.Seed == tmpCard2.Seed && tmpCard.Value == tmpCard2.Value + 1)
@@ -123,10 +121,11 @@ namespace SolitarioTiramisu
             }
         }
 
+
         // rimischiare il mazzo quando finisce. si puo fare solo 1 volta. Da chiamare una volta per ogni mazzetto.
         public void RedistributeDeck(Stack<Card> miniDeck)
         {
-            if (redistribute >= 4)
+            if (redistribute > 4)
             {
                 OnGameEnd?.Invoke("HAI PERSO!"); // Solleva l'evento con il messaggio di sconfitta
                 return;
@@ -164,9 +163,9 @@ namespace SolitarioTiramisu
             return 2; // può continuare a giocare
         }
 
+
         private bool HasLost()
         {
-            
             List<Card> miniList = new List<Card>();
             if (MiniDeck1.TryPeek(out Card tmp11)) miniList.Add(tmp11);
             if (MiniDeck2.TryPeek(out Card tmp22)) miniList.Add(tmp22);
@@ -189,7 +188,6 @@ namespace SolitarioTiramisu
                 return false;
             }
 
-
             if (Deck.Count() <= 0)
             {
                 if (miniList[0].Seed != miniList[1].Seed && miniList[1].Seed != miniList[2].Seed && miniList[2].Seed != miniList[3].Seed)
@@ -204,13 +202,11 @@ namespace SolitarioTiramisu
                             }
                         }
                     }
-
                 }
             }
-
-
             return false;
         }
+
 
         public void PushInDeck(Card card, Stack<Card> to)
         {

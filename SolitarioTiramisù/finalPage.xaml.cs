@@ -32,19 +32,22 @@ namespace SolitarioTiramisu
                 };
 
                 string imagePath;
-                if (message == "HAI VINTO!")
+                string messageKey;
+
+                if (message == "HAI VINTO!" || message == "YOU WON!")
                 {
                     imagePath = System.IO.Path.GetFullPath("../../../assets/trophy.jpg");
+                    messageKey = "WinMessage";
                 }
                 else
                 {
                     imagePath = System.IO.Path.GetFullPath("../../../assets/gameOver.jpg");
+                    messageKey = "LoseMessage";
                 }
 
                 resultImage.Source = new BitmapImage(new Uri(imagePath, UriKind.Absolute));
 
                 // Posiziona l'immagine nel centro del contenitore
-                // Utilizza il metodo Sfondo.ActualWidth e Sfondo.ActualHeight per calcolare le posizioni
                 resultImage.Loaded += (s, e) =>
                 {
                     Canvas.SetLeft(resultImage, (Sfondo.ActualWidth - resultImage.Width) / 2);
@@ -53,12 +56,19 @@ namespace SolitarioTiramisu
 
                 // Aggiungi l'immagine al contenitore Sfondo
                 Sfondo.Children.Add(resultImage);
+
+                // Imposta il messaggio di risultato
+                if (Application.Current.Resources.Contains(messageKey))
+                {
+                    result.Text = (string)Application.Current.Resources[messageKey];
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error loading image: {ex.Message}");
             }
         }
+
 
         private void MainButton_Click(object sender, RoutedEventArgs e)
         {
