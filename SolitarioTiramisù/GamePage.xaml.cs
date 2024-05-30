@@ -18,7 +18,8 @@ namespace SolitarioTiramisu
         private Rectangle draggedCard;
         private Point originalPosition;
         private Table table = new Table();
-        private Deck mazzo = new Deck();
+        private Deck mazzo;
+        
 
         // Dictionary to track cards associated with each target panel
         private Dictionary<Rectangle, List<Rectangle>> targetPanelCards = new Dictionary<Rectangle, List<Rectangle>>();
@@ -27,6 +28,7 @@ namespace SolitarioTiramisu
         {
             InitializeComponent();
             table.OnGameEnd += GameTable_OnGameEnd; // Sottoscrizione all'evento
+            mazzo = table.GetDeck();
         }
 
         private void GameTable_OnGameEnd(string message)

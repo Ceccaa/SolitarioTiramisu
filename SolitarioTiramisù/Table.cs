@@ -15,11 +15,7 @@ namespace SolitarioTiramisu
     {
         public event Action<string> OnGameEnd; // Evento per notificare la fine del gioco
 
-
-
         private Deck Deck = new Deck();
-
-        // TODO: implementare coerenza tra carte generate a video e vari mazzetti gestiti nel backend come degli stack (guardare sotto)
 
         // mazzetti di appoggio su cui fare spostamenti
         public Stack<Card> MiniDeck1 = new Stack<Card>();
@@ -33,6 +29,9 @@ namespace SolitarioTiramisu
         public Stack<Card> StairDeck3 = new Stack<Card>();
         public Stack<Card> StairDeck4 = new Stack<Card>();
         private int redistribute = 0;
+
+
+        public Deck GetDeck() { return Deck; }
 
         // muovere carte da a, tra i mazzi inferiori 
         public bool MinorMoveCard(Stack<Card> from, Stack<Card> to)
@@ -52,19 +51,20 @@ namespace SolitarioTiramisu
             {
                 Card tmpCard = from.Pop();
 
-                if (to.TryPop(out Card tmpCard2))
+                if (to.TryPeek(out Card tmpCard2))
                 {
                     if (tmpCard.Seed == tmpCard2.Seed)
                     {
                         SetCardPosition(tmpCard, to);
-                        PushInDeck(tmpCard2, to);
                         PushInDeck(tmpCard, to);
                         return true;
                     }
+                    else
+                    {
+                        PushInDeck(tmpCard, from);
+                        return false;
+                    }
 
-                    PushInDeck(tmpCard2, to);
-                    PushInDeck(tmpCard, from);
-                    return false;
                 }
                 else
                 {
@@ -98,14 +98,13 @@ namespace SolitarioTiramisu
                     if (tmpCard.Seed == tmpCard2.Seed && tmpCard.Value == tmpCard2.Value + 1)
                     {
                         SetCardPosition(tmpCard, to);
-                        to.Push(tmpCard2);
-                        to.Push(tmpCard);
+                        PushInDeck(tmpCard, to);
                         return true;
                     }
                     else
                     {
                         SetCardPosition(tmpCard, from);
-                        from.Push(tmpCard);
+                        PushInDeck(tmpCard, from);
                         return false;
                     }
                 }
@@ -114,11 +113,11 @@ namespace SolitarioTiramisu
                     if (tmpCard.Value == 1)
                     {
                         SetCardPosition(tmpCard, to);
-                        to.Push(tmpCard);
+                        PushInDeck(tmpCard, to);
                         return true;
                     }
                     SetCardPosition(tmpCard, from);
-                    from.Push(tmpCard);
+                    PushInDeck(tmpCard, from);
                     return false;
                 }
             }
