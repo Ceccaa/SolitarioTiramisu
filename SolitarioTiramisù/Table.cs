@@ -37,12 +37,12 @@ namespace SolitarioTiramisu
         public bool MinorMoveCard(Stack<Card> from, Stack<Card> to)
         {
             int winStatus = Win();
-            if (winStatus == 1) // ha vinto
+            if (winStatus == 0) // ha vinto
             {
                 OnGameEnd?.Invoke("HAI VINTO!");
                 return true;
             }
-            else if (winStatus == 0) // ha perso
+            else if (winStatus == 1) // ha perso
             {
                 OnGameEnd?.Invoke("HAI PERSO!");
                 return false;
@@ -77,12 +77,12 @@ namespace SolitarioTiramisu
         public bool StairMoveCard(Stack<Card> from, Stack<Card> to)
         {
             int winStatus = Win();
-            if (winStatus == 1) // ha vinto
+            if (winStatus == 0) // ha vinto
             {
                 OnGameEnd?.Invoke("HAI VINTO!");
                 return true;
             }
-            else if (winStatus == 0) // ha perso
+            else if (winStatus == 1) // ha perso
             {
                 OnGameEnd?.Invoke("HAI PERSO!");
                 return false;
@@ -114,15 +114,19 @@ namespace SolitarioTiramisu
                         PushInDeck(tmpCard, to);
                         return true;
                     }
-                    SetCardPosition(tmpCard, from);
-                    PushInDeck(tmpCard, from);
-                    return false;
+                    else
+                    {
+                        SetCardPosition(tmpCard, from);
+                        PushInDeck(tmpCard, from);
+                        return false;
+                    }
+
                 }
             }
         }
 
 
-        // rimischiare il mazzo quando finisce. si puo fare solo 1 volta. Da chiamare una volta per ogni mazzetto.
+        // Rimischiare il mazzo quando finisce. Si puo fare solo 1 volta. Da chiamare una volta per ogni mazzetto.
         public void RedistributeDeck(Stack<Card> miniDeck)
         {
             if (redistribute > 4)
