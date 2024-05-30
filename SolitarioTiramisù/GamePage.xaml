@@ -7,20 +7,19 @@
       mc:Ignorable="d"
       Title="Solitario Tiramisu">
     <Page.Resources>
-        <!-- Stile generico per i pulsanti -->
         <Style TargetType="Button">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border Background="{TemplateBinding Background}" 
-                                BorderBrush="{TemplateBinding BorderBrush}" 
-                                BorderThickness="{TemplateBinding BorderThickness}" 
-                                CornerRadius="15" 
-                                Padding="{TemplateBinding Padding}">
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}" 
+                        CornerRadius="15" 
+                        Padding="{TemplateBinding Padding}">
                             <ContentPresenter HorizontalAlignment="Center" 
-                                              VerticalAlignment="Center" 
-                                              Content="{TemplateBinding Content}" 
-                                              ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                                      VerticalAlignment="Center" 
+                                      Content="{TemplateBinding Content}" 
+                                      ContentTemplate="{TemplateBinding ContentTemplate}"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -39,28 +38,37 @@
             </Style.Triggers>
         </Style>
 
-        <!-- Stile specifico per il pulsante btnExit -->
-        <Style x:Key="ExitButtonStyle" TargetType="Button">
+        <!-- Stile specifico per il pulsante "Menu" -->
+        <Style x:Key="MenuButtonStyle" TargetType="Button">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="White" 
-                                BorderBrush="{TemplateBinding BorderBrush}" 
-                                BorderThickness="{TemplateBinding BorderThickness}" 
-                                CornerRadius="15" 
-                                Padding="{TemplateBinding Padding}">
-                            <Grid>
-                                <Image Source="/exit.jpg" Stretch="Uniform"/>
+                        <Border BorderBrush="{TemplateBinding BorderBrush}"  Background="White"
+                        BorderThickness="{TemplateBinding BorderThickness}" 
+                        CornerRadius="15" 
+                        Padding="{TemplateBinding Padding}">
+                            <Grid Margin="0,5,0,5">
+                                <Grid.Background>
+                                    <ImageBrush Stretch="Uniform" ImageSource="/menu.jpg"/>
+                                </Grid.Background>
+
+
+                                <ContentPresenter HorizontalAlignment="Center" 
+                                          VerticalAlignment="Center" 
+                                          Content="{TemplateBinding Content}" 
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"/>
                             </Grid>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Setter Property="Background" Value="White"/>
             <Setter Property="BorderBrush" Value="Black"/>
             <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Width" Value="338"/>
+            <Setter Property="Height" Value="110"/>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <!-- Cambia l'opacita' per l'effetto di hover -->
                     <Setter Property="Opacity" Value="0.8"/>
                     <Setter Property="Background" Value="#CEFCFF"/>
                     <Setter Property="BorderBrush" Value="#4682B4"/>
@@ -73,7 +81,7 @@
         <Grid.Background>
             <ImageBrush ImageSource="/gameTable.jpg" />
         </Grid.Background>
-        
+
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
@@ -113,10 +121,13 @@
                     </Button.Background>
                 </Button>
                 <!-- Pulsante Exit -->
-                <Button x:Name="CloseButton" Style="{StaticResource ExitButtonStyle}" Click="CloseButton_Click" Width="176" Height="74" Canvas.Left="50" Canvas.Top="21" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <Button Click="MenuButton_Click" FontFamily="Cascadia Mono SemiLight" FontSize="20" Style="{StaticResource MenuButtonStyle}" Height="73" Width="176" Canvas.Left="50" Canvas.Top="21" HorizontalAlignment="Left" VerticalAlignment="Center">
                     <Button.Background>
-                        <ImageBrush ImageSource="/exit.jpg" Stretch="Uniform"/>
+                        <ImageBrush/>
                     </Button.Background>
+                    <Button.Content>
+                        <TextBlock Text="{DynamicResource MenuButton}" />
+                    </Button.Content>
                 </Button>
 
             </Canvas>

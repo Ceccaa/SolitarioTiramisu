@@ -53,10 +53,10 @@ namespace SolitarioTiramisu
 
 
 
-        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        private void MenuButton_Click(object sender, RoutedEventArgs e)
         {
-            // Chiudi la finestra principale
-            Window.GetWindow(this)?.Close();
+            this.NavigationService.Navigate(new Uri("MainPage.xaml", UriKind.Relative));
+
         }
 
         private void CardRectangle_MouseMove(object sender, MouseEventArgs e)
