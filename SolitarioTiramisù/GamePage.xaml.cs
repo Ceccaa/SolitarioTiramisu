@@ -87,9 +87,13 @@ namespace SolitarioTiramisu
 
                 if (closestRectangle != null)
                 {
+                    bool isMoveValid = false;
                     Card card = mazzo.GetCardFromRectangle(draggedCard);
-                    bool isMoveValid = PerformMove(card, closestRectangle);
-
+                    if(card.Position != table.StairDeck1 && card.Position != table.StairDeck2 && card.Position != table.StairDeck3 && card.Position != table.StairDeck4)
+                    {
+                        isMoveValid = PerformMove(card, closestRectangle);
+                    }
+                    
                     if (isMoveValid)
                     {
                         double newLeft = Canvas.GetLeft(closestRectangle);
@@ -219,16 +223,20 @@ namespace SolitarioTiramisu
                 if (mazzo.Count() >= 4)
                 {
                     targetPanels = new List<Rectangle> { targetPanel5, targetPanel6, targetPanel7, targetPanel8 };
-                } else if(mazzo.Count() == 3)
+                }
+                else if (mazzo.Count() == 3)
                 {
                     targetPanels = new List<Rectangle> { targetPanel5, targetPanel6, targetPanel7};
-                } else if (mazzo.Count() == 2)
+                }
+                else if (mazzo.Count() == 2)
                 {
                     targetPanels = new List<Rectangle> { targetPanel5, targetPanel6};
-                } else if(mazzo.Count() == 1)
+                }
+                else if (mazzo.Count() == 1)
                 {
                     targetPanels = new List<Rectangle> { targetPanel5};
-                } else
+                }
+                else
                 {
                     ClearTargetPanel(targetPanel5);
                     ClearTargetPanel(targetPanel6);
@@ -241,9 +249,7 @@ namespace SolitarioTiramisu
                     table.RedistributeDeck(table.MiniDeck2);
                     table.RedistributeDeck(table.MiniDeck1);
 
-
                 }
-
 
                 foreach (var targetPanel in targetPanels)
                 {

@@ -34,8 +34,7 @@ namespace SolitarioTiramisu
         }
 
         // Rappresentazione del mazzo in memoria
-//@@TODO@@        private Stack<Card> mazzo = new Stack<Card>();
-        public Stack<Card> mazzo = new Stack<Card>();
+        private Stack<Card> mazzo = new Stack<Card>();
         private Dictionary<Rectangle, Card> cardRectangleMap = new Dictionary<Rectangle, Card>();
 
         // Riempimento del mazzo

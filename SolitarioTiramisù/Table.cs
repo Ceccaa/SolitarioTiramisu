@@ -36,7 +36,6 @@ namespace SolitarioTiramisu
         // muovere carte da a, tra i mazzi inferiori 
         public bool MinorMoveCard(Stack<Card> from, Stack<Card> to)
         {
-CHECK_CONSISTENCY();
             // Logica di spostamento delle carte
             Card tmpCard = from.Pop();
             if (to.TryPeek(out Card tmpCard2))
@@ -45,7 +44,6 @@ CHECK_CONSISTENCY();
                 {
                     SetCardPosition(tmpCard, to);
                     PushInDeck(tmpCard, to);
-CHECK_CONSISTENCY();
 
                     int winStatus = Win();  //Ogni spostamento di carte controlla se il giocatore ha vinto o perso
                     if (winStatus == 0)
@@ -63,7 +61,6 @@ CHECK_CONSISTENCY();
                 else
                 {
                     PushInDeck(tmpCard, from);
-CHECK_CONSISTENCY();
 
                     int winStatus = Win();  //Ogni spostamento di carte controlla se il giocatore ha vinto o perso
                     if (winStatus == 0)
@@ -83,7 +80,6 @@ CHECK_CONSISTENCY();
             {
                 SetCardPosition(tmpCard, to);
                 PushInDeck(tmpCard, to);
-CHECK_CONSISTENCY();
 
                 int winStatus = Win();  //Ogni spostamento di carte controlla se il giocatore ha vinto o perso
                 if (winStatus == 0)
@@ -103,7 +99,6 @@ CHECK_CONSISTENCY();
 
         public bool StairMoveCard(Stack<Card> from, Stack<Card> to)
         {
-CHECK_CONSISTENCY();
             // Logica di spostamento delle carte
             Card tmpCard = from.Pop();
             if (to.TryPeek(out Card tmpCard2))
@@ -112,7 +107,6 @@ CHECK_CONSISTENCY();
                 {
                     SetCardPosition(tmpCard, to);
                     PushInDeck(tmpCard, to);
-CHECK_CONSISTENCY();
 
                     int winStatus = Win();  //Ogni spostamento di carte controlla se il giocatore ha vinto o perso
                     if (winStatus == 0)
@@ -131,7 +125,6 @@ CHECK_CONSISTENCY();
                 {
                     SetCardPosition(tmpCard, from);
                     PushInDeck(tmpCard, from);
-CHECK_CONSISTENCY();
 
                     int winStatus = Win();  //Ogni spostamento di carte controlla se il giocatore ha vinto o perso
                     if (winStatus == 0)
@@ -153,7 +146,6 @@ CHECK_CONSISTENCY();
                 {
                     SetCardPosition(tmpCard, to);
                     PushInDeck(tmpCard, to);
-CHECK_CONSISTENCY();
 
                     int winStatus = Win();  //Ogni spostamento di carte controlla se il giocatore ha vinto o perso
                     if (winStatus == 0)
@@ -172,7 +164,6 @@ CHECK_CONSISTENCY();
                 {
                     SetCardPosition(tmpCard, from);
                     PushInDeck(tmpCard, from);
-CHECK_CONSISTENCY();
 
                     int winStatus = Win();  //Ogni spostamento di carte controlla se il giocatore ha vinto o perso
                     if (winStatus == 0)
@@ -298,11 +289,7 @@ CHECK_CONSISTENCY();
             card.Position = to;
         }
 
-#if !DEBUG
-        private void CHECK_CONSISTENCY()
-        {
-        }
-#else
+/*      Funzione per debug
         public void CHECK_CONSISTENCY()
         {
             HashSet<int>[] cards = new HashSet<int>[4];
@@ -338,6 +325,6 @@ CHECK_CONSISTENCY();
                 if (cards[i].Count != 0)
                     throw new Exception("Lost card");
     }
-#endif
+*/
     }
 }
