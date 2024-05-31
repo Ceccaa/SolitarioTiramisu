@@ -35,7 +35,7 @@
             </Style.Triggers>
         </Style>
 
-        <!-- Stile specifico per il pulsante btnOptions -->
+        <!-- Stile specifico per il pulsante btninfo -->
         <Style x:Key="OptionsButtonStyle" TargetType="Button">
             <Setter Property="Template">
                 <Setter.Value>
@@ -45,7 +45,7 @@
                                 BorderThickness="{TemplateBinding BorderThickness}" 
                                 CornerRadius="15" 
                                 Padding="{TemplateBinding Padding}">
-                            <Image Source="/info.jpg" Stretch="Uniform" Margin="0,-1,0,-1"/>
+                            <Image Source="/info.jpg" Stretch="Uniform" Margin="0,-2.5,0,-2.5"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -241,7 +241,7 @@
                         
                     </Button>
                     <Button x:Name="btnMusic" Click="DisableMusic_Click" Width="68" Height="57" Style="{StaticResource MusicButtonStyle}" Margin="45,0,0,0" HorizontalAlignment="Center"/>
-                    <Button x:Name="btnLanguage" Content="{DynamicResource LanguageButton}" Click="LanguageButton_Click" Width="68" Height="57" Style="{StaticResource LanguageButtonStyle}" Margin="45,0,0,0" FontSize="20" HorizontalAlignment="Right"/>
+                    <Button x:Name="btnLanguage" Content="{DynamicResource LanguageButton}" Click="LanguageButton_Click" Width="68" Height="57" Style="{StaticResource LanguageButtonStyle}" Margin="45,0,0,0" FontSize="27" HorizontalAlignment="Right"/>
                 </StackPanel>
             </StackPanel>
         </Grid>

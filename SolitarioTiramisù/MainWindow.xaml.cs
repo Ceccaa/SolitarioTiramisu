@@ -13,18 +13,22 @@ namespace SolitarioTiramisu
         {
             InitializeComponent();
 
+            //permette di avere la finestra sempre grande
             this.WindowState = WindowState.Maximized;
             this.WindowStyle = WindowStyle.None;
             this.ResizeMode = ResizeMode.NoResize;
 
+            //prendo il percorso della musica di sottofondo
             string relativePath = "soundboard/background.mp3";
             string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
             string absolutePath = Path.Combine(baseDirectory, relativePath);
 
+            //se il percorso non esiste lancio un'eccezione
             if (File.Exists(absolutePath))
             {
                 try
                 {
+                    //faccio partire la musica
                     BackgroundMusic.Source = new Uri(absolutePath, UriKind.Absolute);
                     BackgroundMusic.MediaEnded += BackgroundMusic_MediaEnded; // Riproduci in loop
                     BackgroundMusic.Play();
@@ -40,11 +44,14 @@ namespace SolitarioTiramisu
             }
         }
 
+        #region musica di sottofondo
         private void BackgroundMusic_MediaEnded(object sender, RoutedEventArgs e)
         {
             BackgroundMusic.Position = TimeSpan.Zero;
             BackgroundMusic.Play();
         }
+        #endregion
+
 
         public void DisableMusic()
         {
@@ -58,14 +65,18 @@ namespace SolitarioTiramisu
             IsMusicEnabled = true;
         }
 
+        #region funzione cambio lingua
         public void ChangeLanguage(string culture)
         {
             ResourceDictionary dict = new ResourceDictionary();
             switch (culture)
             {
+                //risorsa in italiano
                 case "it-IT":
                     dict.Source = new Uri("Resources/Strings.it.xaml", UriKind.Relative);
                     break;
+
+                //risorsa in inglese
                 case "en-US":
                 default:
                     dict.Source = new Uri("Resources/Strings.en.xaml", UriKind.Relative);
@@ -85,5 +96,6 @@ namespace SolitarioTiramisu
             // Aggiungi il nuovo dizionario
             Application.Current.Resources.MergedDictionaries.Add(dict);
         }
+        #endregion
     }
 }

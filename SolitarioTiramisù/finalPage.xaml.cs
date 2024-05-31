@@ -15,11 +15,13 @@ namespace SolitarioTiramisu
             SetResultImage(message);
         }
 
+        //modifico il text del messaggio che mi passo dalla classe table
         public void UpdateResult(string message)
         {
             result.Text = message;
         }
 
+        //setto le impostazioni dell'immagine 
         private void SetResultImage(string message)
         {
             try
@@ -34,12 +36,13 @@ namespace SolitarioTiramisu
                 string imagePath;
                 string messageKey;
 
+                //se vinco metto un'immagine
                 if (message == "VITTORIA!" || message == "YOU WON!")
                 {
                     imagePath = System.IO.Path.GetFullPath("../../../assets/trophy.jpg");
                     messageKey = "WinMessage";
                 }
-                else
+                else//altrimenti menno un'altra immagine
                 {
                     imagePath = System.IO.Path.GetFullPath("../../../assets/gameOver.jpg");
                     messageKey = "LoseMessage";
@@ -63,7 +66,7 @@ namespace SolitarioTiramisu
                     result.Text = (string)Application.Current.Resources[messageKey];
                 }
             }
-            catch (Exception ex)
+            catch (Exception ex)    //eccezione in caso non carichi l'immagine
             {
                 MessageBox.Show($"Error loading image: {ex.Message}");
             }

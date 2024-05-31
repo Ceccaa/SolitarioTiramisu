@@ -12,8 +12,10 @@ namespace SolitarioTiramisu
         }
 
 
+        //mando a MainPage
         private void MainButton_Click(object sender, RoutedEventArgs e)
         {
+            
             this.NavigationService.Navigate(new Uri("MainPage.xaml", UriKind.Relative));
         }
     }
