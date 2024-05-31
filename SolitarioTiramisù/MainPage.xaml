@@ -195,7 +195,7 @@
                                 CornerRadius="15" 
                                 Padding="{TemplateBinding Padding}">
                             <Grid>
-                                <Image Source="/book.jpg" Stretch="Uniform" Margin="0,5,0,5"/>
+                                <Image Source="/book.jpg" Stretch="Uniform" Margin="0,3,0,3"/>
                             </Grid>
                         </Border>
                     </ControlTemplate>

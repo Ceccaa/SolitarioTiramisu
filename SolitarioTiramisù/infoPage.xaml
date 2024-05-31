@@ -56,7 +56,7 @@
         </StackPanel>
 
         <!-- Content StackPanel -->
-        <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Height="299" Margin="0,0,0,0">
+        <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Height="142">
             <Label HorizontalContentAlignment="Left" FontSize="20" FontFamily="Cascadia Mono SemiLight" Content="Simone Ceccarelli - Backend Developer" />
             <Label HorizontalContentAlignment="Left" FontSize="20" FontFamily="Cascadia Mono SemiLight" Content="Daniele Broccoli - Backend Developer"/>
             <Label HorizontalContentAlignment="Left" FontSize="20" FontFamily="Cascadia Mono SemiLight" Content="Mattia Cincotta - Frontend Developer" />
@@ -64,8 +64,8 @@
         </StackPanel>
 
         <!-- Button -->
-        <StackPanel Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,20,0,40">
-            <Button Click="MainButton_Click" FontFamily="Cascadia Mono SemiLight" FontSize="20" Style="{StaticResource MenuButtonStyle}">
+        <StackPanel Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,150">
+            <Button  Margin="0,0,0,0" Click="MainButton_Click" FontFamily="Cascadia Mono SemiLight" FontSize="20" Style="{StaticResource MenuButtonStyle}">
                 <Button.Background>
                     <ImageBrush ImageSource="/menu.jpg" Stretch="Uniform"/>
                 </Button.Background>
