@@ -44,11 +44,11 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Image x:Name="resultImage" Grid.Row="0" Width="200" Height="200" Margin="0,310,0,-20"/>
+        <Image x:Name="resultImage" Grid.Row="0" Width="200" Height="200" Margin="0,350,0,-20"/>
         <!-- Button -->
         <StackPanel Height="396" VerticalAlignment="Center" Grid.Row="1">
             <TextBlock x:Name="result" TextWrapping="Wrap" Height="117" Width="188" FontSize="50" TextAlignment="Center" FontFamily="Chiller" Foreground="#FF973333"/>
-            <Button Margin="0,90,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Click="MainButton_Click" FontFamily="Cascadia Mono SemiLight" FontSize="20" Style="{StaticResource MenuButtonStyle}">
+            <Button Margin="-5,90,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Click="MainButton_Click" FontFamily="Cascadia Mono SemiLight" FontSize="20" Style="{StaticResource MenuButtonStyle}">
                 <Button.Background>
                     <ImageBrush ImageSource="/menu.jpg" Stretch="Uniform"/>
                 </Button.Background>
