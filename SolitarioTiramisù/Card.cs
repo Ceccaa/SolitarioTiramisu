@@ -82,7 +82,7 @@ namespace SolitarioTiramisu
             Shuffle();
         }
 
-        // Mischio mazzo
+        // Mischio mazzo (Fisher shuffle)
         private void Shuffle()
         {
             Random r = new Random();
@@ -116,16 +116,17 @@ namespace SolitarioTiramisu
         }
 
         public void Push(Card card)
-        {
-            // TODO: Valutare controlli eventuali
+        { 
             mazzo.Push(card);
         }
 
+        // Associa una carta ad un rettangolo
         public void LinkCardToRectangle(Card card, Rectangle rectangle)
         {
             cardRectangleMap[rectangle] = card;
         }
 
+        // Prende la carta associata al rettangolo
         public Card GetCardFromRectangle(Rectangle rectangle)
         {
             return cardRectangleMap.TryGetValue(rectangle, out Card card) ? card : null;

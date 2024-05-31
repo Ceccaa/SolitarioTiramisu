@@ -21,7 +21,7 @@ namespace SolitarioTiramisu
         private Deck mazzo;
         
 
-        // Dictionary to track cards associated with each target panel
+        // Dictionary che contiene associazione tra rettangoli e carte
         private Dictionary<Rectangle, List<Rectangle>> targetPanelCards = new Dictionary<Rectangle, List<Rectangle>>();
 
         public GamePage()
@@ -31,6 +31,7 @@ namespace SolitarioTiramisu
             mazzo = table.GetDeck();
         }
 
+        //Evento di fine partita
         private void GameTable_OnGameEnd(string message)
         {
             Dispatcher.Invoke(() =>
@@ -52,13 +53,14 @@ namespace SolitarioTiramisu
         }
 
 
-
+        // Bottone per tornare al menu principale
         private void MenuButton_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new Uri("MainPage.xaml", UriKind.Relative));
 
         }
 
+        // Drag & Drop  
         private void CardRectangle_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
@@ -75,6 +77,7 @@ namespace SolitarioTiramisu
             }
         }
 
+        //Drag & Drop
         private void Canvas_Drop(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(typeof(Rectangle)) && draggedCard != null)
@@ -109,6 +112,7 @@ namespace SolitarioTiramisu
             }
         }
 
+        // Aggiorna la posizione della carta nel dizionario
         private void UpdateCardPositionInDictionary(Rectangle card, Rectangle newTargetPanel)
         {
             foreach (var kvp in targetPanelCards)
@@ -127,6 +131,7 @@ namespace SolitarioTiramisu
             targetPanelCards[newTargetPanel].Add(card);
         }
 
+        // Esegue la mossa nella logica
         private bool PerformMove(Card card, Rectangle targetRectangle)
         {
             if (targetRectangle == targetPanel5)
@@ -162,6 +167,7 @@ namespace SolitarioTiramisu
                 return table.StairMoveCard(card.Position, table.StairDeck4);
             }
         }
+
 
         private void Canvas_DragOver(object sender, DragEventArgs e)
         {

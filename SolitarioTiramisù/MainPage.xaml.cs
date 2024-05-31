@@ -10,12 +10,14 @@ namespace SolitarioTiramisu
     {
         public MainPage()
         {
+            // Inizializza la pagina
             InitializeComponent();
             SetLogoImage();
             SetButtonContent();
             Loaded += MainPage_Loaded;
         }
 
+        // Traduzione del gioco
         private void LanguageButton_Click(object sender, RoutedEventArgs e)
         {
             if (Window.GetWindow(this) is MainWindow mainWindow)
@@ -93,6 +95,7 @@ namespace SolitarioTiramisu
             }
         }
 
+        // Bottoni di gioco
         private void UpdateMusicButtonImage(bool isMusicEnabled)
         {
             var musicImage = btnMusic.Template.FindName("MusicImage", btnMusic) as Image;
