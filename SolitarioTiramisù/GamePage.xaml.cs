@@ -215,7 +215,35 @@ namespace SolitarioTiramisu
         {
             try
             {
-                var targetPanels = new List<Rectangle> { targetPanel5, targetPanel6, targetPanel7, targetPanel8 };
+                var targetPanels = new List<Rectangle>();
+                if (mazzo.Count() >= 4)
+                {
+                    targetPanels = new List<Rectangle> { targetPanel5, targetPanel6, targetPanel7, targetPanel8 };
+                } else if(mazzo.Count() == 3)
+                {
+                    targetPanels = new List<Rectangle> { targetPanel5, targetPanel6, targetPanel7};
+                } else if (mazzo.Count() == 2)
+                {
+                    targetPanels = new List<Rectangle> { targetPanel5, targetPanel6};
+                } else if(mazzo.Count() == 1)
+                {
+                    targetPanels = new List<Rectangle> { targetPanel5};
+                } else
+                {
+                    ClearTargetPanel(targetPanel5);
+                    ClearTargetPanel(targetPanel6);
+                    ClearTargetPanel(targetPanel7);
+                    ClearTargetPanel(targetPanel8);
+                    mazzo.ClearCardRectangleLinkage();
+
+                    table.RedistributeDeck(table.MiniDeck4);
+                    table.RedistributeDeck(table.MiniDeck3);
+                    table.RedistributeDeck(table.MiniDeck2);
+                    table.RedistributeDeck(table.MiniDeck1);
+
+
+                }
+
 
                 foreach (var targetPanel in targetPanels)
                 {
@@ -258,17 +286,7 @@ namespace SolitarioTiramisu
             }
             catch (Exception ex)
             {
-                ClearTargetPanel(targetPanel5);
-                ClearTargetPanel(targetPanel6);
-                ClearTargetPanel(targetPanel7);
-                ClearTargetPanel(targetPanel8);
-                mazzo.ClearCardRectangleLinkage();
-
-                table.RedistributeDeck(table.MiniDeck4);
-                table.RedistributeDeck(table.MiniDeck3);
-                table.RedistributeDeck(table.MiniDeck2);
-                table.RedistributeDeck(table.MiniDeck1);
-
+               
             }
         }
 
