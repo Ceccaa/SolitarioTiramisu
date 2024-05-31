@@ -36,6 +36,7 @@ namespace SolitarioTiramisu
         // muovere carte da a, tra i mazzi inferiori 
         public bool MinorMoveCard(Stack<Card> from, Stack<Card> to)
         {
+CHECK_CONSISTENCY();
             // Logica di spostamento delle carte
             Card tmpCard = from.Pop();
             if (to.TryPeek(out Card tmpCard2))
@@ -44,6 +45,7 @@ namespace SolitarioTiramisu
                 {
                     SetCardPosition(tmpCard, to);
                     PushInDeck(tmpCard, to);
+CHECK_CONSISTENCY();
 
                     int winStatus = Win();  //Ogni spostamento di carte controlla se il giocatore ha vinto o perso
                     if (winStatus == 0)
@@ -61,6 +63,7 @@ namespace SolitarioTiramisu
                 else
                 {
                     PushInDeck(tmpCard, from);
+CHECK_CONSISTENCY();
 
                     int winStatus = Win();  //Ogni spostamento di carte controlla se il giocatore ha vinto o perso
                     if (winStatus == 0)
@@ -80,6 +83,7 @@ namespace SolitarioTiramisu
             {
                 SetCardPosition(tmpCard, to);
                 PushInDeck(tmpCard, to);
+CHECK_CONSISTENCY();
 
                 int winStatus = Win();  //Ogni spostamento di carte controlla se il giocatore ha vinto o perso
                 if (winStatus == 0)
@@ -99,6 +103,7 @@ namespace SolitarioTiramisu
 
         public bool StairMoveCard(Stack<Card> from, Stack<Card> to)
         {
+CHECK_CONSISTENCY();
             // Logica di spostamento delle carte
             Card tmpCard = from.Pop();
             if (to.TryPeek(out Card tmpCard2))
@@ -107,6 +112,7 @@ namespace SolitarioTiramisu
                 {
                     SetCardPosition(tmpCard, to);
                     PushInDeck(tmpCard, to);
+CHECK_CONSISTENCY();
 
                     int winStatus = Win();  //Ogni spostamento di carte controlla se il giocatore ha vinto o perso
                     if (winStatus == 0)
@@ -125,6 +131,7 @@ namespace SolitarioTiramisu
                 {
                     SetCardPosition(tmpCard, from);
                     PushInDeck(tmpCard, from);
+CHECK_CONSISTENCY();
 
                     int winStatus = Win();  //Ogni spostamento di carte controlla se il giocatore ha vinto o perso
                     if (winStatus == 0)
@@ -146,6 +153,7 @@ namespace SolitarioTiramisu
                 {
                     SetCardPosition(tmpCard, to);
                     PushInDeck(tmpCard, to);
+CHECK_CONSISTENCY();
 
                     int winStatus = Win();  //Ogni spostamento di carte controlla se il giocatore ha vinto o perso
                     if (winStatus == 0)
@@ -164,6 +172,7 @@ namespace SolitarioTiramisu
                 {
                     SetCardPosition(tmpCard, from);
                     PushInDeck(tmpCard, from);
+CHECK_CONSISTENCY();
 
                     int winStatus = Win();  //Ogni spostamento di carte controlla se il giocatore ha vinto o perso
                     if (winStatus == 0)
@@ -288,5 +297,47 @@ namespace SolitarioTiramisu
         {
             card.Position = to;
         }
+
+#if !DEBUG
+        private void CHECK_CONSISTENCY()
+        {
+        }
+#else
+        public void CHECK_CONSISTENCY()
+        {
+            HashSet<int>[] cards = new HashSet<int>[4];
+            for (int i = 0; i < 4; i++)
+            {
+                cards[i] = new HashSet<int>();
+                for (int value = 1; value <= 10; ++value)
+                    cards[i].Add(value);
+            }
+
+            void Erode(Stack<Card> s)
+            {
+                foreach (Card c in s)
+                {
+                    int i = c.Seed[0] - 'A';
+                    if (!cards[i].Contains(c.Value))
+                        throw new Exception("Missing card");
+                    cards[i].Remove(c.Value);
+                }
+            }
+
+            Erode(Deck.mazzo);
+            Erode(MiniDeck1);
+            Erode(MiniDeck2);
+            Erode(MiniDeck3);
+            Erode(MiniDeck4);
+
+            Erode(StairDeck1);
+            Erode(StairDeck2);
+            Erode(StairDeck3);
+            Erode(StairDeck4);
+            for (int i = 0; i < 4; i++)
+                if (cards[i].Count != 0)
+                    throw new Exception("Lost card");
+    }
+#endif
     }
 }

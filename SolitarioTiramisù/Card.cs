@@ -34,7 +34,8 @@ namespace SolitarioTiramisu
         }
 
         // Rappresentazione del mazzo in memoria
-        private Stack<Card> mazzo = new Stack<Card>();
+//@@TODO@@        private Stack<Card> mazzo = new Stack<Card>();
+        public Stack<Card> mazzo = new Stack<Card>();
         private Dictionary<Rectangle, Card> cardRectangleMap = new Dictionary<Rectangle, Card>();
 
         // Riempimento del mazzo
@@ -42,8 +43,6 @@ namespace SolitarioTiramisu
         {
             string folderPath = "../../../images";
             string[] imageFiles = Directory.GetFiles(folderPath);
-
-            Random random = new Random();
 
             foreach (string imagePath in imageFiles)
             {
