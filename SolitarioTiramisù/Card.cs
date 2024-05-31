@@ -88,10 +88,20 @@ namespace SolitarioTiramisu
             Random r = new Random();
             Card[] temp = mazzo.ToArray();
             mazzo.Clear();
-            foreach (Card c in temp.OrderBy(x => r.Next()))
+
+            for (int i = temp.Length - 1; i > 0; i--)
+            {
+                int j = r.Next(i + 1);
+                Card tempCard = temp[i];
+                temp[i] = temp[j];
+                temp[j] = tempCard;
+            }
+
+            foreach (Card c in temp)
             {
                 mazzo.Push(c);
             }
+
         }
 
         // Pesco carta
