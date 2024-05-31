@@ -15,7 +15,7 @@ namespace SolitarioTiramisu
     {
         public event Action<string> OnGameEnd; // Evento per notificare la fine del gioco
 
-        private Deck Deck = new Deck();
+        private Deck Deck = new Deck(); // mazzo principale
 
         // mazzetti di appoggio su cui fare spostamenti
         public Stack<Card> MiniDeck1 = new Stack<Card>();
@@ -45,7 +45,7 @@ namespace SolitarioTiramisu
                     SetCardPosition(tmpCard, to);
                     PushInDeck(tmpCard, to);
 
-                    int winStatus = Win();
+                    int winStatus = Win();  //Ogni spostamento di carte controlla se il giocatore ha vinto o perso
                     if (winStatus == 0)
                     {
                         OnGameEnd?.Invoke("VITTORIA!");
@@ -62,7 +62,7 @@ namespace SolitarioTiramisu
                 {
                     PushInDeck(tmpCard, from);
 
-                    int winStatus = Win();
+                    int winStatus = Win();  //Ogni spostamento di carte controlla se il giocatore ha vinto o perso
                     if (winStatus == 0)
                     {
                         OnGameEnd?.Invoke("VITTORIA!");
@@ -81,7 +81,7 @@ namespace SolitarioTiramisu
                 SetCardPosition(tmpCard, to);
                 PushInDeck(tmpCard, to);
 
-                int winStatus = Win();
+                int winStatus = Win();  //Ogni spostamento di carte controlla se il giocatore ha vinto o perso
                 if (winStatus == 0)
                 {
                     OnGameEnd?.Invoke("VITTORIA!");
@@ -108,7 +108,7 @@ namespace SolitarioTiramisu
                     SetCardPosition(tmpCard, to);
                     PushInDeck(tmpCard, to);
 
-                    int winStatus = Win();
+                    int winStatus = Win();  //Ogni spostamento di carte controlla se il giocatore ha vinto o perso
                     if (winStatus == 0)
                     {
                         OnGameEnd?.Invoke("VITTORIA!");
@@ -126,7 +126,7 @@ namespace SolitarioTiramisu
                     SetCardPosition(tmpCard, from);
                     PushInDeck(tmpCard, from);
 
-                    int winStatus = Win();
+                    int winStatus = Win();  //Ogni spostamento di carte controlla se il giocatore ha vinto o perso
                     if (winStatus == 0)
                     {
                         OnGameEnd?.Invoke("VITTORIA!");
@@ -147,7 +147,7 @@ namespace SolitarioTiramisu
                     SetCardPosition(tmpCard, to);
                     PushInDeck(tmpCard, to);
 
-                    int winStatus = Win();
+                    int winStatus = Win();  //Ogni spostamento di carte controlla se il giocatore ha vinto o perso
                     if (winStatus == 0)
                     {
                         OnGameEnd?.Invoke("VITTORIA!");
@@ -165,7 +165,7 @@ namespace SolitarioTiramisu
                     SetCardPosition(tmpCard, from);
                     PushInDeck(tmpCard, from);
 
-                    int winStatus = Win();
+                    int winStatus = Win();  //Ogni spostamento di carte controlla se il giocatore ha vinto o perso
                     if (winStatus == 0)
                     {
                         OnGameEnd?.Invoke("VITTORIA!");
@@ -187,6 +187,7 @@ namespace SolitarioTiramisu
         // Rimischiare il mazzo quando finisce. Si puo fare solo 1 volta. Da chiamare una volta per ogni mazzetto.
         public void RedistributeDeck(Stack<Card> miniDeck)
         {
+            // perde se non puo muovere e pescare
             if (redistribute > 4 || Win() == 1)
             {
                 OnGameEnd?.Invoke("HAI PERSO!"); // Solleva l'evento con il messaggio di sconfitta
@@ -233,6 +234,7 @@ namespace SolitarioTiramisu
 
         private bool HasLost()
         {
+            // Prende la sitauzione attuale del tavolo
             List<Card> miniList = new List<Card>();
             if (MiniDeck1.TryPeek(out Card tmp11)) miniList.Add(tmp11);
             if (MiniDeck2.TryPeek(out Card tmp22)) miniList.Add(tmp22);
@@ -255,6 +257,7 @@ namespace SolitarioTiramisu
                 return false;
             }
 
+            //Se alla fine del mazzo non ci sono piu mosse fattibili perde
             if (Deck.Count() <= 0)
             {
                 if (miniList[0].Seed != miniList[1].Seed && miniList[1].Seed != miniList[2].Seed && miniList[2].Seed != miniList[3].Seed)
@@ -274,12 +277,13 @@ namespace SolitarioTiramisu
             return false;
         }
 
-
+        
         public void PushInDeck(Card card, Stack<Card> to)
         {
             to.Push(card);
         }
 
+        // Setta la posizione attuale della carta
         public void SetCardPosition(Card card, Stack<Card> to)
         {
             card.Position = to;
