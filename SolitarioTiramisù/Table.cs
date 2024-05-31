@@ -36,93 +36,151 @@ namespace SolitarioTiramisu
         // muovere carte da a, tra i mazzi inferiori 
         public bool MinorMoveCard(Stack<Card> from, Stack<Card> to)
         {
-            int winStatus = Win();
-            if (winStatus == 0) // ha vinto
+            // Logica di spostamento delle carte
+            Card tmpCard = from.Pop();
+            if (to.TryPeek(out Card tmpCard2))
             {
-                OnGameEnd?.Invoke("VITTORIA!");
-                return true;
-            }
-            else if (winStatus == 1) // ha perso
-            {
-                OnGameEnd?.Invoke("HAI PERSO!");
-                return false;
-            }
-            else
-            {
-                // Logica di spostamento delle carte
-                Card tmpCard = from.Pop();
-                if (to.TryPeek(out Card tmpCard2))
-                {
-                    if (tmpCard.Seed == tmpCard2.Seed)
-                    {
-                        SetCardPosition(tmpCard, to);
-                        PushInDeck(tmpCard, to);
-                        return true;
-                    }
-                    else
-                    {
-                        PushInDeck(tmpCard, from);
-                        return false;
-                    }
-                }
-                else
+                if (tmpCard.Seed == tmpCard2.Seed)
                 {
                     SetCardPosition(tmpCard, to);
                     PushInDeck(tmpCard, to);
-                    return true;
+
+                    int winStatus = Win();
+                    if (winStatus == 0)
+                    {
+                        OnGameEnd?.Invoke("VITTORIA!");
+                        return true;
+                    }
+                    else if (winStatus == 1) // ha perso
+                    {
+                        OnGameEnd?.Invoke("HAI PERSO!");
+                        return false;
+                    }
+                    else { return true; }
+                }
+                else
+                {
+                    PushInDeck(tmpCard, from);
+
+                    int winStatus = Win();
+                    if (winStatus == 0)
+                    {
+                        OnGameEnd?.Invoke("VITTORIA!");
+                        return true;
+                    }
+                    else if (winStatus == 1) // ha perso
+                    {
+                        OnGameEnd?.Invoke("HAI PERSO!");
+                        return false;
+                    }
+                    else { return false; }
                 }
             }
+            else
+            {
+                SetCardPosition(tmpCard, to);
+                PushInDeck(tmpCard, to);
+
+                int winStatus = Win();
+                if (winStatus == 0)
+                {
+                    OnGameEnd?.Invoke("VITTORIA!");
+                    return true;
+                }
+                else if (winStatus == 1) // ha perso
+                {
+                    OnGameEnd?.Invoke("HAI PERSO!");
+                    return false;
+                }
+                else { return true; }
+            }
+            
         }
 
         public bool StairMoveCard(Stack<Card> from, Stack<Card> to)
         {
-            int winStatus = Win();
-            if (winStatus == 0) // ha vinto
+            // Logica di spostamento delle carte
+            Card tmpCard = from.Pop();
+            if (to.TryPeek(out Card tmpCard2))
             {
-                OnGameEnd?.Invoke("VITTORIA!");
-                return true;
-            }
-            else if (winStatus == 1) // ha perso
-            {
-                OnGameEnd?.Invoke("HAI PERSO!");
-                return false;
-            }
-            else
-            {
-                // Logica di spostamento delle carte
-                Card tmpCard = from.Pop();
-                if (to.TryPeek(out Card tmpCard2))
+                if (tmpCard.Seed == tmpCard2.Seed && tmpCard.Value == tmpCard2.Value + 1)
                 {
-                    if (tmpCard.Seed == tmpCard2.Seed && tmpCard.Value == tmpCard2.Value + 1)
+                    SetCardPosition(tmpCard, to);
+                    PushInDeck(tmpCard, to);
+
+                    int winStatus = Win();
+                    if (winStatus == 0)
                     {
-                        SetCardPosition(tmpCard, to);
-                        PushInDeck(tmpCard, to);
+                        OnGameEnd?.Invoke("VITTORIA!");
                         return true;
                     }
-                    else
+                    else if (winStatus == 1) // ha perso
                     {
-                        SetCardPosition(tmpCard, from);
-                        PushInDeck(tmpCard, from);
+                        OnGameEnd?.Invoke("HAI PERSO!");
                         return false;
                     }
+                    else { return true; }
                 }
                 else
                 {
-                    if (tmpCard.Value == 1)
+                    SetCardPosition(tmpCard, from);
+                    PushInDeck(tmpCard, from);
+
+                    int winStatus = Win();
+                    if (winStatus == 0)
                     {
-                        SetCardPosition(tmpCard, to);
-                        PushInDeck(tmpCard, to);
+                        OnGameEnd?.Invoke("VITTORIA!");
                         return true;
                     }
-                    else
+                    else if (winStatus == 1) // ha perso
                     {
-                        SetCardPosition(tmpCard, from);
-                        PushInDeck(tmpCard, from);
+                        OnGameEnd?.Invoke("HAI PERSO!");
                         return false;
                     }
-
+                    else { return false; }
                 }
             }
+            else
+            {
+                if (tmpCard.Value == 1)
+                {
+                    SetCardPosition(tmpCard, to);
+                    PushInDeck(tmpCard, to);
+
+                    int winStatus = Win();
+                    if (winStatus == 0)
+                    {
+                        OnGameEnd?.Invoke("VITTORIA!");
+                        return true;
+                    }
+                    else if (winStatus == 1) // ha perso
+                    {
+                        OnGameEnd?.Invoke("HAI PERSO!");
+                        return false;
+                    }
+                    else { return true; }
+                }
+                else
+                {
+                    SetCardPosition(tmpCard, from);
+                    PushInDeck(tmpCard, from);
+
+                    int winStatus = Win();
+                    if (winStatus == 0)
+                    {
+                        OnGameEnd?.Invoke("VITTORIA!");
+                        return true;
+                    }
+                    else if (winStatus == 1) // ha perso
+                    {
+                        OnGameEnd?.Invoke("HAI PERSO!");
+                        return false;
+                    }
+                    else { return false; }
+                }
+
+            }
+            
         }
 
 

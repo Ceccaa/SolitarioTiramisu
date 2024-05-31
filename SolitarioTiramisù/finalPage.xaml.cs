@@ -34,7 +34,7 @@ namespace SolitarioTiramisu
                 string imagePath;
                 string messageKey;
 
-                if (message == "HAI VINTO!" || message == "YOU WON!")
+                if (message == "VITTORIA!" || message == "YOU WON!")
                 {
                     imagePath = System.IO.Path.GetFullPath("../../../assets/trophy.jpg");
                     messageKey = "WinMessage";
