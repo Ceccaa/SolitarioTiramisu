@@ -14,6 +14,6 @@
     <sys:String x:Key="EndOfGame">FINE DEL GIOCO:</sys:String>
     <sys:String x:Key="EndText">Si può rigirare il mazzo due volte: il gioco termina quando tutte le carte si trovano nelle basi in ordine ascendente dallo stesso seme. Se al termine del secondo mazzo non ci sono più mosse possibili e le basi non sono complete, il gioco è considerato perso.</sys:String>
     <sys:String x:Key="MenuButton">Menu</sys:String>
-    <sys:String x:Key="WinMessage">HAI VINTO!</sys:String>
+    <sys:String x:Key="WinMessage">VITTORIA</sys:String>
     <sys:String x:Key="LoseMessage">HAI PERSO!</sys:String>
 </ResourceDictionary>

@@ -47,8 +47,8 @@
         <Image x:Name="resultImage" Grid.Row="0" Width="200" Height="200" Margin="0,310,0,0"/>
         <!-- Button -->
         <StackPanel Height="396" VerticalAlignment="Center" Grid.Row="1">
-            <TextBlock x:Name="result" TextWrapping="Wrap" Height="103" Width="164" FontSize="30" TextAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Center" FontFamily="Cascadia Mono SemiLight" Margin="0,20,0,0"/>
-            <Button Margin="0,40,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Click="MainButton_Click" FontFamily="Cascadia Mono SemiLight" FontSize="20" Style="{StaticResource MenuButtonStyle}">
+            <TextBlock x:Name="result" TextWrapping="Wrap" Height="117" Width="187" FontSize="50" TextAlignment="Center" HorizontalAlignment="Center" FontFamily="Chiller" Margin="0,25,0,10" Foreground="#FF973333"/>
+            <Button Margin="0,50,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Click="MainButton_Click" FontFamily="Cascadia Mono SemiLight" FontSize="20" Style="{StaticResource MenuButtonStyle}">
                 <Button.Background>
                     <ImageBrush ImageSource="/menu.jpg" Stretch="Uniform"/>
                 </Button.Background>

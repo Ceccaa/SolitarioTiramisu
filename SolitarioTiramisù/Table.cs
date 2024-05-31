@@ -39,7 +39,7 @@ namespace SolitarioTiramisu
             int winStatus = Win();
             if (winStatus == 0) // ha vinto
             {
-                OnGameEnd?.Invoke("HAI VINTO!");
+                OnGameEnd?.Invoke("VITTORIA!");
                 return true;
             }
             else if (winStatus == 1) // ha perso
@@ -79,7 +79,7 @@ namespace SolitarioTiramisu
             int winStatus = Win();
             if (winStatus == 0) // ha vinto
             {
-                OnGameEnd?.Invoke("HAI VINTO!");
+                OnGameEnd?.Invoke("VITTORIA!");
                 return true;
             }
             else if (winStatus == 1) // ha perso
@@ -136,7 +136,7 @@ namespace SolitarioTiramisu
             }
             else if(redistribute > 4 || Win() == 0)
             {
-                OnGameEnd?.Invoke("HAI VINTO!"); // Solleva l'evento con il messaggio di vincita
+                OnGameEnd?.Invoke("VITTORIA!"); // Solleva l'evento con il messaggio di vincita
                 return;
             }
             else
