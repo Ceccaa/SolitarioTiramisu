@@ -130,5 +130,10 @@ namespace SolitarioTiramisu
         {
             return cardRectangleMap.TryGetValue(rectangle, out Card card) ? card : null;
         }
+
+        public void ClearCardRectangleLinkage()
+        {
+             cardRectangleMap.Clear();
+        }
     }
 }

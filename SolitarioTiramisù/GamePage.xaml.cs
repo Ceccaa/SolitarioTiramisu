@@ -262,11 +262,13 @@ namespace SolitarioTiramisu
                 ClearTargetPanel(targetPanel6);
                 ClearTargetPanel(targetPanel7);
                 ClearTargetPanel(targetPanel8);
+                mazzo.ClearCardRectangleLinkage();
 
                 table.RedistributeDeck(table.MiniDeck4);
                 table.RedistributeDeck(table.MiniDeck3);
                 table.RedistributeDeck(table.MiniDeck2);
                 table.RedistributeDeck(table.MiniDeck1);
+
             }
         }
 
