@@ -31,6 +31,7 @@ namespace SolitarioTiramisu
             mazzo = table.GetDeck();
         }
 
+
         //Evento di fine partita
         private void GameTable_OnGameEnd(string message)
         {
@@ -242,7 +243,6 @@ namespace SolitarioTiramisu
                     ClearTargetPanel(targetPanel6);
                     ClearTargetPanel(targetPanel7);
                     ClearTargetPanel(targetPanel8);
-                    mazzo.ClearCardRectangleLinkage();
 
                     table.RedistributeDeck(table.MiniDeck4);
                     table.RedistributeDeck(table.MiniDeck3);

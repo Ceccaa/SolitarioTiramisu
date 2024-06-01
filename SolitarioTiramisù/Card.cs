@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Shapes;
 
 namespace SolitarioTiramisu
@@ -13,6 +14,7 @@ namespace SolitarioTiramisu
     // Oggetto mazzo
     public class Deck
     {
+       
         public class Card
         {
             // Properties with private setters for immutability
@@ -130,9 +132,5 @@ namespace SolitarioTiramisu
             return cardRectangleMap.TryGetValue(rectangle, out Card card) ? card : null;
         }
 
-        public void ClearCardRectangleLinkage()
-        {
-             cardRectangleMap.Clear();
-        }
     }
 }
